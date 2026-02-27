@@ -153,6 +153,37 @@
   .footer-links a{font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;text-decoration:none;color:var(--grey);transition:color 0.2s;}
   .footer-links a:hover{color:var(--blue-light);}
 
+  /* Estilos para el botón Volver Arriba */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 45px;
+    height: 45px;
+    background: var(--blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0; /* Oculto por defecto */
+    pointer-events: none; /* No clickable cuando está oculto */
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    z-index: 9990; /* Por debajo del cursor personalizado */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .back-to-top:hover {
+    background: var(--blue-mid);
+    transform: translateY(-3px);
+  }
+
   .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
   .reveal.visible{opacity:1;transform:translateY(0);}
   .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}
@@ -167,6 +198,7 @@
     .br-grid{grid-template-columns:1fr;} .pr-grid{grid-template-columns:1fr;gap:2rem;}
     .ct-inner{grid-template-columns:1fr;gap:3rem;} .form-row{grid-template-columns:1fr;}
     .hero-stats{gap:2rem;} footer{padding:1.5rem 1.5rem;flex-direction:column;align-items:flex-start;}
+    .back-to-top{bottom: 1.5rem; right: 1.5rem;} /* Ajuste para móviles */
   }
 </style>
 </head>
@@ -193,7 +225,7 @@
     <h1>Tu marca<br>merece<br><em>destacar.</em></h1>
     <p class="hero-sub">Damos vida a las ideas a través del diseño y la impresión. Somos un <strong>taller publicitario</strong> especializado en <strong>branding, impresión digital, plotteo, rotulación</strong> y producción de artículos promocionales.</p>
     <div class="hero-actions">
-      <a href="#contacto" class="btn-primary">Cotizar proyecto</a>
+      <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary">VER CATÁLOGO</a>
       <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
     </div>
     <div class="hero-stats">
@@ -340,19 +372,19 @@
       <div class="ct-item"><div class="ct-icon">🌐</div><div><div class="ct-lbl">Web</div><div class="ct-val">www.loscrafters.net</div></div></div>
     </div>
     
-    <div class="form-wrap reveal d1" id="whatsapp-form">
+    <form class="form-wrap reveal d1" id="whatsapp-form">
       <div class="form-row">
-        <div class="fg"><label>Nombre</label><input type="text" id="wa-nombre" placeholder="Tu nombre"></div>
-        <div class="fg"><label>Apellido</label><input type="text" id="wa-apellido" placeholder="Tu apellido"></div>
+        <div class="fg"><label>Nombre</label><input type="text" id="wa-nombre" placeholder="Tu nombre" required></div>
+        <div class="fg"><label>Apellido</label><input type="text" id="wa-apellido" placeholder="Tu apellido" required></div>
       </div>
       <div class="form-row">
-        <div class="fg"><label>Empresa</label><input type="text" id="wa-empresa" placeholder="Tu empresa"></div>
-        <div class="fg"><label>RNC</label><input type="text" id="wa-rnc" placeholder="Tu RNC"></div>
+        <div class="fg"><label>Empresa</label><input type="text" id="wa-empresa" placeholder="Tu empresa" required></div>
+        <div class="fg"><label>RNC</label><input type="text" id="wa-rnc" placeholder="Tu RNC" required></div>
       </div>
-      <div class="fg"><label>Correo electrónico</label><input type="email" id="wa-correo" placeholder="tu@correo.com"></div>
+      <div class="fg"><label>Correo electrónico</label><input type="email" id="wa-correo" placeholder="tu@correo.com" required></div>
       <div class="fg">
         <label>Servicio de interés</label>
-        <select id="wa-servicio">
+        <select id="wa-servicio" required>
           <option value="">Selecciona un servicio</option>
           <option value="Señalizaciones Viales">Señalizaciones Viales</option>
           <option value="Branding Aplicado / Vehículos">Branding Aplicado / Vehículos</option>
@@ -366,13 +398,13 @@
           <option value="Otro">Otro</option>
         </select>
       </div>
-      <div class="fg"><label>Cuéntanos de tu proyecto</label><textarea id="wa-proyecto" placeholder="Describe brevemente lo que necesitas..."></textarea></div>
+      <div class="fg"><label>Cuéntanos de tu proyecto</label><textarea id="wa-proyecto" placeholder="Describe brevemente lo que necesitas..." required></textarea></div>
       
-      <button type="button" id="btn-enviar-wa" class="btn-wa">
+      <button type="submit" id="btn-enviar-wa" class="btn-wa">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Enviar por WhatsApp
       </button>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -386,6 +418,10 @@
   </ul>
 </footer>
 
+<a href="#inicio" class="back-to-top" id="backToTop" aria-label="Volver arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+
 <script>
   // Cursor personalizado
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
@@ -398,9 +434,19 @@
   const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.1});
   reveals.forEach(r=>observer.observe(r));
 
-  // Generador de mensaje de WhatsApp formateado con bullet points
-  document.getElementById('btn-enviar-wa').addEventListener('click', function(e) {
-    e.preventDefault();
+  // Lógica del botón "Volver Arriba"
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) { // Aparece después de 500px de scroll
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  });
+
+  // Generador de mensaje de WhatsApp
+  document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
+    e.preventDefault(); 
     
     const nombre = document.getElementById('wa-nombre').value.trim();
     const apellido = document.getElementById('wa-apellido').value.trim();
@@ -410,16 +456,15 @@
     const servicio = document.getElementById('wa-servicio').value.trim();
     const proyecto = document.getElementById('wa-proyecto').value.trim();
 
-    // Combina nombre y apellido si ambos existen
     const nombreCompleto = [nombre, apellido].filter(Boolean).join(' ');
 
     const mensajeText = `*NUEVA SOLICITUD - LOS CRAFTERS*\n\n` +
-                        `- *NOMBRE:* ${nombreCompleto || 'No especificado'}\n` +
-                        `- *EMPRESA:* ${empresa || 'No especificado'}\n` +
-                        `- *RNC:* ${rnc || 'No especificado'}\n` +
-                        `- *CORREO ELECTRÓNICO:* ${correo || 'No especificado'}\n` +
-                        `- *SERVICIO DE INTERÉS:* ${servicio || 'No especificado'}\n\n` +
-                        `*CUÉNTANOS DE TU PROYECTO:*\n${proyecto || 'No especificado'}`;
+                        `- *NOMBRE:* ${nombreCompleto}\n` +
+                        `- *EMPRESA:* ${empresa}\n` +
+                        `- *RNC:* ${rnc}\n` +
+                        `- *CORREO ELECTRÓNICO:* ${correo}\n` +
+                        `- *SERVICIO DE INTERÉS:* ${servicio}\n\n` +
+                        `*CUÉNTANOS DE TU PROYECTO:*\n${proyecto}`;
 
     const mensajeEncoded = encodeURIComponent(mensajeText);
     const numeroWA = '18294109362'; 
