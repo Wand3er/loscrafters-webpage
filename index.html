@@ -94,17 +94,13 @@
   .pf-card{border-radius:6px;overflow:hidden;border:1px solid var(--card-border);background:var(--card-bg);transition:border-color 0.3s,transform 0.3s;cursor:pointer;}
   .pf-card:hover{border-color:var(--blue);transform:translateY(-4px);}
   .pf-card:first-child{grid-column:span 2;}
-  .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;}
+  
+  /* Ajustes para fotos reales del portafolio */
+  .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#080E18;position:relative;}
   .pf-card:first-child .pf-img{aspect-ratio:21/9;}
-  .pf-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;transition:transform 0.5s ease;}
-  .pf-card:first-child .pf-img-inner{font-size:4.5rem;}
-  .pf-card:hover .pf-img-inner{transform:scale(1.06);}
-  .pb1{background:linear-gradient(135deg,#0d1829,#1A3F6F 55%,#3265a6);}
-  .pb2{background:linear-gradient(135deg,#080E18,#244E8A 55%,#5BA3F5);}
-  .pb3{background:linear-gradient(135deg,#0d1829,#1A3F6F 55%,#244E8A);}
-  .pb4{background:linear-gradient(135deg,#0a1628,#244E8A 55%,#7EC8F7);}
-  .pb5{background:linear-gradient(135deg,#080E18,#1A3F6F 55%,#3265a6);}
-  .pb6{background:linear-gradient(135deg,#0d1829,#3265a6 55%,#5BA3F5);}
+  .pf-img img {width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block;}
+  .pf-card:hover .pf-img img {transform: scale(1.06);}
+
   .pf-info{padding:1.2rem 1.4rem;}
   .pf-client{font-family:'Montserrat',sans-serif;font-size:0.63rem;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:var(--blue-light);margin-bottom:0.3rem;}
   .pf-title{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.02em;}
@@ -153,7 +149,6 @@
   .footer-links a{font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;text-decoration:none;color:var(--grey);transition:color 0.2s;}
   .footer-links a:hover{color:var(--blue-light);}
 
-  /* Estilos para el botón Volver Arriba */
   .back-to-top {
     position: fixed;
     bottom: 2rem;
@@ -167,10 +162,10 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    opacity: 0; /* Oculto por defecto */
-    pointer-events: none; /* No clickable cuando está oculto */
+    opacity: 0;
+    pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
-    z-index: 9990; /* Por debajo del cursor personalizado */
+    z-index: 9990;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
 
@@ -198,7 +193,7 @@
     .br-grid{grid-template-columns:1fr;} .pr-grid{grid-template-columns:1fr;gap:2rem;}
     .ct-inner{grid-template-columns:1fr;gap:3rem;} .form-row{grid-template-columns:1fr;}
     .hero-stats{gap:2rem;} footer{padding:1.5rem 1.5rem;flex-direction:column;align-items:flex-start;}
-    .back-to-top{bottom: 1.5rem; right: 1.5rem;} /* Ajuste para móviles */
+    .back-to-top{bottom: 1.5rem; right: 1.5rem;}
   }
 </style>
 </head>
@@ -305,30 +300,39 @@
       <p>Trabajos reales que demuestran cómo transformamos ideas en soluciones visuales que impactan y perduran.</p>
     </div>
   </div>
+  
   <div class="pf-grid reveal">
     <div class="pf-card">
-      <div class="pf-img"><div class="pf-img-inner pb1">🏭</div></div>
+      <div class="pf-img"><img src="https://i.postimg.cc/90zfQrbW/FOTO-PID.png" alt="Parque Industrial Duarte"></div>
       <div class="pf-info"><div class="pf-client">Señalización Vial</div><div class="pf-title">Parque Industrial Duarte</div><div class="pf-desc">Identificamos las entradas de los Parques de Naves, permitiendo al cliente colocar los nombres de las empresas que allí colindan.</div></div>
     </div>
     <div class="pf-card">
-      <div class="pf-img"><div class="pf-img-inner pb2">🚐</div></div>
+      <div class="pf-img"><img src="https://i.postimg.cc/wxw4m7qj/IMG_7273.png" alt="Kuno's Food Truck"></div>
       <div class="pf-info"><div class="pf-client">Branding Vehicular</div><div class="pf-title">Kuno's Food Truck</div><div class="pf-desc">Ubicado en el Raices Food Park, logramos colocar de forma eficiente la identidad de la marca en el vehículo.</div></div>
     </div>
     <div class="pf-card">
-      <div class="pf-img"><div class="pf-img-inner pb3">🏫</div></div>
+      <div class="pf-img"><img src="https://i.postimg.cc/FzT6FKRy/IMG_4654.png" alt="Colegio Cristiano Logos"></div>
       <div class="pf-info"><div class="pf-client">Rotulación</div><div class="pf-title">Colegio Cristiano Logos</div><div class="pf-desc">Con materiales resistentes en el tiempo, logramos revivir la imagen del letrero principal del colegio.</div></div>
     </div>
     <div class="pf-card">
-      <div class="pf-img"><div class="pf-img-inner pb4">📦</div></div>
+      <div class="pf-img"><img src="https://i.postimg.cc/V6cpDTpY/IMG_2602.png" alt="Boxpaq Los Ríos / Linked Store"></div>
       <div class="pf-info"><div class="pf-client">Caja de Luces</div><div class="pf-title">Boxpaq Los Ríos / Linked Store</div><div class="pf-desc">Implementación de caja de luces y onevision en cristales para visibilidad total las 24 horas del día.</div></div>
     </div>
     <div class="pf-card">
-      <div class="pf-img"><div class="pf-img-inner pb5">🏫</div></div>
+      <div class="pf-img"><img src="https://i.postimg.cc/0jGw76mG/IMG_1087.jpg" alt="Carol Morgan School"></div>
       <div class="pf-info"><div class="pf-client">Señalización</div><div class="pf-title">Carol Morgan School</div><div class="pf-desc">Instalamos señalizaciones preventivas en todo el plantel de este prestigioso colegio internacional.</div></div>
     </div>
     <div class="pf-card">
-      <div class="pf-img"><div class="pf-img-inner pb6">🛍️</div></div>
+      <div class="pf-img"><img src="https://i.postimg.cc/vT0K8mB3/IMG_5184.png" alt="Beauty Supply"></div>
       <div class="pf-info"><div class="pf-client">Monolitos</div><div class="pf-title">Beauty Supply</div><div class="pf-desc">Con monolitos modulares para estanterías, damos a tu marca un realce especial para proyectar tus productos.</div></div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-img"><img src="https://i.postimg.cc/3xdsR22j/0e58a7da_4e42_4b15_ac43_5dbc5c464363.png" alt="Conferencia Por Su Causa"></div>
+      <div class="pf-info"><div class="pf-client">Personalizaciones</div><div class="pf-title">Conferencia Por Su Causa</div><div class="pf-desc">Impresiones que marcan una diferencia en tus artículos promocionales, para tus eventos.</div></div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-img"><img src="https://i.postimg.cc/wjmwZ2hD/IMG_7791.png" alt="Librería Integridad y Sabiduría"></div>
+      <div class="pf-info"><div class="pf-client">Rompetráficos</div><div class="pf-title">Librería Integridad y Sabiduría</div><div class="pf-desc">Soluciones de impacto para espacios de alto tránsito.</div></div>
     </div>
   </div>
 </section>
@@ -423,28 +427,24 @@
 </a>
 
 <script>
-  // Cursor personalizado
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
   (function a(){cursor.style.transform=`translate(${mx-6}px,${my-6}px)`;rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(a);})();
 
-  // Animaciones de scroll
   const reveals=document.querySelectorAll('.reveal');
   const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.1});
   reveals.forEach(r=>observer.observe(r));
 
-  // Lógica del botón "Volver Arriba"
   const backToTopBtn = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) { // Aparece después de 500px de scroll
+    if (window.scrollY > 500) {
       backToTopBtn.classList.add('visible');
     } else {
       backToTopBtn.classList.remove('visible');
     }
   });
 
-  // Generador de mensaje de WhatsApp
   document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
     e.preventDefault(); 
     
