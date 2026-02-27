@@ -7,360 +7,230 @@
 <link rel="icon" href="https://i.postimg.cc/N0q0R0J0/LC-Logo-icon-10.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue:#3265a6; --blue-light:#5BA3F5; --blue-pale:#7EC8F7;
-    --blue-deep:#1A3F6F; --blue-mid:#244E8A;
-    --navy:#0A0F1A; --dark:#080E18; --white:#F0F6FF;
-    --grey:#8BA4C2; --card-bg:#101929; --card-border:#1C2E47;
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
+  :root{--blue:#3265a6;--blue-light:#5BA3F5;--blue-pale:#7EC8F7;--blue-deep:#1A3F6F;--blue-mid:#244E8A;--navy:#0A0F1A;--dark:#080E18;--white:#F0F6FF;--grey:#8BA4C2;--card-bg:#101929;--card-border:#1C2E47;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;} html{scroll-behavior:smooth;}
   body{font-family:'Open Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;cursor:none;}
-
   .cursor{width:12px;height:12px;background:var(--blue-light);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;}
   .cursor-ring{width:36px;height:36px;border:2px solid var(--blue);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform 0.3s ease;}
-
   nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(16px);background:rgba(10,15,26,0.88);border-bottom:1px solid rgba(50,101,166,0.2);}
-  .logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:0.05em;text-transform:uppercase;}
-  .logo span{color:var(--blue-light);}
-  .logo-sub{font-size:0.58rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);display:block;margin-top:2px;font-family:'Open Sans',sans-serif;}
-  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
-  .nav-links a{text-decoration:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;transition:opacity 0.2s,color 0.2s;}
-  .nav-links a:hover{opacity:1;color:var(--blue-light);}
-  .nav-cta{background:var(--blue)!important;color:var(--white)!important;opacity:1!important;padding:0.5rem 1.3rem;border-radius:3px;transition:background 0.2s!important;}
-  .nav-cta:hover{background:var(--blue-mid)!important;}
+  .logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:0.05em;text-transform:uppercase;} .logo span{color:var(--blue-light);}
+  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;} .nav-links a{text-decoration:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;transition:0.2s;} .nav-links a:hover{opacity:1;color:var(--blue-light);}
+  .nav-cta{background:var(--blue)!important;color:var(--white)!important;opacity:1!important;padding:0.5rem 1.3rem;border-radius:3px;transition:0.2s!important;} .nav-cta:hover{background:var(--blue-mid)!important;}
 
   #inicio{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9rem 5rem 5rem;position:relative;overflow:hidden;}
   .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 75% 35%,rgba(50,101,166,0.28) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 15% 75%,rgba(26,63,111,0.22) 0%,transparent 55%);}
   .hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(50,101,166,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(50,101,166,0.04) 1px,transparent 1px);background-size:60px 60px;}
-  .hero-content{position:relative;z-index:2;max-width:820px;}
-  .hero-logo{margin-bottom:2rem;animation:fadeUp 0.7s ease both;}
-  .hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(50,101,166,0.12);border:1px solid rgba(91,163,245,0.25);color:var(--blue-pale);font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:2px;margin-bottom:2rem;animation:fadeUp 0.7s ease both;}
-  .hero-tag::before{content:'';width:6px;height:6px;background:var(--blue-light);border-radius:50%;}
-  h1{font-family:'Montserrat',sans-serif;font-size:clamp(3rem,7vw,5.8rem);font-weight:900;line-height:0.98;letter-spacing:-0.025em;text-transform:uppercase;animation:fadeUp 0.7s 0.1s ease both;}
-  h1 em{font-style:normal;color:var(--blue-light);}
-  .hero-sub{margin-top:1.8rem;font-size:1rem;line-height:1.8;color:var(--grey);max-width:560px;animation:fadeUp 0.7s 0.2s ease both;}
-  .hero-sub strong{color:var(--white);font-weight:600;}
+  .hero-split-container {display: flex; align-items: center; min-height: 55vh; max-width: 1400px; margin: 0 auto; width: 100%; position: relative; z-index: 2;}
+  .hero-text-side {width: 55%; padding-right: 3rem;} .hero-content {width: 100%; max-width: 650px;}
+  .hero-image-side {position: absolute; right: calc(-50vw + 50%); width: 42vw; height: 90%; top: 5%; z-index: 2; animation: fadeUp 0.7s 0.3s ease both;}
+  .hero-slider {width: 100%; height: 100%; border: 3px solid var(--blue); border-right: none; border-radius: 12px 0 0 12px; overflow: hidden; position: relative; box-shadow: -15px 0 40px rgba(0,0,0,0.6); background: var(--dark);}
+  .slide {position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out;} .slide.active {opacity: 1;}
+  .hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(50,101,166,0.12);border:1px solid rgba(91,163,245,0.25);color:var(--blue-pale);font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:2px;margin-bottom:2rem;animation:fadeUp 0.7s ease both;} .hero-tag::before{content:'';width:6px;height:6px;background:var(--blue-light);border-radius:50%;}
+  h1{font-family:'Montserrat',sans-serif;font-size:clamp(3rem,6vw,5.8rem);font-weight:900;line-height:0.98;letter-spacing:-0.025em;text-transform:uppercase;animation:fadeUp 0.7s 0.1s ease both;} h1 em{font-style:normal;color:var(--blue-light);}
+  .hero-sub{margin-top:1.8rem;font-size:1rem;line-height:1.8;color:var(--grey);max-width:560px;animation:fadeUp 0.7s 0.2s ease both;} .hero-sub strong{color:var(--white);font-weight:600;}
   .hero-actions{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.7s 0.3s ease both;}
-  .btn-primary{background:var(--blue);color:var(--white);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.2s,box-shadow 0.2s;}
-  .btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(50,101,166,0.4);}
-  .btn-secondary{border:1.5px solid rgba(91,163,245,0.25);color:var(--blue-pale);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;}
-  .btn-secondary:hover{border-color:var(--blue-light);background:rgba(91,163,245,0.08);color:var(--white);}
+  .btn-primary{background:var(--blue);color:var(--white);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;} .btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(50,101,166,0.4);}
+  .btn-secondary{border:1.5px solid rgba(91,163,245,0.25);color:var(--blue-pale);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;} .btn-secondary:hover{border-color:var(--blue-light);background:rgba(91,163,245,0.08);color:var(--white);}
   .hero-stats{margin-top:4rem;display:flex;gap:4rem;flex-wrap:wrap;animation:fadeUp 0.7s 0.4s ease both;padding-top:2.5rem;border-top:1px solid rgba(50,101,166,0.18);}
-  .stat-num{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;color:var(--blue-light);line-height:1;letter-spacing:-0.03em;}
-  .stat-label{font-size:0.72rem;color:var(--grey);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.4rem;font-family:'Montserrat',sans-serif;font-weight:700;}
+  .stat-num{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;color:var(--blue-light);line-height:1;letter-spacing:-0.03em;} .stat-label{font-size:0.72rem;color:var(--grey);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.4rem;font-family:'Montserrat',sans-serif;font-weight:700;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
 
-  .marquee-wrap{overflow:hidden;background:var(--blue);padding:0.7rem 0;white-space:nowrap;}
-  .marquee-track{display:inline-flex;animation:marquee 28s linear infinite;}
-  .marquee-item{font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;color:rgba(255,255,255,0.85);padding:0 2rem;letter-spacing:0.12em;text-transform:uppercase;}
-  .msep{color:rgba(255,255,255,0.35);}
+  .marquee-wrap{overflow:hidden;background:var(--blue);padding:0.7rem 0;white-space:nowrap;} .marquee-track{display:inline-flex;animation:marquee 28s linear infinite;}
+  .marquee-item{font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;color:rgba(255,255,255,0.85);padding:0 2rem;letter-spacing:0.12em;text-transform:uppercase;} .msep{color:rgba(255,255,255,0.35);}
   @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
   section{padding:6rem 5rem;}
-  .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Montserrat',sans-serif;color:var(--blue-light);font-size:0.68rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;}
-  .eyebrow::before{content:'';display:block;width:24px;height:3px;background:var(--blue-light);}
+  .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Montserrat',sans-serif;color:var(--blue-light);font-size:0.68rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;} .eyebrow::before{content:'';display:block;width:24px;height:3px;background:var(--blue-light);}
   h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem;}
-
-  #about-banner{background:var(--blue-deep);padding:4.5rem 5rem;text-align:center;}
-  #about-banner h3{font-family:'Montserrat',sans-serif;font-size:clamp(1.3rem,3vw,2.1rem);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;margin-bottom:1.2rem;}
-  #about-banner p{color:rgba(240,246,255,0.7);max-width:620px;margin:0 auto;line-height:1.8;font-size:1rem;}
+  #about-banner{background:var(--blue-deep);padding:3.5rem 5rem;text-align:center;} #about-banner h3{font-family:'Montserrat',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;margin:0;color:var(--white);}
 
   #servicios{background:var(--dark);}
-  .svc-header{max-width:600px;margin-bottom:3rem;}
-  .svc-header p{color:var(--grey);line-height:1.75;margin-top:0.8rem;}
-  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--card-border);border:1px solid var(--card-border);border-radius:6px;overflow:hidden;}
-  .svc-grid+.svc-grid{margin-top:1px;}
-  .svc-card{background:var(--card-bg);padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:background 0.3s;}
-  .svc-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
-  .svc-card:hover{background:#152235;}
-  .svc-card:hover::after{transform:scaleX(1);}
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--card-border);border:1px solid var(--card-border);border-radius:6px;overflow:hidden;margin-top:2rem;} .svc-grid+.svc-grid{margin-top:1px;}
+  .svc-card{background:var(--card-bg);padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:0.3s;} .svc-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:0.3s;} .svc-card:hover{background:#152235;} .svc-card:hover::after{transform:scaleX(1);}
   .svc-num{font-family:'Montserrat',sans-serif;font-size:2.8rem;font-weight:900;color:rgba(50,101,166,0.18);line-height:1;margin-bottom:1rem;letter-spacing:-0.04em;}
-  .svc-card h3{font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.7rem;color:var(--white);}
-  .svc-card p{font-size:0.83rem;color:var(--grey);line-height:1.65;}
-
-  #impacto{background:#0D1829;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
-  .imp-text p{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
-  .imp-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-  .imp-stat{background:var(--card-bg);border:1px solid var(--card-border);border-radius:6px;padding:1.8rem;transition:border-color 0.3s;}
-  .imp-stat:hover{border-color:var(--blue);}
-  .imp-stat .n{font-family:'Montserrat',sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);letter-spacing:-0.03em;line-height:1;}
-  .imp-stat .l{font-size:0.75rem;color:var(--grey);margin-top:0.5rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-family:'Montserrat',sans-serif;}
+  .svc-card h3{font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.7rem;color:var(--white);} .svc-card p{font-size:0.83rem;color:var(--grey);line-height:1.5;}
 
   #portafolio{background:var(--navy);}
-  .pf-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
-  .pf-header p{color:var(--grey);max-width:400px;line-height:1.7;margin-top:0.8rem;}
+  .pf-filters {display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:3rem;margin-top:2rem;}
+  .filter-btn {background:transparent;border:1px solid var(--card-border);color:var(--grey);padding:0.6rem 1.4rem;border-radius:30px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:0.3s;}
+  .filter-btn:hover, .filter-btn.active {background:var(--blue);color:var(--white);border-color:var(--blue);}
   .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
-  .pf-card{border-radius:6px;overflow:hidden;border:1px solid var(--card-border);background:var(--card-bg);transition:border-color 0.3s,transform 0.3s;cursor:pointer;}
-  .pf-card:hover{border-color:var(--blue);transform:translateY(-4px);}
-  .pf-card:first-child{grid-column:span 2;}
-  
-  /* Ajustes para fotos reales del portafolio */
-  .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#080E18;position:relative;}
-  .pf-card:first-child .pf-img{aspect-ratio:21/9;}
-  .pf-img img {width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block;}
-  .pf-card:hover .pf-img img {transform: scale(1.06);}
+  .pf-card{border-radius:6px;overflow:hidden;border:1px solid var(--card-border);background:var(--card-bg);transition:0.4s ease; cursor:pointer;} .pf-card:hover{border-color:var(--blue);transform:translateY(-4px);}
+  .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#080E18;position:relative;} .pf-img img {width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; display: block;} .pf-card:hover .pf-img img {transform: scale(1.06);}
+  .pf-info{padding:1.2rem 1.4rem; text-align:center;} .pf-title{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.1em;}
 
-  .pf-info{padding:1.2rem 1.4rem;}
-  .pf-client{font-family:'Montserrat',sans-serif;font-size:0.63rem;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:var(--blue-light);margin-bottom:0.3rem;}
-  .pf-title{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.02em;}
-  .pf-desc{font-size:0.78rem;color:var(--grey);margin-top:0.4rem;line-height:1.55;}
+  #impacto{background:#0D1829;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;} .imp-text p{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
+  .imp-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;} .imp-stat{background:var(--card-bg);border:1px solid var(--card-border);border-radius:6px;padding:1.8rem;} .imp-stat:hover{border-color:var(--blue);}
+  .imp-stat .n{font-family:'Montserrat',sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);letter-spacing:-0.03em;line-height:1;} .imp-stat .l{font-size:0.75rem;color:var(--grey);margin-top:0.5rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-family:'Montserrat',sans-serif;}
 
-  #branding-extra{background:#0D1829;}
-  .br-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
-  .br-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:6px;padding:2.2rem;transition:border-color 0.3s;}
-  .br-card:hover{border-color:var(--blue);}
-  .br-tag{display:inline-block;background:rgba(50,101,166,0.15);color:var(--blue-light);font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;padding:0.28rem 0.7rem;border-radius:2px;margin-bottom:1rem;}
-  .br-card h4{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--white);margin-bottom:0.7rem;}
-  .br-card p{color:var(--grey);font-size:0.83rem;line-height:1.7;}
-
-  #proceso{background:var(--dark);}
-  .pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3rem;}
-  .pr-intro p{color:var(--grey);line-height:1.75;margin-top:1rem;}
-  .pr-steps{display:flex;flex-direction:column;}
-  .pr-step{display:flex;gap:1.8rem;padding:2rem 0;border-bottom:1px solid var(--card-border);}
-  .pr-step:last-child{border-bottom:none;}
+  #proceso{background:var(--dark);} .pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;} .pr-intro p{color:var(--grey);line-height:1.75;margin-top:1rem;}
+  .pr-steps{display:flex;flex-direction:column;} .pr-step{display:flex;gap:1.8rem;padding:2rem 0;border-bottom:1px solid var(--card-border);} .pr-step:last-child{border-bottom:none;}
   .pr-num{font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:900;color:rgba(50,101,166,0.16);line-height:1;flex-shrink:0;width:56px;letter-spacing:-0.04em;}
-  .pr-step h4{font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);margin-bottom:0.5rem;}
-  .pr-step p{font-size:0.82rem;color:var(--grey);line-height:1.7;}
+  .pr-step h4{font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);margin-bottom:0.5rem;} .pr-step p{font-size:0.82rem;color:var(--grey);line-height:1.7;}
 
-  #contacto{background:var(--dark);}
-  .ct-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
-  .ct-text .lead{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
-  .ct-item{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.2rem;border:1px solid var(--card-border);border-radius:5px;background:var(--card-bg);margin-bottom:0.7rem;transition:border-color 0.3s;}
-  .ct-item:hover{border-color:var(--blue);}
-  .ct-icon{width:38px;height:38px;flex-shrink:0;background:rgba(50,101,166,0.15);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
-  .ct-lbl{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--blue-light);margin-bottom:0.2rem;}
-  .ct-val{font-size:0.88rem;font-weight:600;color:var(--white);}
-  .form-wrap{display:flex;flex-direction:column;gap:0.9rem;}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
-  .fg{display:flex;flex-direction:column;gap:0.35rem;}
+  #contacto{background:#0D1829;} .ct-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;} .ct-text .lead{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
+  .ct-item{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.2rem;border:1px solid var(--card-border);border-radius:5px;background:var(--card-bg);margin-bottom:0.7rem;transition:0.3s;} .ct-item:hover{border-color:var(--blue);}
+  .ct-icon{width:38px;height:38px;flex-shrink:0;background:rgba(50,101,166,0.15);border-radius:5px;display:flex;align-items:center;justify-content:center;} .ct-lbl{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--blue-light);margin-bottom:0.2rem;} .ct-val{font-size:0.88rem;font-weight:600;color:var(--white);}
+  .form-wrap{display:flex;flex-direction:column;gap:0.9rem;} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;} .fg{display:flex;flex-direction:column;gap:0.35rem;}
   .fg label{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--grey);}
-  .fg input,.fg select,.fg textarea{background:var(--card-bg);border:1px solid var(--card-border);border-radius:3px;padding:0.75rem 0.9rem;color:var(--white);font-family:'Open Sans',sans-serif;font-size:0.87rem;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
-  .fg select option{background:#0d1829;}
-  .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue-light);}
-  .fg textarea{resize:vertical;min-height:95px;}
-  .btn-wa{display:flex;align-items:center;justify-content:center;gap:0.6rem;background:#25D366;color:#050505;padding:0.95rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;margin-top:0.3rem;width:100%;}
-  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3);}
+  .fg input,.fg select,.fg textarea{background:var(--card-bg);border:1px solid var(--card-border);border-radius:3px;padding:0.75rem 0.9rem;color:var(--white);font-family:inherit;font-size:0.87rem;outline:none;} .fg select option{background:#0d1829;} .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue-light);}
+  .btn-wa{display:flex;align-items:center;justify-content:center;gap:0.6rem;background:#25D366;color:#050505;padding:0.95rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;transition:0.2s;width:100%;} .btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3);}
 
-  footer{border-top:1px solid var(--card-border);padding:1.8rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-  .footer-copy{font-size:0.75rem;color:var(--grey);}
-  .footer-links{display:flex;gap:2rem;list-style:none;}
-  .footer-links a{font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;text-decoration:none;color:var(--grey);transition:color 0.2s;}
-  .footer-links a:hover{color:var(--blue-light);}
-
-  .back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 45px;
-    height: 45px;
-    background: var(--blue);
-    color: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
-    z-index: 9990;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-
-  .back-to-top.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .back-to-top:hover {
-    background: var(--blue-mid);
-    transform: translateY(-3px);
-  }
-
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
-  .reveal.visible{opacity:1;transform:translateY(0);}
-  .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}
+  footer{border-top:1px solid var(--card-border);padding:1.8rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;} .footer-copy{font-size:0.75rem;color:var(--grey);}
+  .back-to-top {position:fixed;bottom:2rem;right:2rem;width:45px;height:45px;background:var(--blue);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:0.3s;z-index:9990;} .back-to-top.visible {opacity:1;pointer-events:auto;}
+  .reveal{opacity:0;transform:translateY(30px);transition:0.6s ease;} .reveal.visible{opacity:1;transform:translateY(0);} .d1{transition-delay:0.1s;}
 
   @media(max-width:1024px){
-    nav{padding:1rem 1.5rem;} .nav-links{display:none;}
-    section{padding:4rem 1.5rem;} #inicio{padding:7rem 1.5rem 3rem;}
-    #about-banner{padding:3rem 1.5rem;} #branding-extra{padding:4rem 1.5rem;}
-    .svc-grid{grid-template-columns:1fr 1fr;}
-    #impacto{grid-template-columns:1fr;gap:3rem;padding:4rem 1.5rem;}
-    .pf-grid{grid-template-columns:1fr 1fr;} .pf-card:first-child{grid-column:span 1;}
-    .br-grid{grid-template-columns:1fr;} .pr-grid{grid-template-columns:1fr;gap:2rem;}
-    .ct-inner{grid-template-columns:1fr;gap:3rem;} .form-row{grid-template-columns:1fr;}
-    .hero-stats{gap:2rem;} footer{padding:1.5rem 1.5rem;flex-direction:column;align-items:flex-start;}
-    .back-to-top{bottom: 1.5rem; right: 1.5rem;}
+    nav{padding:1rem 1.5rem;} .nav-links{display:none;} #inicio{padding:7rem 1.5rem 3rem;} .hero-split-container {flex-direction:column-reverse;} .hero-text-side {width:100%;padding-right:0;} .hero-image-side {position:relative;right:auto;width:100%;height:350px;} .hero-slider {border-radius:0;border:none;border-bottom:3px solid var(--blue);}
+    section{padding:4rem 1.5rem;} .svc-grid,.pf-grid,.imp-stats{grid-template-columns:1fr 1fr;} #impacto,.pr-grid,.ct-inner,.form-row{grid-template-columns:1fr;} footer{padding:1.5rem;flex-direction:column;}
   }
+  @media(max-width:600px){.pf-grid,.svc-grid,.imp-stats{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
+<div class="cursor" id="cursor"></div><div class="cursor-ring" id="cursorRing"></div>
 <nav>
   <div class="logo"><img src="https://i.postimg.cc/0yv4RdFc/Logo-LC-12.png" alt="Los Crafters" style="height:48px;width:auto;"></div>
-  <ul class="nav-links">
-    <li><a href="#inicio">Inicio</a></li>
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#portafolio">Proyectos</a></li>
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#contacto" class="nav-cta">Cotizar</a></li>
-  </ul>
+  <ul class="nav-links"><li><a href="#inicio">Inicio</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#portafolio">Proyectos</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#contacto" class="nav-cta">Cotizar</a></li></ul>
 </nav>
 
 <section id="inicio">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Taller Publicitario · Santo Domingo, RD</div>
-    <h1>Tu marca<br>merece<br><em>destacar.</em></h1>
-    <p class="hero-sub">Damos vida a las ideas a través del diseño y la impresión. Somos un <strong>taller publicitario</strong> especializado en <strong>branding, impresión digital, plotteo, rotulación</strong> y producción de artículos promocionales.</p>
-    <div class="hero-actions">
-      <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary">VER CATÁLOGO</a>
-      <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-split-container">
+    <div class="hero-text-side">
+      <div class="hero-content">
+        <div class="hero-tag">Taller Publicitario · Santo Domingo, RD</div>
+        <h1>Tu marca<br>merece<br><em>destacar.</em></h1>
+        <p class="hero-sub">Damos vida a las ideas a través del diseño y la impresión. Somos un <strong>taller publicitario</strong> especializado en <strong>branding, impresión digital, plotteo, rotulación</strong> y producción de artículos promocionales.</p>
+        <div class="hero-actions">
+          <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary">VER CATÁLOGO</a>
+          <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num">500+</div><div class="stat-label">Proyectos completados</div></div>
+          <div><div class="stat-num">95%</div><div class="stat-label">Tasa de satisfacción</div></div>
+          <div><div class="stat-num">10+</div><div class="stat-label">Años de experiencia</div></div>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div><div class="stat-num">500+</div><div class="stat-label">Proyectos completados</div></div>
-      <div><div class="stat-num">95%</div><div class="stat-label">Tasa de satisfacción</div></div>
-      <div><div class="stat-num">10+</div><div class="stat-label">Años de experiencia</div></div>
+    <div class="hero-image-side">
+      <div class="hero-slider">
+        <img src="https://i.postimg.cc/3xdsR22j/0e58a7da_4e42_4b15_ac43_5dbc5c464363.png" class="slide active" alt="Portafolio 1">
+        <img src="https://i.postimg.cc/0Qd33n1G/IMG_2676.png" class="slide" alt="Portafolio 2">
+        <img src="https://i.postimg.cc/FzT6FKRy/IMG_4654.png" class="slide" alt="Portafolio 3">
+      </div>
     </div>
   </div>
 </section>
 
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="marquee-item">Diseño Gráfico</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Impresión Digital</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Rotulación</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Branding Aplicado</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Señalizaciones Viales</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Artículos Promocionales</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Bordados</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Cajas de Luces</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Diseño Gráfico</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Impresión Digital</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Rotulación</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Branding Aplicado</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Señalizaciones Viales</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Artículos Promocionales</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Bordados</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Cajas de Luces</span><span class="marquee-item msep">///</span>
+    <span class="marquee-item">Diseño Gráfico</span><span class="marquee-item msep">///</span><span class="marquee-item">Impresión Digital</span><span class="marquee-item msep">///</span><span class="marquee-item">Rotulación</span><span class="marquee-item msep">///</span><span class="marquee-item">Branding Aplicado</span><span class="marquee-item msep">///</span><span class="marquee-item">Señalizaciones</span><span class="marquee-item msep">///</span><span class="marquee-item">Promocionales</span><span class="marquee-item msep">///</span><span class="marquee-item">Bordados</span><span class="marquee-item msep">///</span><span class="marquee-item">Fachadas</span><span class="marquee-item msep">///</span>
+    <span class="marquee-item">Diseño Gráfico</span><span class="marquee-item msep">///</span><span class="marquee-item">Impresión Digital</span><span class="marquee-item msep">///</span><span class="marquee-item">Rotulación</span><span class="marquee-item msep">///</span><span class="marquee-item">Branding Aplicado</span><span class="marquee-item msep">///</span><span class="marquee-item">Señalizaciones</span><span class="marquee-item msep">///</span><span class="marquee-item">Promocionales</span><span class="marquee-item msep">///</span><span class="marquee-item">Bordados</span><span class="marquee-item msep">///</span><span class="marquee-item">Fachadas</span><span class="marquee-item msep">///</span>
   </div>
 </div>
 
-<div id="about-banner" class="reveal">
-  <h3>Más que un Taller Publicitario,<br>Somos el Aliado de tu Marca.</h3>
-  <p>Desde <strong>branding</strong> hasta <strong>rotulación</strong>, ofrecemos soluciones integrales que reflejan la identidad de tu negocio con calidad y creatividad.</p>
-</div>
+<div id="about-banner" class="reveal"><h3>Más que un Taller Publicitario, Somos el Aliado de tu Marca.</h3></div>
 
 <section id="servicios">
-  <div class="svc-header reveal">
-    <div class="eyebrow">Nuestros Servicios</div>
-    <h2>Todo lo que tu marca<br>necesita en un lugar</h2>
-    <p>Desde la idea hasta la ejecución. Materiales de calidad, tecnología de vanguardia y un equipo creativo a tu disposición.</p>
-  </div>
+  <div class="svc-header reveal"><div class="eyebrow">Nuestros Servicios</div><h2>Calidad en cada detalle</h2></div>
   <div class="svc-grid reveal">
-    <div class="svc-card"><div class="svc-num">01</div><h3>Señalizaciones Viales</h3><p>Transformamos tus ideas en letreros con tecnología avanzada. Identificamos y destacamos tus espacios con materiales de alta durabilidad.</p></div>
-    <div class="svc-card"><div class="svc-num">02</div><h3>Branding Aplicado</h3><p>El arte plasmado en vehículos que convierten cada viaje en una pasarela publicitaria. Plotteo y vinilado de alta calidad.</p></div>
-    <div class="svc-card"><div class="svc-num">03</div><h3>Rotulaciones</h3><p>El arte plasmado en cualquier superficie permite darle un aspecto renovado a tus espacios. Vinilos decorativos y corporativos.</p></div>
-    <div class="svc-card"><div class="svc-num">04</div><h3>Bordados</h3><p>Transformamos bordados e impresiones en arte promocional. Uniformes, gorras y textiles con la identidad de tu marca.</p></div>
+    <div class="svc-card"><div class="svc-num">01</div><h3>Señalización</h3><p>Letreros con tecnología avanzada para identificar y destacar tus espacios.</p></div>
+    <div class="svc-card"><div class="svc-num">02</div><h3>Branding Vehicular</h3><p>Plotteo de alta calidad que convierte tus vehículos en pasarelas publicitarias.</p></div>
+    <div class="svc-card"><div class="svc-num">03</div><h3>Letreros</h3><p>Vinilos y rótulos decorativos para darle un aspecto renovado a cualquier superficie.</p></div>
+    <div class="svc-card"><div class="svc-num">04</div><h3>Bordados</h3><p>Uniformes y textiles personalizados con la identidad impecable de tu marca.</p></div>
   </div>
   <div class="svc-grid reveal d1">
-    <div class="svc-card"><div class="svc-num">05</div><h3>Monolitos de Interior</h3><p>Desarrollamos tus ideas en soluciones que atraen a tus clientes. Exhibidores y puntos de venta que realzan tu marca.</p></div>
-    <div class="svc-card"><div class="svc-num">06</div><h3>Cajas de Luces</h3><p>Confía en nuestra experiencia para lucir tu negocio con iluminación LED que garantiza visibilidad las 24 horas del día.</p></div>
-    <div class="svc-card"><div class="svc-num">07</div><h3>Rompetráficos</h3><p>Letreros que llaman la atención desde una primera impresión. Diseños estratégicos que capturan miradas en movimiento.</p></div>
-    <div class="svc-card"><div class="svc-num">08</div><h3>Señalización Interna</h3><p>Calidad que permite destacar detalles en todo lugar. Sistemas cohesivos para oficinas, comercios e industrias.</p></div>
+    <div class="svc-card"><div class="svc-num">05</div><h3>Exhibidores</h3><p>Estructuras y monolitos modulares que realzan tus productos en punto de venta.</p></div>
+    <div class="svc-card"><div class="svc-num">06</div><h3>Fachadas</h3><p>Cajas de luces e iluminación LED de alto impacto visual 24/7.</p></div>
+    <div class="svc-card"><div class="svc-num">07</div><h3>Artículos Promocionales</h3><p>Impresiones que marcan la diferencia en tus eventos y personalizaciones.</p></div>
+    <div class="svc-card"><div class="svc-num">08</div><h3>Diseño Gráfico</h3><p>Soluciones integrales de identidad corporativa y publicidad gráfica.</p></div>
+  </div>
+</section>
+
+<section id="portafolio">
+  <div class="pf-header reveal"><div><div class="eyebrow">Inspírate</div><h2>Proyectos Destacados</h2></div></div>
+  <div class="pf-filters reveal">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="senalizacion">Señalización</button>
+    <button class="filter-btn" data-filter="branding">Branding Vehicular</button>
+    <button class="filter-btn" data-filter="fachadas">Fachadas</button>
+    <button class="filter-btn" data-filter="exhibidores">Exhibidores</button>
+    <button class="filter-btn" data-filter="promocionales">Artículos Promocionales</button>
+    <button class="filter-btn" data-filter="letreros">Letreros</button>
+  </div>
+  
+  <div class="pf-grid reveal d1" id="portfolio-grid">
+    <div class="pf-card destacado" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/wjmwZ2hD/IMG_7791.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
+    <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/ZqNXPZ7K/IMG_1883.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
+    <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/MT8Nd4Nx/IMG_1886.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
+    <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/BZ2DrzyD/IMG_1168.jpg" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
+    <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/wvdZ0PZM/IMG_2672.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
+
+    <div class="pf-card destacado" data-cat="branding"><div class="pf-img"><img src="https://i.postimg.cc/9f1qwfg4/PHOTO_2023_12_30_11_24_55.jpg" alt="Branding Vehicular"></div><div class="pf-info"><div class="pf-title">Branding Vehicular</div></div></div>
+    <div class="pf-card" data-cat="branding"><div class="pf-img"><img src="https://i.postimg.cc/9FSxLKqF/IMG_7678.png" alt="Branding Vehicular"></div><div class="pf-info"><div class="pf-title">Branding Vehicular</div></div></div>
+    <div class="pf-card" data-cat="branding"><div class="pf-img"><img src="https://i.postimg.cc/d0nTZ0Nh/PHOTO_2023_12_23_22_58_38.jpg" alt="Branding Vehicular"></div><div class="pf-info"><div class="pf-title">Branding Vehicular</div></div></div>
+
+    <div class="pf-card destacado" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/gjj5brQ4/IMG_4618.avif" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
+    <div class="pf-card" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/jS08Z8xL/IMG_1989.avif" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
+    <div class="pf-card" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/VkCxNr6K/IMG_4571.avif" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
+    <div class="pf-card" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/V6cpDTpY/IMG_2602.png" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
+
+    <div class="pf-card destacado" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/pdv6Xs40/IMG_5039.avif" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
+    <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/PxxvWk0P/PHOTO_2024_07_05_11_15_59.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
+    <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/CKJfnKrk/PHOTO_2024_07_05_11_15_58_2.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
+    <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/W4SJq4Y0/PHOTO_2024_07_05_11_15_58.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
+    <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/bvL2SvVb/PHOTO_2024_07_05_11_15_57.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
+
+    <div class="pf-card destacado" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/3xdsR22j/0e58a7da_4e42_4b15_ac43_5dbc5c464363.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+    <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/VvzyLTFc/IMG_7224.avif" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+    <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/4xqrhn17/2738251f_e6d1_4f1e_82a7_1319896a5717.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+    <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/QdwRWVq1/Grupo_1.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+    <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/rwKBm551/2b71f59a_3dff_4cb5_9d11_311aae441279.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+    <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/26wcT5ns/IMG_7195.avif" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+    <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/Fs1WgNz6/IMG_7286.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+    <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/Znngz02H/IMG_4857.avif" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
+
+    <div class="pf-card destacado" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/FzT6FKRy/IMG_4654.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/wxw4m7qj/IMG_7273.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/vT0K8mB3/IMG_5184.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/02JWGgs9/IMG_1986.avif" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/MT8Nd4Nx/IMG_1886.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/JzNpgb0g/IMG_1987.avif" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/ZqNXPZ7K/IMG_1883.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/jS08Z8xL/IMG_1989.avif" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/YSFTNkn7/IMG_1884.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/Wp8Cw5nT/IMG_5712.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/4x9WqPzF/IMG_7859.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/y8ZLtjFb/IMG_7866.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
+    <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/7YD7wV8K/IMG_1198.jpg" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
   </div>
 </section>
 
 <section id="impacto">
   <div class="imp-text reveal">
     <div class="eyebrow">Nuestro Impacto</div>
-    <h2>Transformamos<br>ideas en realidad</h2>
-    <p>En Los Crafters, convertimos tus ideas en impactantes diseños y materiales que destacan tu marca. Ya sea que necesites un <strong>logo impactante, materiales impresos, rotulación para vehículos o artículos promocionales únicos</strong>, tenemos las herramientas y la experiencia para hacerlo realidad.</p>
+    <h2>Resultados<br>que hablan</h2>
+    <p>La calidad no se negocia. Cada proyecto es una oportunidad para demostrar nuestro compromiso con la excelencia gráfica y potenciar la imagen de tu negocio.</p>
     <a href="#contacto" class="btn-primary">Contáctanos</a>
   </div>
   <div class="imp-stats reveal d1">
-    <div class="imp-stat"><div class="n">500+</div><div class="l">Proyectos completados en diseño y publicidad</div></div>
-    <div class="imp-stat"><div class="n">95%</div><div class="l">Tasa de satisfacción de nuestros clientes</div></div>
-    <div class="imp-stat"><div class="n">10</div><div class="l">Años de experiencia en publicidad y diseño</div></div>
-    <div class="imp-stat"><div class="n">100%</div><div class="l">Compromiso con la calidad en cada proyecto</div></div>
-  </div>
-</section>
-
-<section id="portafolio">
-  <div class="pf-header reveal">
-    <div>
-      <div class="eyebrow">Inspírate con nuestra creatividad</div>
-      <h2>Nuestros proyectos<br>destacados</h2>
-      <p>Trabajos reales que demuestran cómo transformamos ideas en soluciones visuales que impactan y perduran.</p>
-    </div>
-  </div>
-  
-  <div class="pf-grid reveal">
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/90zfQrbW/FOTO-PID.png" alt="Parque Industrial Duarte"></div>
-      <div class="pf-info"><div class="pf-client">Señalización Vial</div><div class="pf-title">Parque Industrial Duarte</div><div class="pf-desc">Identificamos las entradas de los Parques de Naves, permitiendo al cliente colocar los nombres de las empresas que allí colindan.</div></div>
-    </div>
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/wxw4m7qj/IMG_7273.png" alt="Kuno's Food Truck"></div>
-      <div class="pf-info"><div class="pf-client">Branding Vehicular</div><div class="pf-title">Kuno's Food Truck</div><div class="pf-desc">Ubicado en el Raices Food Park, logramos colocar de forma eficiente la identidad de la marca en el vehículo.</div></div>
-    </div>
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/FzT6FKRy/IMG_4654.png" alt="Colegio Cristiano Logos"></div>
-      <div class="pf-info"><div class="pf-client">Rotulación</div><div class="pf-title">Colegio Cristiano Logos</div><div class="pf-desc">Con materiales resistentes en el tiempo, logramos revivir la imagen del letrero principal del colegio.</div></div>
-    </div>
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/V6cpDTpY/IMG_2602.png" alt="Boxpaq Los Ríos / Linked Store"></div>
-      <div class="pf-info"><div class="pf-client">Caja de Luces</div><div class="pf-title">Boxpaq Los Ríos / Linked Store</div><div class="pf-desc">Implementación de caja de luces y onevision en cristales para visibilidad total las 24 horas del día.</div></div>
-    </div>
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/0jGw76mG/IMG_1087.jpg" alt="Carol Morgan School"></div>
-      <div class="pf-info"><div class="pf-client">Señalización</div><div class="pf-title">Carol Morgan School</div><div class="pf-desc">Instalamos señalizaciones preventivas en todo el plantel de este prestigioso colegio internacional.</div></div>
-    </div>
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/vT0K8mB3/IMG_5184.png" alt="Beauty Supply"></div>
-      <div class="pf-info"><div class="pf-client">Monolitos</div><div class="pf-title">Beauty Supply</div><div class="pf-desc">Con monolitos modulares para estanterías, damos a tu marca un realce especial para proyectar tus productos.</div></div>
-    </div>
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/3xdsR22j/0e58a7da_4e42_4b15_ac43_5dbc5c464363.png" alt="Conferencia Por Su Causa"></div>
-      <div class="pf-info"><div class="pf-client">Personalizaciones</div><div class="pf-title">Conferencia Por Su Causa</div><div class="pf-desc">Impresiones que marcan una diferencia en tus artículos promocionales, para tus eventos.</div></div>
-    </div>
-    <div class="pf-card">
-      <div class="pf-img"><img src="https://i.postimg.cc/wjmwZ2hD/IMG_7791.png" alt="Librería Integridad y Sabiduría"></div>
-      <div class="pf-info"><div class="pf-client">Rompetráficos</div><div class="pf-title">Librería Integridad y Sabiduría</div><div class="pf-desc">Soluciones de impacto para espacios de alto tránsito.</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="branding-extra">
-  <div class="eyebrow reveal">Soluciones Especiales</div>
-  <h2 class="reveal">Branding y artículos<br>que dejan huella</h2>
-  <div class="br-grid">
-    <div class="br-card reveal"><div class="br-tag">Branding</div><h4>Soluciones de Branding y Diseño</h4><p>Creamos identidades visuales que destacan. Desde logotipos impactantes hasta manuales de marca, nuestro enfoque personalizado asegura que cada elemento refleje la esencia de tu empresa.</p></div>
-    <div class="br-card reveal d1"><div class="br-tag">Lanyards</div><h4>Lanyards Corporativos</h4><p>Con nuestros lanyards, tu empresa podrá estar identificada de forma 100% profesional. Colores y materiales que resaltan la identidad de tu marca en eventos y el día a día.</p></div>
-    <div class="br-card reveal d2"><div class="br-tag">Promocionales</div><h4>Artículos Promocionales Únicos</h4><p>Desde bolígrafos hasta camisetas personalizadas, nuestros artículos son perfectos para reforzar tu marca. Diseñamos productos útiles que dejan una impresión duradera.</p></div>
-    <div class="br-card reveal d3"><div class="br-tag">Impresión</div><h4>Impresión Digital de Alta Calidad</h4><p>Tarjetas, brochures, flyers y catálogos con tecnología de punta que garantiza colores vibrantes y acabados profesionales en cada pieza impresa.</p></div>
+    <div class="imp-stat"><div class="n">500+</div><div class="l">Proyectos completados</div></div>
+    <div class="imp-stat"><div class="n">95%</div><div class="l">Tasa de satisfacción</div></div>
+    <div class="imp-stat"><div class="n">10</div><div class="l">Años de experiencia</div></div>
+    <div class="imp-stat"><div class="n">100%</div><div class="l">Compromiso en calidad</div></div>
   </div>
 </section>
 
 <section id="proceso">
-  <div class="eyebrow reveal">Cómo Trabajamos</div>
-  <h2 class="reveal">Nuestro proceso<br>de trabajo</h2>
+  <div class="eyebrow reveal">Flujo de Trabajo</div>
+  <h2 class="reveal">Nuestro Proceso</h2>
   <div class="pr-grid">
-    <div class="pr-intro reveal">
-      <p>Cada proyecto comienza con escucharte. Trabajamos de la mano contigo en cada etapa para asegurar que el resultado final supere tus expectativas.</p>
-      <br><a href="#contacto" class="btn-primary" style="display:inline-flex;margin-top:1rem;">Iniciar proyecto</a>
-    </div>
+    <div class="pr-intro reveal"><p>Trabajamos de la mano contigo en cada etapa para asegurar que el resultado final supere tus expectativas sin rodeos ni demoras.</p><br><a href="#contacto" class="btn-primary" style="display:inline-flex;margin-top:1rem;">Iniciar proyecto</a></div>
     <div class="pr-steps reveal d1">
-      <div class="pr-step"><div class="pr-num">1</div><div><h4>Desde la idea hasta la realidad</h4><p>Nuestro equipo se sumerge en la esencia de tu marca, explorando conceptos y desarrollando propuestas que capturan tu visión. Trabajamos contigo para que cada detalle refleje tu identidad.</p></div></div>
-      <div class="pr-step"><div class="pr-num">2</div><div><h4>Calidad en cada etapa</h4><p>Desde la selección de materiales hasta la impresión final, cada fase es supervisada con rigor. Utilizamos tecnología de vanguardia para garantizar que el resultado supere tus expectativas.</p></div></div>
-      <div class="pr-step"><div class="pr-num">3</div><div><h4>Entrega puntual</h4><p>El tiempo es esencial. Nos comprometemos a cumplir los plazos establecidos, asegurando que tu proyecto esté listo cuando lo necesites. La eficiencia es parte de nuestro compromiso.</p></div></div>
-      <div class="pr-step"><div class="pr-num">4</div><div><h4>Innovación constante</h4><p>En Los Crafters, no solo seguimos tendencias; las creamos. Buscamos constantemente nuevas técnicas para ofrecerte soluciones únicas. Cada proyecto es una oportunidad para innovar.</p></div></div>
+      <div class="pr-step"><div class="pr-num">1</div><div><h4>Idea & Concepto</h4><p>Capturamos tu visión y desarrollamos propuestas alineadas a tu identidad de marca.</p></div></div>
+      <div class="pr-step"><div class="pr-num">2</div><div><h4>Producción</h4><p>Utilizamos materiales premium y tecnología de punta con supervisión rigurosa.</p></div></div>
+      <div class="pr-step"><div class="pr-num">3</div><div><h4>Instalación & Entrega</h4><p>Eficiencia y puntualidad para que tu marca brille exactamente cuando lo necesitas.</p></div></div>
     </div>
   </div>
 </section>
@@ -369,13 +239,11 @@
   <div class="ct-inner">
     <div class="ct-text reveal">
       <div class="eyebrow">Contáctanos</div>
-      <h2>¿Listo para dar el<br>siguiente paso?</h2>
-      <p class="lead">En Los Crafters, estamos aquí para ayudarte a transformar tus ideas en realidad. Comunícate con nosotros y descubre cómo podemos llevar tu marca al siguiente nivel.</p>
+      <h2>¿Listo para el<br>siguiente paso?</h2>
+      <p class="lead">Comunícate con nosotros y descubre cómo podemos llevar la imagen de tu negocio al siguiente nivel.</p>
       <div class="ct-item"><div class="ct-icon">✉️</div><div><div class="ct-lbl">Email</div><div class="ct-val">info@loscrafters.net</div></div></div>
       <div class="ct-item"><div class="ct-icon">📞</div><div><div class="ct-lbl">Teléfono</div><div class="ct-val">+1 809-568-6663</div></div></div>
-      <div class="ct-item"><div class="ct-icon">🌐</div><div><div class="ct-lbl">Web</div><div class="ct-val">www.loscrafters.net</div></div></div>
     </div>
-    
     <form class="form-wrap reveal d1" id="whatsapp-form">
       <div class="form-row">
         <div class="fg"><label>Nombre</label><input type="text" id="wa-nombre" placeholder="Tu nombre" required></div>
@@ -385,41 +253,29 @@
         <div class="fg"><label>Empresa</label><input type="text" id="wa-empresa" placeholder="Tu empresa" required></div>
         <div class="fg"><label>RNC</label><input type="text" id="wa-rnc" placeholder="Tu RNC" required></div>
       </div>
-      <div class="fg"><label>Correo electrónico</label><input type="email" id="wa-correo" placeholder="tu@correo.com" required></div>
+      <div class="fg"><label>Correo</label><input type="email" id="wa-correo" placeholder="tu@correo.com" required></div>
       <div class="fg">
         <label>Servicio de interés</label>
         <select id="wa-servicio" required>
           <option value="">Selecciona un servicio</option>
-          <option value="Señalizaciones Viales">Señalizaciones Viales</option>
-          <option value="Branding Aplicado / Vehículos">Branding Aplicado / Vehículos</option>
-          <option value="Rotulaciones">Rotulaciones</option>
-          <option value="Bordados">Bordados</option>
-          <option value="Monolitos de Interior">Monolitos de Interior</option>
-          <option value="Cajas de Luces">Cajas de Luces</option>
-          <option value="Rompetráficos">Rompetráficos</option>
+          <option value="Señalización">Señalización</option>
+          <option value="Branding Vehicular">Branding Vehicular</option>
+          <option value="Fachadas">Fachadas</option>
+          <option value="Exhibidores">Exhibidores</option>
           <option value="Artículos Promocionales">Artículos Promocionales</option>
-          <option value="Diseño Gráfico">Diseño Gráfico</option>
+          <option value="Letreros">Letreros</option>
           <option value="Otro">Otro</option>
         </select>
       </div>
-      <div class="fg"><label>Cuéntanos de tu proyecto</label><textarea id="wa-proyecto" placeholder="Describe brevemente lo que necesitas..." required></textarea></div>
-      
-      <button type="submit" id="btn-enviar-wa" class="btn-wa">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Enviar por WhatsApp
-      </button>
+      <div class="fg"><label>Proyecto</label><textarea id="wa-proyecto" placeholder="Describe brevemente lo que necesitas..." required></textarea></div>
+      <button type="submit" class="btn-wa">Enviar Solicitud</button>
     </form>
   </div>
 </section>
 
 <footer>
   <div class="logo"><img src="https://i.postimg.cc/0yv4RdFc/Logo-LC-12.png" alt="Los Crafters" style="height:36px;width:auto;"></div>
-  <div class="footer-copy">© 2024 Los Crafters · Santo Domingo, República Dominicana · Todos los derechos reservados.</div>
-  <ul class="footer-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#portafolio">Proyectos</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
+  <div class="footer-copy">© 2024 Los Crafters · Santo Domingo, RD · Todos los derechos reservados.</div>
 </footer>
 
 <a href="#inicio" class="back-to-top" id="backToTop" aria-label="Volver arriba">
@@ -427,49 +283,37 @@
 </a>
 
 <script>
-  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-  let mx=0,my=0,rx=0,ry=0;
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing'); let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
   (function a(){cursor.style.transform=`translate(${mx-6}px,${my-6}px)`;rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(a);})();
 
   const reveals=document.querySelectorAll('.reveal');
-  const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.1});
-  reveals.forEach(r=>observer.observe(r));
+  const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.1}); reveals.forEach(r=>observer.observe(r));
 
-  const backToTopBtn = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-      backToTopBtn.classList.add('visible');
-    } else {
-      backToTopBtn.classList.remove('visible');
-    }
+  const backToTopBtn = document.getElementById('backToTop'); window.addEventListener('scroll', () => { if (window.scrollY > 500) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); } });
+
+  const slides = document.querySelectorAll('.slide'); if(slides.length > 0) { let currentSlide = 0; setInterval(() => { slides[currentSlide].classList.remove('active'); currentSlide = (currentSlide + 1) % slides.length; slides[currentSlide].classList.add('active'); }, 5000); }
+
+  const filterBtns = document.querySelectorAll('.filter-btn'); const pfCards = document.querySelectorAll('.pf-card');
+  function initPortfolio() { pfCards.forEach(card => { if (card.classList.contains('destacado')) { card.style.display = 'block'; setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50); } else { card.style.display = 'none'; card.style.opacity = '0'; card.style.transform = 'scale(0.8)'; } }); }
+  initPortfolio();
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); const filterValue = btn.getAttribute('data-filter');
+      pfCards.forEach(card => {
+        let shouldShow = (filterValue === 'all') ? card.classList.contains('destacado') : (card.getAttribute('data-cat') === filterValue);
+        if(shouldShow) { card.style.display = 'block'; setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50); } 
+        else { card.style.opacity = '0'; card.style.transform = 'scale(0.8)'; setTimeout(() => { card.style.display = 'none'; }, 300); }
+      });
+    });
   });
 
   document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
     e.preventDefault(); 
-    
-    const nombre = document.getElementById('wa-nombre').value.trim();
-    const apellido = document.getElementById('wa-apellido').value.trim();
-    const empresa = document.getElementById('wa-empresa').value.trim();
-    const rnc = document.getElementById('wa-rnc').value.trim();
-    const correo = document.getElementById('wa-correo').value.trim();
-    const servicio = document.getElementById('wa-servicio').value.trim();
-    const proyecto = document.getElementById('wa-proyecto').value.trim();
-
+    const nombre = document.getElementById('wa-nombre').value.trim(), apellido = document.getElementById('wa-apellido').value.trim(), empresa = document.getElementById('wa-empresa').value.trim(), rnc = document.getElementById('wa-rnc').value.trim(), correo = document.getElementById('wa-correo').value.trim(), servicio = document.getElementById('wa-servicio').value.trim(), proyecto = document.getElementById('wa-proyecto').value.trim();
     const nombreCompleto = [nombre, apellido].filter(Boolean).join(' ');
-
-    const mensajeText = `*NUEVA SOLICITUD - LOS CRAFTERS*\n\n` +
-                        `- *NOMBRE:* ${nombreCompleto}\n` +
-                        `- *EMPRESA:* ${empresa}\n` +
-                        `- *RNC:* ${rnc}\n` +
-                        `- *CORREO ELECTRÓNICO:* ${correo}\n` +
-                        `- *SERVICIO DE INTERÉS:* ${servicio}\n\n` +
-                        `*CUÉNTANOS DE TU PROYECTO:*\n${proyecto}`;
-
-    const mensajeEncoded = encodeURIComponent(mensajeText);
-    const numeroWA = '18294109362'; 
-    
-    window.open(`https://wa.me/${numeroWA}?text=${mensajeEncoded}`, '_blank');
+    const mensajeText = `*NUEVA SOLICITUD - LOS CRAFTERS*\n\n- *NOMBRE:* ${nombreCompleto}\n- *EMPRESA:* ${empresa}\n- *RNC:* ${rnc}\n- *CORREO ELECTRÓNICO:* ${correo}\n- *SERVICIO DE INTERÉS:* ${servicio}\n\n*CUÉNTANOS DE TU PROYECTO:*\n${proyecto}`;
+    window.open(`https://wa.me/18294109362?text=${encodeURIComponent(mensajeText)}`, '_blank');
   });
 </script>
 </body>
