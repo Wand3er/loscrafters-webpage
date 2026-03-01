@@ -14,7 +14,8 @@
 
 <meta property="og:title" content="Los Crafters — Taller Publicitario">
 <meta property="og:description" content="Especialistas en branding, impresión digital, rotulación y letreros en República Dominicana.">
-<meta property="og:image" content="https://i.postimg.cc/90zfQrbW/FOTO-PID.png"> <meta property="og:url" content="https://www.loscrafters.net/">
+<meta property="og:image" content="https://i.postimg.cc/90zfQrbW/FOTO-PID.png">
+<meta property="og:url" content="https://www.loscrafters.net/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_DO">
 
@@ -23,7 +24,8 @@
 <meta name="twitter:description" content="Soluciones visuales y publicidad bien dirigida en Santo Domingo.">
 <meta name="twitter:image" content="https://i.postimg.cc/90zfQrbW/FOTO-PID.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;family=Open+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -43,12 +45,14 @@
   "priceRange": "$$"
 }
 </script>
+
 <style>
   :root{--blue:#3265a6;--blue-light:#5BA3F5;--blue-pale:#7EC8F7;--blue-deep:#1A3F6F;--blue-mid:#244E8A;--navy:#0A0F1A;--dark:#080E18;--white:#F0F6FF;--grey:#8BA4C2;--card-bg:#101929;--card-border:#1C2E47;}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;} html{scroll-behavior:smooth;}
   body{font-family:'Open Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;cursor:none;}
   .cursor{width:12px;height:12px;background:var(--blue-light);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;}
   .cursor-ring{width:36px;height:36px;border:2px solid var(--blue);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform 0.3s ease;}
+  
   nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(16px);background:rgba(10,15,26,0.88);border-bottom:1px solid rgba(50,101,166,0.2);}
   .logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:0.05em;text-transform:uppercase;} .logo span{color:var(--blue-light);}
   .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;} .nav-links a{text-decoration:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;transition:0.2s;} .nav-links a:hover{opacity:1;color:var(--blue-light);}
@@ -60,33 +64,40 @@
   .hero-split-container {display: flex; align-items: center; min-height: 55vh; max-width: 1400px; margin: 0 auto; width: 100%; position: relative; z-index: 2;}
   .hero-text-side {width: 55%; padding-right: 3rem;} .hero-content {width: 100%; max-width: 650px;}
   .hero-image-side {position: absolute; right: calc(-50vw + 50%); width: 42vw; height: 90%; top: 5%; z-index: 2; animation: fadeUp 0.7s 0.3s ease both;}
+  
   .hero-slider {width: 100%; height: 100%; border: 3px solid var(--blue); border-right: none; border-radius: 12px 0 0 12px; overflow: hidden; position: relative; box-shadow: -15px 0 40px rgba(0,0,0,0.6); background: var(--dark);}
+  .hero-slider::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--navy) 0%, transparent 100%); opacity: 0.8; z-index: 5; pointer-events: none; }
   .slide {position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out;} .slide.active {opacity: 1;}
+  
   .hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(50,101,166,0.12);border:1px solid rgba(91,163,245,0.25);color:var(--blue-pale);font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:2px;margin-bottom:2rem;animation:fadeUp 0.7s ease both;} .hero-tag::before{content:'';width:6px;height:6px;background:var(--blue-light);border-radius:50%;}
   h1{font-family:'Montserrat',sans-serif;font-size:clamp(3rem,6vw,5.8rem);font-weight:900;line-height:0.98;letter-spacing:-0.025em;text-transform:uppercase;animation:fadeUp 0.7s 0.1s ease both;} h1 em{font-style:normal;color:var(--blue-light);}
-  .hero-sub{margin-top:1.8rem;font-size:1rem;line-height:1.8;color:var(--grey);max-width:560px;animation:fadeUp 0.7s 0.2s ease both;} .hero-sub strong{color:var(--white);font-weight:600;}
+  .hero-sub{margin-top:1.8rem;font-size:1.1rem;font-weight:500;line-height:1.8;color:var(--grey);max-width:560px;animation:fadeUp 0.7s 0.2s ease both;}
   .hero-actions{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.7s 0.3s ease both;}
   .btn-primary{background:var(--blue);color:var(--white);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;} .btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(50,101,166,0.4);}
   .btn-secondary{border:1.5px solid rgba(91,163,245,0.25);color:var(--blue-pale);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;} .btn-secondary:hover{border-color:var(--blue-light);background:rgba(91,163,245,0.08);color:var(--white);}
-  .hero-stats{margin-top:4rem;display:flex;gap:4rem;flex-wrap:wrap;animation:fadeUp 0.7s 0.4s ease both;padding-top:2.5rem;border-top:1px solid rgba(50,101,166,0.18);}
-  .stat-num{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;color:var(--blue-light);line-height:1;letter-spacing:-0.03em;} .stat-label{font-size:0.72rem;color:var(--grey);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.4rem;font-family:'Montserrat',sans-serif;font-weight:700;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
 
-  .marquee-wrap{overflow:hidden;background:var(--blue);padding:0.7rem 0;white-space:nowrap;} .marquee-track{display:inline-flex;animation:marquee 28s linear infinite;}
-  .marquee-item{font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;color:rgba(255,255,255,0.85);padding:0 2rem;letter-spacing:0.12em;text-transform:uppercase;} .msep{color:rgba(255,255,255,0.35);}
-  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
-  section{padding:6rem 5rem;}
+  /* --- BANNER ABOUT --- */
   .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Montserrat',sans-serif;color:var(--blue-light);font-size:0.68rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;} .eyebrow::before{content:'';display:block;width:24px;height:3px;background:var(--blue-light);}
   h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem;}
-  #about-banner{background:var(--blue-deep);padding:3.5rem 5rem;text-align:center;} #about-banner h3{font-family:'Montserrat',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;margin:0;color:var(--white);}
+  #about-banner{background:var(--blue-deep);padding:3.5rem 5rem;text-align:center;margin-top:2rem;} #about-banner h3{font-family:'Montserrat',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;margin:0;color:var(--white);}
 
+  /* --- CARRUSEL DE LOGOS LENTO --- */
+  .client-logos { background: var(--dark); padding: 3.5rem 0; overflow: hidden; border-bottom: 1px solid var(--card-border); }
+  .client-logos-track { display: flex; width: calc(220px * 20); animation: scroll-logos 80s linear infinite; align-items: center; }
+  .client-logos-track img { width: 140px; margin: 0 40px; filter: grayscale(100%) opacity(0.4); transition: all 0.3s ease; }
+  .client-logos-track img:hover { filter: grayscale(0%) opacity(1); transform: scale(1.08); }
+  @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-220px * 10)); } }
+
+  /* --- SERVICIOS GRID --- */
+  section{padding:6rem 5rem;}
   #servicios{background:var(--dark);}
   .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--card-border);border:1px solid var(--card-border);border-radius:6px;overflow:hidden;margin-top:2rem;} .svc-grid+.svc-grid{margin-top:1px;}
   .svc-card{background:var(--card-bg);padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:0.3s;} .svc-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:0.3s;} .svc-card:hover{background:#152235;} .svc-card:hover::after{transform:scaleX(1);}
   .svc-num{font-family:'Montserrat',sans-serif;font-size:2.8rem;font-weight:900;color:rgba(50,101,166,0.18);line-height:1;margin-bottom:1rem;letter-spacing:-0.04em;}
   .svc-card h3{font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.7rem;color:var(--white);} .svc-card p{font-size:0.83rem;color:var(--grey);line-height:1.5;}
 
+  /* --- PORTAFOLIO --- */
   #portafolio{background:var(--navy);}
   .pf-filters {display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:3rem;margin-top:2rem;}
   .filter-btn {background:transparent;border:1px solid var(--card-border);color:var(--grey);padding:0.6rem 1.4rem;border-radius:30px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:0.3s;}
@@ -96,15 +107,28 @@
   .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#080E18;position:relative;} .pf-img img {width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; display: block;} .pf-card:hover .pf-img img {transform: scale(1.06);}
   .pf-info{padding:1.2rem 1.4rem; text-align:center;} .pf-title{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.1em;}
 
-  #impacto{background:#0D1829;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;} .imp-text p{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
-  .imp-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;} .imp-stat{background:var(--card-bg);border:1px solid var(--card-border);border-radius:6px;padding:1.8rem;} .imp-stat:hover{border-color:var(--blue);}
-  .imp-stat .n{font-family:'Montserrat',sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);letter-spacing:-0.03em;line-height:1;} .imp-stat .l{font-size:0.75rem;color:var(--grey);margin-top:0.5rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-family:'Montserrat',sans-serif;}
+  /* --- SECUENCIA DE VIDEOS --- */
+  .bg-vid { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); z-index: 1; opacity: 0; transition: opacity 1s ease-in-out; }
+  .bg-vid.active-vid { opacity: 0.65; }
 
-  #proceso{background:var(--dark);} .pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;} .pr-intro p{color:var(--grey);line-height:1.75;margin-top:1rem;}
-  .pr-steps{display:flex;flex-direction:column;} .pr-step{display:flex;gap:1.8rem;padding:2rem 0;border-bottom:1px solid var(--card-border);} .pr-step:last-child{border-bottom:none;}
+  /* --- IMPACTO ANCHO COMPLETO --- */
+  #impacto{background:#0D1829; display: flex; flex-direction: column; align-items: center; padding: 6rem 0;}
+  .imp-text-center {text-align: center; max-width: 650px; margin-bottom: 3.5rem; padding: 0 5rem;}
+  .imp-text-center p{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
+  .imp-stats-container {width: 100%; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); background: var(--card-border);}
+  .imp-stats{display:flex; width: 100%; gap: 1px;}
+  .imp-stat{flex: 1; background:var(--card-bg); padding:3.5rem 2rem; text-align: center; transition: background 0.3s;}
+  .imp-stat:hover{background: #152235;}
+  .imp-stat .n{font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:900;color:var(--blue-light);letter-spacing:-0.03em;line-height:1;} .imp-stat .l{font-size:0.75rem;color:var(--grey);margin-top:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-family:'Montserrat',sans-serif;}
+
+  /* --- PROCESO ALINEADO AL TECHO --- */
+  #proceso{background:var(--dark);} .pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;} 
+  .pr-steps{display:flex;flex-direction:column;} .pr-step{display:flex;gap:1.8rem;padding:2.5rem 0;border-bottom:1px solid var(--card-border);} .pr-step:first-child{padding-top:0;} .pr-step:last-child{border-bottom:none; padding-bottom:0;}
+  .pr-intro p{color:var(--grey);line-height:1.75;margin-top:0;}
   .pr-num{font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:900;color:rgba(50,101,166,0.16);line-height:1;flex-shrink:0;width:56px;letter-spacing:-0.04em;}
   .pr-step h4{font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);margin-bottom:0.5rem;} .pr-step p{font-size:0.82rem;color:var(--grey);line-height:1.7;}
 
+  /* --- CONTACTO --- */
   #contacto{background:#0D1829;} .ct-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;} .ct-text .lead{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
   .ct-item{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.2rem;border:1px solid var(--card-border);border-radius:5px;background:var(--card-bg);margin-bottom:0.7rem;transition:0.3s;} .ct-item:hover{border-color:var(--blue);}
   .ct-icon{width:38px;height:38px;flex-shrink:0;background:rgba(50,101,166,0.15);border-radius:5px;display:flex;align-items:center;justify-content:center;} .ct-lbl{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--blue-light);margin-bottom:0.2rem;} .ct-val{font-size:0.88rem;font-weight:600;color:var(--white);}
@@ -113,22 +137,44 @@
   .fg input,.fg select,.fg textarea{background:var(--card-bg);border:1px solid var(--card-border);border-radius:3px;padding:0.75rem 0.9rem;color:var(--white);font-family:inherit;font-size:0.87rem;outline:none;} .fg select option{background:#0d1829;} .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue-light);}
   .btn-wa{display:flex;align-items:center;justify-content:center;gap:0.6rem;background:#25D366;color:#050505;padding:0.95rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;transition:0.2s;width:100%;} .btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3);}
 
+  /* --- FOOTER & COMPONENTES FLOTANTES --- */
   footer{border-top:1px solid var(--card-border);padding:1.8rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;} .footer-copy{font-size:0.75rem;color:var(--grey);}
   .back-to-top {position:fixed;bottom:2rem;right:2rem;width:45px;height:45px;background:var(--blue);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:0.3s;z-index:9990;} .back-to-top.visible {opacity:1;pointer-events:auto;}
   .reveal{opacity:0;transform:translateY(30px);transition:0.6s ease;} .reveal.visible{opacity:1;transform:translateY(0);} .d1{transition-delay:0.1s;}
 
+  .wa-float { position: fixed; bottom: 2rem; left: 2rem; width: 55px; height: 55px; background: #25D366; color: #FFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9990; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; }
+  .wa-float:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 20px rgba(37,211,102,0.4); color: #fff;}
+  .wa-float svg { width: 32px; height: 32px; fill: currentColor; }
+
+  /* --- MODAL --- */
+  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 26, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .modal-box { background: var(--card-bg); border: 1px solid var(--blue); border-radius: 6px; padding: 2.5rem 2rem; width: 90%; max-width: 500px; position: relative; transform: translateY(-30px); transition: transform 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+  .modal-overlay.active .modal-box { transform: translateY(0); }
+  .close-modal { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; color: var(--grey); cursor: pointer; transition: color 0.2s; line-height: 1; }
+  .close-modal:hover { color: var(--white); }
+  .modal-box h3 { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; color: var(--white); text-align: center; }
+
   @media(max-width:1024px){
     nav{padding:1rem 1.5rem;} .nav-links{display:none;} #inicio{padding:7rem 1.5rem 3rem;} .hero-split-container {flex-direction:column-reverse;} .hero-text-side {width:100%;padding-right:0;} .hero-image-side {position:relative;right:auto;width:100%;height:350px;} .hero-slider {border-radius:0;border:none;border-bottom:3px solid var(--blue);}
-    section{padding:4rem 1.5rem;} .svc-grid,.pf-grid,.imp-stats{grid-template-columns:1fr 1fr;} #impacto,.pr-grid,.ct-inner,.form-row{grid-template-columns:1fr;} footer{padding:1.5rem;flex-direction:column;}
+    section{padding:4rem 1.5rem;} .svc-grid,.pf-grid{grid-template-columns:1fr 1fr;} .imp-stats{flex-direction: column;} #impacto,.pr-grid,.ct-inner,.form-row{grid-template-columns:1fr;} footer{padding:1.5rem;flex-direction:column;}
+    .wa-float { bottom: 1.5rem; left: 1.5rem; } .imp-text-center{padding: 0 1.5rem;} .imp-stat{padding: 2rem 1rem;}
   }
-  @media(max-width:600px){.pf-grid,.svc-grid,.imp-stats{grid-template-columns:1fr;}}
+  @media(max-width:600px){.pf-grid,.svc-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 <div class="cursor" id="cursor"></div><div class="cursor-ring" id="cursorRing"></div>
+
 <nav>
   <div class="logo"><img src="https://i.postimg.cc/0yv4RdFc/Logo-LC-12.png" alt="Los Crafters" style="height:48px;width:auto;"></div>
-  <ul class="nav-links"><li><a href="#inicio">Inicio</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#portafolio">Proyectos</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#contacto" class="nav-cta">Cotizar</a></li></ul>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#portafolio">Proyectos</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#" id="navCotizar" class="nav-cta">Cotizar</a></li>
+  </ul>
 </nav>
 
 <section id="inicio">
@@ -138,36 +184,32 @@
       <div class="hero-content">
         <div class="hero-tag">Taller Publicitario · Santo Domingo, RD</div>
         <h1>Tu marca<br>merece<br><em>destacar.</em></h1>
-        <p class="hero-sub">Damos vida a las ideas a través del diseño y la impresión. Somos un <strong>taller publicitario</strong> especializado en <strong>branding, impresión digital, plotteo, rotulación</strong> y producción de artículos promocionales.</p>
+        <p class="hero-sub">Damos vida a las ideas a través del diseño y la producción de alta calidad. Somos tu aliado estratégico para potenciar la imagen de tu negocio en cada proyecto.</p>
         <div class="hero-actions">
           <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary">VER CATÁLOGO</a>
           <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
-        </div>
-        <div class="hero-stats">
-          <div><div class="stat-num">500+</div><div class="stat-label">Proyectos completados</div></div>
-          <div><div class="stat-num">95%</div><div class="stat-label">Tasa de satisfacción</div></div>
-          <div><div class="stat-num">10+</div><div class="stat-label">Años de experiencia</div></div>
         </div>
       </div>
     </div>
     <div class="hero-image-side">
       <div class="hero-slider">
-        <img src="https://i.postimg.cc/3xdsR22j/0e58a7da_4e42_4b15_ac43_5dbc5c464363.png" class="slide active" alt="Portafolio 1">
-        <img src="https://i.postimg.cc/0Qd33n1G/IMG_2676.png" class="slide" alt="Portafolio 2">
-        <img src="https://i.postimg.cc/FzT6FKRy/IMG_4654.png" class="slide" alt="Portafolio 3">
+        <img src="https://i.postimg.cc/vT0K8mB3/IMG_5184.png" class="slide active" alt="Portafolio Hero 1">
+        <img src="https://i.postimg.cc/QdwRWVq1/Grupo_1.png" class="slide" alt="Portafolio Hero 2">
+        <img src="https://i.postimg.cc/qM0n4LV7/IMG_1151.jpg" class="slide" alt="Portafolio Hero 3">
+        <img src="https://i.postimg.cc/s1FJHXrF/IMG_1990.avif" class="slide" alt="Portafolio Hero 4">
+        <img src="https://i.postimg.cc/fW3nPrNf/IMG_2022.avif" class="slide" alt="Portafolio Hero 5">
       </div>
     </div>
   </div>
 </section>
 
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">Diseño Gráfico</span><span class="marquee-item msep">///</span><span class="marquee-item">Impresión Digital</span><span class="marquee-item msep">///</span><span class="marquee-item">Rotulación</span><span class="marquee-item msep">///</span><span class="marquee-item">Branding Aplicado</span><span class="marquee-item msep">///</span><span class="marquee-item">Señalizaciones</span><span class="marquee-item msep">///</span><span class="marquee-item">Promocionales</span><span class="marquee-item msep">///</span><span class="marquee-item">Bordados</span><span class="marquee-item msep">///</span><span class="marquee-item">Fachadas</span><span class="marquee-item msep">///</span>
-    <span class="marquee-item">Diseño Gráfico</span><span class="marquee-item msep">///</span><span class="marquee-item">Impresión Digital</span><span class="marquee-item msep">///</span><span class="marquee-item">Rotulación</span><span class="marquee-item msep">///</span><span class="marquee-item">Branding Aplicado</span><span class="marquee-item msep">///</span><span class="marquee-item">Señalizaciones</span><span class="marquee-item msep">///</span><span class="marquee-item">Promocionales</span><span class="marquee-item msep">///</span><span class="marquee-item">Bordados</span><span class="marquee-item msep">///</span><span class="marquee-item">Fachadas</span><span class="marquee-item msep">///</span>
+<div id="about-banner" class="reveal"><h3>Más que un Taller Publicitario, Somos el Aliado de tu Marca.</h3></div>
+
+<div class="client-logos">
+  <div class="client-logos-track">
+    <img src="https://i.postimg.cc/yxn1CZSq/LOGOS_SLIDER_20.png" alt="Cliente"><img src="https://i.postimg.cc/tJDqGxnv/LOGOS_SLIDER_11.png" alt="Cliente"><img src="https://i.postimg.cc/nrTFfD9N/LOGOS_SLIDER_18.png" alt="Cliente"><img src="https://i.postimg.cc/x8gfVzNx/LOGOS_SLIDER_12.png" alt="Cliente"><img src="https://i.postimg.cc/QCS8ZTK2/LOGOS_SLIDER_19.png" alt="Cliente"><img src="https://i.postimg.cc/T1QdvD5H/LOGOS_SLIDER_13.png" alt="Cliente"><img src="https://i.postimg.cc/7hXHr2JW/LOGOS_SLIDER_14.png" alt="Cliente"><img src="https://i.postimg.cc/Xqxj6CBP/LOGOS_SLIDER_15.png" alt="Cliente"><img src="https://i.postimg.cc/7hXHr2Jc/LOGOS_SLIDER_16.png" alt="Cliente"><img src="https://i.postimg.cc/SRVSbMY3/LOGOS_SLIDER_17.png" alt="Cliente"><img src="https://i.postimg.cc/yxn1CZSq/LOGOS_SLIDER_20.png" alt="Cliente"><img src="https://i.postimg.cc/tJDqGxnv/LOGOS_SLIDER_11.png" alt="Cliente"><img src="https://i.postimg.cc/nrTFfD9N/LOGOS_SLIDER_18.png" alt="Cliente"><img src="https://i.postimg.cc/x8gfVzNx/LOGOS_SLIDER_12.png" alt="Cliente"><img src="https://i.postimg.cc/QCS8ZTK2/LOGOS_SLIDER_19.png" alt="Cliente"><img src="https://i.postimg.cc/T1QdvD5H/LOGOS_SLIDER_13.png" alt="Cliente"><img src="https://i.postimg.cc/7hXHr2JW/LOGOS_SLIDER_14.png" alt="Cliente"><img src="https://i.postimg.cc/Xqxj6CBP/LOGOS_SLIDER_15.png" alt="Cliente"><img src="https://i.postimg.cc/7hXHr2Jc/LOGOS_SLIDER_16.png" alt="Cliente"><img src="https://i.postimg.cc/SRVSbMY3/LOGOS_SLIDER_17.png" alt="Cliente">
   </div>
 </div>
-
-<div id="about-banner" class="reveal"><h3>Más que un Taller Publicitario, Somos el Aliado de tu Marca.</h3></div>
 
 <section id="servicios">
   <div class="svc-header reveal"><div class="eyebrow">Nuestros Servicios</div><h2>Calidad en cada detalle</h2></div>
@@ -244,18 +286,45 @@
   </div>
 </section>
 
-<section id="impacto">
-  <div class="imp-text reveal">
-    <div class="eyebrow">Nuestro Impacto</div>
-    <h2>Resultados<br>que hablan</h2>
-    <p>La calidad no se negocia. Cada proyecto es una oportunidad para demostrar nuestro compromiso con la excelencia gráfica y potenciar la imagen de tu negocio.</p>
-    <a href="#contacto" class="btn-primary">Contáctanos</a>
+<section id="video-destacado" style="padding: 0; position: relative; width: 100vw; height: 60vh; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--dark); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+  <div style="position: absolute; inset: 0; background: rgba(10, 15, 26, 0.4); z-index: 2;"></div>
+  
+ <video class="bg-vid active-vid" autoplay loop muted playsinline>
+    <source src="./videos/ACRILICO.mp4" type="video/mp4">
+  </video>
+
+  <video class="bg-vid" autoplay loop muted playsinline>
+    <source src="./videos/CAJA%20DE%20LUCES.mp4" type="video/mp4">
+  </video>
+
+  <video class="bg-vid" autoplay loop muted playsinline>
+    <source src="./videos/ROTULACION.mp4" type="video/mp4">
+  </video>
+
+  <video class="bg-vid" autoplay loop muted playsinline>
+    <source src="./videos/UV%20DIRECTO.MP4" type="video/mp4">
+  </video>
+
+  <div class="reveal" style="position: relative; z-index: 3; text-align: center; padding: 0 2rem;">
+    <div class="eyebrow" style="justify-content: center;">Capacidad Operativa</div>
+    <h2 style="color: var(--white); text-shadow: 0 4px 20px rgba(0,0,0,0.8);">Producción a Gran Escala</h2>
   </div>
-  <div class="imp-stats reveal d1">
-    <div class="imp-stat"><div class="n">500+</div><div class="l">Proyectos completados</div></div>
-    <div class="imp-stat"><div class="n">95%</div><div class="l">Tasa de satisfacción</div></div>
-    <div class="imp-stat"><div class="n">10</div><div class="l">Años de experiencia</div></div>
-    <div class="imp-stat"><div class="n">100%</div><div class="l">Compromiso en calidad</div></div>
+</section>
+
+<section id="impacto">
+  <div class="imp-text-center reveal">
+    <div class="eyebrow">Nuestro Impacto</div>
+   <h2 style="white-space: nowrap; font-size: clamp(1.6rem, 4.5vw, 2.8rem);">Resultados que hablan</h2>
+    <p>La calidad no se negocia. Cada proyecto es una oportunidad para demostrar nuestro compromiso con la excelencia gráfica y potenciar la imagen de tu negocio.</p>
+  </div>
+  
+  <div class="imp-stats-container reveal d1">
+    <div class="imp-stats">
+      <div class="imp-stat"><div class="n"><span class="counter" data-target="100">0</span>%</div><div class="l">Compromiso en calidad</div></div>
+      <div class="imp-stat"><div class="n"><span class="counter" data-target="10">0</span></div><div class="l">Años de experiencia</div></div>
+      <div class="imp-stat"><div class="n"><span class="counter" data-target="500">0</span>+</div><div class="l">Proyectos completados</div></div>
+      <div class="imp-stat"><div class="n"><span class="counter" data-target="95">0</span>%</div><div class="l">Tasa de satisfacción</div></div>
+    </div>
   </div>
 </section>
 
@@ -319,18 +388,55 @@
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
 </a>
 
+<a href="https://wa.me/18294109362?text=Hola%20Los%20Crafters,%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n." class="wa-float" target="_blank" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div class="modal-overlay" id="cotizarModal">
+  <div class="modal-box">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <h3>Cotiza tu Proyecto</h3>
+    <form class="form-wrap" id="whatsapp-modal-form">
+      <div class="form-row">
+        <div class="fg"><label>Nombre</label><input type="text" id="wa-modal-nombre" placeholder="Tu nombre" required></div>
+        <div class="fg"><label>Empresa</label><input type="text" id="wa-modal-empresa" placeholder="Tu empresa" required></div>
+      </div>
+      <div class="fg">
+        <label>Servicio de interés</label>
+        <select id="wa-modal-servicio" required>
+          <option value="">Selecciona un servicio</option>
+          <option value="Señalización">Señalización</option>
+          <option value="Branding Vehicular">Branding Vehicular</option>
+          <option value="Fachadas">Fachadas / Cajas de Luces</option>
+          <option value="Exhibidores">Exhibidores / Monolitos</option>
+          <option value="Artículos Promocionales">Artículos Promocionales</option>
+          <option value="Letreros">Letreros / Rotulaciones</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="fg"><label>Proyecto</label><textarea id="wa-modal-proyecto" placeholder="Describe brevemente lo que necesitas..." required style="min-height: 80px;"></textarea></div>
+      <button type="submit" class="btn-wa">Enviar Solicitud a WhatsApp</button>
+    </form>
+  </div>
+</div>
+
 <script>
+  // CURSOR PERSONALIZADO
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing'); let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
   (function a(){cursor.style.transform=`translate(${mx-6}px,${my-6}px)`;rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(a);})();
 
+  // EFECTOS DE APARICIÓN AL HACER SCROLL
   const reveals=document.querySelectorAll('.reveal');
   const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.1}); reveals.forEach(r=>observer.observe(r));
 
+  // BOTÓN VOLVER ARRIBA
   const backToTopBtn = document.getElementById('backToTop'); window.addEventListener('scroll', () => { if (window.scrollY > 500) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); } });
 
+  // SLIDER DEL HERO (FOTOS)
   const slides = document.querySelectorAll('.slide'); if(slides.length > 0) { let currentSlide = 0; setInterval(() => { slides[currentSlide].classList.remove('active'); currentSlide = (currentSlide + 1) % slides.length; slides[currentSlide].classList.add('active'); }, 5000); }
 
+  // FILTRO DEL PORTAFOLIO
   const filterBtns = document.querySelectorAll('.filter-btn'); const pfCards = document.querySelectorAll('.pf-card');
   function initPortfolio() { pfCards.forEach(card => { if (card.classList.contains('destacado')) { card.style.display = 'block'; setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50); } else { card.style.display = 'none'; card.style.opacity = '0'; card.style.transform = 'scale(0.8)'; } }); }
   initPortfolio();
@@ -345,6 +451,7 @@
     });
   });
 
+  // ENVÍO DE FORMULARIO PRINCIPAL A WHATSAPP
   document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
     e.preventDefault(); 
     const nombre = document.getElementById('wa-nombre').value.trim(), apellido = document.getElementById('wa-apellido').value.trim(), empresa = document.getElementById('wa-empresa').value.trim(), rnc = document.getElementById('wa-rnc').value.trim(), correo = document.getElementById('wa-correo').value.trim(), servicio = document.getElementById('wa-servicio').value.trim(), proyecto = document.getElementById('wa-proyecto').value.trim();
@@ -352,6 +459,47 @@
     const mensajeText = `*NUEVA SOLICITUD - LOS CRAFTERS*\n\n- *NOMBRE:* ${nombreCompleto}\n- *EMPRESA:* ${empresa}\n- *RNC:* ${rnc}\n- *CORREO ELECTRÓNICO:* ${correo}\n- *SERVICIO DE INTERÉS:* ${servicio}\n\n*CUÉNTANOS DE TU PROYECTO:*\n${proyecto}`;
     window.open(`https://wa.me/18294109362?text=${encodeURIComponent(mensajeText)}`, '_blank');
   });
+
+  // LÓGICA DEL POP-UP (MODAL) COTIZACIÓN RÁPIDA
+  const modal = document.getElementById('cotizarModal'); const btnNav = document.getElementById('navCotizar'); const closeBtn = document.getElementById('closeModal');
+  btnNav.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
+  closeBtn.addEventListener('click', () => { modal.classList.remove('active'); });
+  window.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('active'); } });
+  document.getElementById('whatsapp-modal-form').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    const nombre = document.getElementById('wa-modal-nombre').value.trim(); const empresa = document.getElementById('wa-modal-empresa').value.trim(); const servicio = document.getElementById('wa-modal-servicio').value.trim(); const proyecto = document.getElementById('wa-modal-proyecto').value.trim();
+    const mensajeText = `*NUEVA COTIZACIÓN RÁPIDA - LOS CRAFTERS*\n\n- *NOMBRE:* ${nombre}\n- *EMPRESA:* ${empresa}\n- *SERVICIO DE INTERÉS:* ${servicio}\n\n*DETALLES DEL PROYECTO:*\n${proyecto}`;
+    window.open(`https://wa.me/18294109362?text=${encodeURIComponent(mensajeText)}`, '_blank');
+    modal.classList.remove('active');
+  });
+
+  // ANIMACIÓN LENTA DE LOS NÚMEROS DE IMPACTO
+  const counters=document.querySelectorAll('.counter');
+  const counterObserver=new IntersectionObserver((entries,obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const target=+entry.target.getAttribute('data-target'); const duration=4000; const increment=target/(duration/16); let current=0;
+        const update=()=>{
+          current+=increment;
+          if(current<target){ entry.target.innerText=Math.ceil(current); requestAnimationFrame(update); }
+          else{ entry.target.innerText=target; }
+        };
+        update(); obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.5});
+  counters.forEach(c=>counterObserver.observe(c));
+
+  // SECUENCIA DE VIDEOS DE FONDO (CADA 3 SEGUNDOS)
+  const bgVids = document.querySelectorAll('.bg-vid');
+  if(bgVids.length > 0) {
+    let vidIndex = 0;
+    setInterval(() => {
+      bgVids[vidIndex].classList.remove('active-vid');
+      vidIndex = (vidIndex + 1) % bgVids.length;
+      bgVids[vidIndex].classList.add('active-vid');
+    }, 3000); 
+  }
 </script>
 </body>
 </html>
