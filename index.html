@@ -107,14 +107,9 @@
   .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#080E18;position:relative;} .pf-img img {width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; display: block;} .pf-card:hover .pf-img img {transform: scale(1.06);}
   .pf-info{padding:1.2rem 1.4rem; text-align:center;} .pf-title{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.1em;}
 
-  /* --- SECUENCIA DE VIDEOS --- */
-  .bg-vid { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); z-index: 1; opacity: 0; transition: opacity 1s ease-in-out; }
-  .bg-vid.active-vid { opacity: 0.65; }
-
-  /* --- IMPACTO ANCHO COMPLETO --- */
-  #impacto{background:#0D1829; display: flex; flex-direction: column; align-items: center; padding: 6rem 0;}
-  .imp-text-center {text-align: center; max-width: 650px; margin-bottom: 3.5rem; padding: 0 5rem;}
-  .imp-text-center p{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
+  /* --- IMPACTO (CENTRADOS) --- */
+  #impacto{background:#0D1829; padding: 6rem 0;}
+  .imp-text-center {display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 100%; padding: 0 2rem 3.5rem 2rem;}
   .imp-stats-container {width: 100%; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); background: var(--card-border);}
   .imp-stats{display:flex; width: 100%; gap: 1px;}
   .imp-stat{flex: 1; background:var(--card-bg); padding:3.5rem 2rem; text-align: center; transition: background 0.3s;}
@@ -146,7 +141,7 @@
   .wa-float:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 20px rgba(37,211,102,0.4); color: #fff;}
   .wa-float svg { width: 32px; height: 32px; fill: currentColor; }
 
-  /* --- MODAL --- */
+  /* --- MODAL DE COTIZACIÓN --- */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 26, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
   .modal-overlay.active { opacity: 1; pointer-events: auto; }
   .modal-box { background: var(--card-bg); border: 1px solid var(--blue); border-radius: 6px; padding: 2.5rem 2rem; width: 90%; max-width: 500px; position: relative; transform: translateY(-30px); transition: transform 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
@@ -155,12 +150,26 @@
   .close-modal:hover { color: var(--white); }
   .modal-box h3 { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; color: var(--white); text-align: center; }
 
+  /* --- LIGHTBOX (GALERÍA DE FOTOS AMPLIADAS) --- */
+  .lightbox-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 999999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .lightbox-wrap.active { opacity: 1; pointer-events: auto; }
+  #lightbox-img { max-width: 90%; max-height: 85vh; border-radius: 4px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); object-fit: contain; transition: transform 0.3s ease; }
+  .lightbox-close { position: absolute; top: 1.5rem; right: 2.5rem; font-size: 3rem; color: var(--grey); cursor: pointer; transition: color 0.2s; line-height: 1; z-index: 2; }
+  .lightbox-close:hover { color: var(--white); }
+  .lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10, 15, 26, 0.7); color: var(--white); border: 1px solid var(--blue); border-radius: 50%; width: 55px; height: 55px; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s, transform 0.2s; z-index: 2; }
+  .lightbox-btn:hover { background: var(--blue); transform: translateY(-50%) scale(1.1); }
+  .lightbox-prev { left: 2rem; }
+  .lightbox-next { right: 2rem; }
+
   @media(max-width:1024px){
     nav{padding:1rem 1.5rem;} .nav-links{display:none;} #inicio{padding:7rem 1.5rem 3rem;} .hero-split-container {flex-direction:column-reverse;} .hero-text-side {width:100%;padding-right:0;} .hero-image-side {position:relative;right:auto;width:100%;height:350px;} .hero-slider {border-radius:0;border:none;border-bottom:3px solid var(--blue);}
     section{padding:4rem 1.5rem;} .svc-grid,.pf-grid{grid-template-columns:1fr 1fr;} .imp-stats{flex-direction: column;} #impacto,.pr-grid,.ct-inner,.form-row{grid-template-columns:1fr;} footer{padding:1.5rem;flex-direction:column;}
     .wa-float { bottom: 1.5rem; left: 1.5rem; } .imp-text-center{padding: 0 1.5rem;} .imp-stat{padding: 2rem 1rem;}
   }
-  @media(max-width:600px){.pf-grid,.svc-grid{grid-template-columns:1fr;}}
+  @media(max-width:768px){
+    .pf-grid,.svc-grid{grid-template-columns:1fr;}
+    .lightbox-btn { width: 40px; height: 40px; font-size: 1.2rem; } .lightbox-prev { left: 1rem; } .lightbox-next { right: 1rem; } .lightbox-close { top: 1rem; right: 1rem; font-size: 2.5rem; }
+  }
 </style>
 </head>
 <body>
@@ -286,38 +295,10 @@
   </div>
 </section>
 
-<section id="video-destacado" style="padding: 0; position: relative; width: 100vw; height: 60vh; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--dark); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
-  <div style="position: absolute; inset: 0; background: rgba(10, 15, 26, 0.4); z-index: 2;"></div>
-  
- <video class="bg-vid active-vid" autoplay loop muted playsinline>
-    <source src="./videos/ACRILICO.mp4" type="video/mp4">
-  </video>
-
-  <video class="bg-vid" autoplay loop muted playsinline>
-    <source src="./videos/CAJA%20DE%20LUCES.mp4" type="video/mp4">
-  </video>
-
-  <video class="bg-vid" autoplay loop muted playsinline>
-    <source src="./videos/ROTULACION.mp4" type="video/mp4">
-  </video>
-
-  <video class="bg-vid" autoplay loop muted playsinline>
-    <source src="./videos/UV%20DIRECTO.MP4" type="video/mp4">
-  </video>
-
-  <div class="reveal" style="position: relative; z-index: 3; text-align: center; padding: 0 2rem;">
-    <div class="eyebrow" style="justify-content: center;">Capacidad Operativa</div>
-    <h2 style="color: var(--white); text-shadow: 0 4px 20px rgba(0,0,0,0.8);">Producción a Gran Escala</h2>
-  </div>
-</section>
-
 <section id="impacto">
-  <div class="imp-text-center reveal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 100%; padding: 0 2rem 3.5rem 2rem;">
-    
+  <div class="imp-text-center reveal">
     <div class="eyebrow" style="margin-left: -24px;">Nuestro Impacto</div>
-    
     <h2 style="text-align: center; white-space: nowrap; margin-top: 0; margin-bottom: 1.2rem;">Resultados que hablan</h2>
-    
     <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--grey); line-height: 1.8;">
       La calidad no se negocia. Cada proyecto es una oportunidad para demostrar<br>nuestro compromiso con la excelencia gráfica y potenciar la imagen de tu negocio.
     </p>
@@ -425,6 +406,13 @@
   </div>
 </div>
 
+<div id="lightbox" class="lightbox-wrap">
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <button class="lightbox-btn lightbox-prev" id="lightboxPrev">&#10094;</button>
+  <img id="lightbox-img" src="" alt="Proyecto Ampliado">
+  <button class="lightbox-btn lightbox-next" id="lightboxNext">&#10095;</button>
+</div>
+
 <script>
   // CURSOR PERSONALIZADO
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing'); let mx=0,my=0,rx=0,ry=0;
@@ -495,16 +483,53 @@
   },{threshold:0.5});
   counters.forEach(c=>counterObserver.observe(c));
 
-  // SECUENCIA DE VIDEOS DE FONDO (CADA 3 SEGUNDOS)
-  const bgVids = document.querySelectorAll('.bg-vid');
-  if(bgVids.length > 0) {
-    let vidIndex = 0;
-    setInterval(() => {
-      bgVids[vidIndex].classList.remove('active-vid');
-      vidIndex = (vidIndex + 1) % bgVids.length;
-      bgVids[vidIndex].classList.add('active-vid');
-    }, 3000); 
+  // --- LÓGICA DEL LIGHTBOX (TODAS LAS FOTOS) ---
+  const lightboxWrap = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCloseBtn = document.getElementById('lightboxClose');
+  const lightboxPrevBtn = document.getElementById('lightboxPrev');
+  const lightboxNextBtn = document.getElementById('lightboxNext');
+  
+  // Aquí está el truco: Ahora tomamos TODAS las imágenes desde el principio, sin importar si están filtradas
+  const allPortfolioImages = Array.from(document.querySelectorAll('.pf-card img'));
+  let currentImageIndex = 0;
+
+  function showLightboxImage(index) {
+    if (allPortfolioImages.length === 0) return;
+    if (index < 0) index = allPortfolioImages.length - 1; 
+    if (index >= allPortfolioImages.length) index = 0;    
+    
+    currentImageIndex = index;
+    lightboxImg.src = allPortfolioImages[currentImageIndex].src;
   }
+
+  document.querySelectorAll('.pf-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      // Al hacer clic, buscamos en qué posición de la lista global está esa foto
+      const clickedImg = card.querySelector('img');
+      currentImageIndex = allPortfolioImages.indexOf(clickedImg);
+      
+      if (currentImageIndex !== -1) {
+        lightboxImg.src = clickedImg.src;
+        lightboxWrap.classList.add('active');
+      }
+    });
+  });
+
+  lightboxCloseBtn.addEventListener('click', () => lightboxWrap.classList.remove('active'));
+  lightboxWrap.addEventListener('click', (e) => {
+    if (e.target === lightboxWrap) lightboxWrap.classList.remove('active'); 
+  });
+
+  lightboxPrevBtn.addEventListener('click', () => showLightboxImage(currentImageIndex - 1));
+  lightboxNextBtn.addEventListener('click', () => showLightboxImage(currentImageIndex + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightboxWrap.classList.contains('active')) return; 
+    if (e.key === 'ArrowLeft') showLightboxImage(currentImageIndex - 1);
+    if (e.key === 'ArrowRight') showLightboxImage(currentImageIndex + 1);
+    if (e.key === 'Escape') lightboxWrap.classList.remove('active');
+  });
 </script>
 </body>
 </html>
