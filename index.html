@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Los Crafters — Taller Publicitario en Santo Domingo</title>
 <meta name="description" content="Transformamos ideas en soluciones visuales. Somos un taller publicitario en Santo Domingo especializado en branding, impresión digital, letreros, rotulación y artículos promocionales.">
 <meta name="keywords" content="taller publicitario, diseño gráfico, impresión digital, rotulación vehicular, letreros, señalización, fachadas, Santo Domingo, República Dominicana, artículos promocionales, Los Crafters">
@@ -11,180 +10,453 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.loscrafters.net/">
 <link rel="icon" href="https://i.postimg.cc/N0q0R0J0/LC-Logo-icon-10.png" type="image/png">
-
 <meta property="og:title" content="Los Crafters — Taller Publicitario">
 <meta property="og:description" content="Especialistas en branding, impresión digital, rotulación y letreros en República Dominicana.">
 <meta property="og:image" content="https://i.postimg.cc/90zfQrbW/FOTO-PID.png">
 <meta property="og:url" content="https://www.loscrafters.net/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_DO">
-
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Los Crafters — Taller Publicitario">
 <meta name="twitter:description" content="Soluciones visuales y publicidad bien dirigida en Santo Domingo.">
 <meta name="twitter:image" content="https://i.postimg.cc/90zfQrbW/FOTO-PID.png">
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Los Crafters SRL",
-  "image": "https://i.postimg.cc/0yv4RdFc/Logo-LC-12.png",
-  "url": "https://www.loscrafters.net",
-  "telephone": "+18095686663",
-  "email": "info@loscrafters.net",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Santo Domingo",
-    "addressCountry": "DO"
-  },
-  "description": "Taller publicitario especializado en branding, impresión digital, rotulación, señalización y artículos promocionales.",
-  "priceRange": "$$"
-}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Los Crafters SRL","image":"https://i.postimg.cc/0yv4RdFc/Logo-LC-12.png","url":"https://www.loscrafters.net","telephone":"+18095686663","email":"info@loscrafters.net","address":{"@type":"PostalAddress","addressLocality":"Santo Domingo","addressCountry":"DO"},"description":"Taller publicitario especializado en branding, impresión digital, rotulación, señalización y artículos promocionales.","priceRange":"$$"}
 </script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ESKZGEV85"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5ESKZGEV85');</script>
 
-  gtag('config', 'G-5ESKZGEV85');
-</script>
+<!-- GSAP para animaciones avanzadas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
   :root{--blue:#3265a6;--blue-light:#5BA3F5;--blue-pale:#7EC8F7;--blue-deep:#1A3F6F;--blue-mid:#244E8A;--navy:#0A0F1A;--dark:#080E18;--white:#F0F6FF;--grey:#8BA4C2;--card-bg:#101929;--card-border:#1C2E47;}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;} html{scroll-behavior:smooth;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   body{font-family:'Open Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;cursor:none;}
-  .cursor{width:12px;height:12px;background:var(--blue-light);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;}
-  .cursor-ring{width:36px;height:36px;border:2px solid var(--blue);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform 0.3s ease;}
-  
-  nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(16px);background:rgba(10,15,26,0.88);border-bottom:1px solid rgba(50,101,166,0.2);}
-  .logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:0.05em;text-transform:uppercase;} .logo span{color:var(--blue-light);}
-  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;} .nav-links a{text-decoration:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;transition:0.2s;} .nav-links a:hover{opacity:1;color:var(--blue-light);}
-  .nav-cta{background:var(--blue)!important;color:var(--white)!important;opacity:1!important;padding:0.5rem 1.3rem;border-radius:3px;transition:0.2s!important;} .nav-cta:hover{background:var(--blue-mid)!important;}
 
-  #inicio{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9rem 5rem 5rem;position:relative;overflow:hidden;}
-  .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 75% 35%,rgba(50,101,166,0.28) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 15% 75%,rgba(26,63,111,0.22) 0%,transparent 55%);}
-  .hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(50,101,166,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(50,101,166,0.04) 1px,transparent 1px);background-size:60px 60px;}
-  .hero-split-container {display: flex; align-items: center; min-height: 55vh; max-width: 1400px; margin: 0 auto; width: 100%; position: relative; z-index: 2;}
-  .hero-text-side {width: 55%; padding-right: 3rem;} .hero-content {width: 100%; max-width: 650px;}
-  .hero-image-side {position: absolute; right: calc(-50vw + 50%); width: 42vw; height: 90%; top: 5%; z-index: 2; animation: fadeUp 0.7s 0.3s ease both;}
-  
-  .hero-slider {width: 100%; height: 100%; border: 3px solid var(--blue); border-right: none; border-radius: 12px 0 0 12px; overflow: hidden; position: relative; box-shadow: -15px 0 40px rgba(0,0,0,0.6); background: var(--dark);}
-  .hero-slider::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--navy) 0%, transparent 100%); opacity: 0.8; z-index: 5; pointer-events: none; }
-  .slide {position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out;} .slide.active {opacity: 1;}
-  
-  .hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(50,101,166,0.12);border:1px solid rgba(91,163,245,0.25);color:var(--blue-pale);font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:2px;margin-bottom:2rem;animation:fadeUp 0.7s ease both;} .hero-tag::before{content:'';width:6px;height:6px;background:var(--blue-light);border-radius:50%;}
-  h1{font-family:'Montserrat',sans-serif;font-size:clamp(3rem,6vw,5.8rem);font-weight:900;line-height:0.98;letter-spacing:-0.025em;text-transform:uppercase;animation:fadeUp 0.7s 0.1s ease both;} h1 em{font-style:normal;color:var(--blue-light);}
-  .hero-sub{margin-top:1.8rem;font-size:1.1rem;font-weight:500;line-height:1.8;color:var(--grey);max-width:560px;animation:fadeUp 0.7s 0.2s ease both;}
-  .hero-actions{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.7s 0.3s ease both;}
-  .btn-primary{background:var(--blue);color:var(--white);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;} .btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(50,101,166,0.4);}
-  .btn-secondary{border:1.5px solid rgba(91,163,245,0.25);color:var(--blue-pale);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;} .btn-secondary:hover{border-color:var(--blue-light);background:rgba(91,163,245,0.08);color:var(--white);}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+  /* ═══════════════════════════════════════
+     CURSOR PERSONALIZADO MEJORADO
+  ═══════════════════════════════════════ */
+  .cursor{width:10px;height:10px;background:var(--blue-light);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform 0.15s ease, width 0.3s ease, height 0.3s ease;}
+  .cursor-ring{width:38px;height:38px;border:1.5px solid rgba(91,163,245,0.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width 0.4s cubic-bezier(.175,.885,.32,1.275), height 0.4s cubic-bezier(.175,.885,.32,1.275), border-color 0.3s ease;}
+  body.cursor-hover .cursor{transform:translate(-50%,-50%) scale(0);width:0;height:0;}
+  body.cursor-hover .cursor-ring{width:60px;height:60px;border-color:var(--blue-light);background:rgba(91,163,245,0.06);}
+  body.cursor-click .cursor-ring{width:28px;height:28px;}
 
-  /* --- BANNER ABOUT --- */
-  .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Montserrat',sans-serif;color:var(--blue-light);font-size:0.68rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;} .eyebrow::before{content:'';display:block;width:24px;height:3px;background:var(--blue-light);}
-  h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem;}
-  #about-banner{background:var(--blue-deep);padding:3.5rem 5rem;text-align:center;margin-top:2rem;} #about-banner h3{font-family:'Montserrat',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;margin:0;color:var(--white);}
+  /* ═══════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════ */
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(16px);background:rgba(10,15,26,0.88);border-bottom:1px solid rgba(50,101,166,0.2);transition:padding 0.4s ease, background 0.4s ease;}
+  nav.nav-scrolled{padding:0.6rem 5rem;background:rgba(10,15,26,0.97);}
+  .logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:0.05em;text-transform:uppercase;}
+  .logo span{color:var(--blue-light);}
+  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+  .nav-links a{text-decoration:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;transition:0.2s;}
+  .nav-links a:hover{opacity:1;color:var(--blue-light);}
+  .nav-cta{background:var(--blue)!important;color:var(--white)!important;opacity:1!important;padding:0.5rem 1.3rem;border-radius:3px;transition:0.2s!important;}
+  .nav-cta:hover{background:var(--blue-mid)!important;}
 
-  /* --- CARRUSEL DE LOGOS LENTO --- */
-  .client-logos { background: var(--dark); padding: 3.5rem 0; overflow: hidden; border-bottom: 1px solid var(--card-border); }
-  .client-logos-track { display: flex; width: calc(220px * 20); animation: scroll-logos 80s linear infinite; align-items: center; }
-  .client-logos-track img { width: 140px; margin: 0 40px; filter: grayscale(100%) opacity(0.4); transition: all 0.3s ease; }
-  .client-logos-track img:hover { filter: grayscale(0%) opacity(1); transform: scale(1.08); }
-  @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-220px * 10)); } }
+  /* ═══════════════════════════════════════
+     HERO REVEAL ON INTERACTION
+  ═══════════════════════════════════════ */
+  #inicio{min-height:100vh;position:relative;overflow:hidden;padding:0;}
 
-  /* --- SERVICIOS GRID --- */
-  section{padding:6rem 5rem;}
-  #servicios{background:var(--dark);}
-  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--card-border);border:1px solid var(--card-border);border-radius:6px;overflow:hidden;margin-top:2rem;} .svc-grid+.svc-grid{margin-top:1px;}
-  .svc-card{background:var(--card-bg);padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:0.3s;} .svc-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:0.3s;} .svc-card:hover{background:#152235;} .svc-card:hover::after{transform:scaleX(1);}
-  .svc-num{font-family:'Montserrat',sans-serif;font-size:2.8rem;font-weight:900;color:rgba(50,101,166,0.18);line-height:1;margin-bottom:1rem;letter-spacing:-0.04em;}
-  .svc-card h3{font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.7rem;color:var(--white);} .svc-card p{font-size:0.83rem;color:var(--grey);line-height:1.5;}
+  /* Estado 1 — Solo texto */
+  .hero-state1{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    z-index:10;text-align:center;padding:2rem;
+    transition:transform 1.2s cubic-bezier(.16,1,.3,1), opacity 1.2s ease;
+  }
+  .hero-state1.triggered{
+    transform:translateX(-40%) scale(0.5);
+    opacity:0;
+    pointer-events:none;
+    z-index:1;
+  }
+  .hs1-tag{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:rgba(50,101,166,0.12);border:1px solid rgba(91,163,245,0.25);
+    color:var(--blue-pale);font-family:'Montserrat',sans-serif;
+    font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;
+    padding:0.4rem 1rem;border-radius:2px;margin-bottom:2rem;
+    opacity:0;transform:translateY(20px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .hs1-tag::before{content:'';width:6px;height:6px;background:var(--blue-light);border-radius:50%;}
+  .hs1-tag.loaded{opacity:1;transform:translateY(0);}
+  .hs1-h1{
+    font-family:'Montserrat',sans-serif;
+    font-size:clamp(4rem,9vw,8.5rem);
+    font-weight:900;line-height:0.95;
+    letter-spacing:-0.03em;text-transform:uppercase;
+    margin-bottom:2.5rem;
+  }
+  .hs1-line{display:block;overflow:hidden;line-height:1;}
+  .hs1-word{
+    display:inline-block;color:var(--white);
+    transform:translateY(110%);opacity:0;
+    transition:transform 0.9s cubic-bezier(.16,1,.3,1), opacity 0.9s ease;
+  }
+  .hs1-word.loaded{transform:translateY(0);opacity:1;}
+  .hs1-blue{color:var(--blue-light);}
+  .hs1-hint{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Montserrat',sans-serif;
+    font-size:0.68rem;color:rgba(255,255,255,0.3);
+    letter-spacing:0.2em;text-transform:uppercase;
+    opacity:0;transition:opacity 0.8s ease;
+  }
+  .hs1-hint.loaded{opacity:1;}
+  .hs1-hint-dot{
+    width:10px;height:10px;border-radius:50%;
+    border:1px solid rgba(91,163,245,0.4);
+    position:relative;flex-shrink:0;
+  }
+  .hs1-hint-dot::after{
+    content:'';position:absolute;inset:2px;
+    border-radius:50%;background:var(--blue-light);
+    animation:hintpulse 1.6s ease infinite;
+  }
+  @keyframes hintpulse{0%,100%{transform:scale(1);opacity:1;}60%{transform:scale(2);opacity:0;}}
 
-  /* --- PORTAFOLIO --- */
-  #portafolio{background:var(--navy);}
-  .pf-filters {display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:3rem;margin-top:2rem;}
-  .filter-btn {background:transparent;border:1px solid var(--card-border);color:var(--grey);padding:0.6rem 1.4rem;border-radius:30px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:0.3s;}
-  .filter-btn:hover, .filter-btn.active {background:var(--blue);color:var(--white);border-color:var(--blue);}
-  .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
-  .pf-card{border-radius:6px;overflow:hidden;border:1px solid var(--card-border);background:var(--card-bg);transition:0.4s ease; cursor:pointer;} .pf-card:hover{border-color:var(--blue);transform:translateY(-4px);}
-  .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#080E18;position:relative;} .pf-img img {width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; display: block;} .pf-card:hover .pf-img img {transform: scale(1.06);}
-  .pf-info{padding:1.2rem 1.4rem; text-align:center;} .pf-title{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.1em;}
+  /* Estado 2 — Slideshow */
+  .hero-state2{
+    position:absolute;inset:0;z-index:8;
+    clip-path:inset(0 100% 0 0);
+    transition:clip-path 1.3s cubic-bezier(.16,1,.3,1);
+  }
+  .hero-state2.triggered{clip-path:inset(0 0% 0 0);}
 
-  /* --- IMPACTO (CENTRADOS) --- */
-  #impacto{background:#0D1829; padding: 6rem 0;}
-  .imp-text-center {display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 100%; padding: 0 2rem 3.5rem 2rem;}
-  .imp-stats-container {width: 100%; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); background: var(--card-border);}
-  .imp-stats{display:flex; width: 100%; gap: 1px;}
-  .imp-stat{flex: 1; background:var(--card-bg); padding:3.5rem 2rem; text-align: center; transition: background 0.3s;}
-  .imp-stat:hover{background: #152235;}
-  .imp-stat .n{font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:900;color:var(--blue-light);letter-spacing:-0.03em;line-height:1;} .imp-stat .l{font-size:0.75rem;color:var(--grey);margin-top:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-family:'Montserrat',sans-serif;}
+  .hcs-slide{
+    position:absolute;inset:0;opacity:0;
+    transition:opacity 1.8s ease;
+    background-size:cover;background-position:center;
+  }
+  .hcs-slide.active{opacity:1;}
+  .hcs-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to right,rgba(10,15,26,0.92) 0%,rgba(10,15,26,0.55) 45%,rgba(10,15,26,0.1) 100%);
+  }
+  .hcs-content{
+    position:absolute;inset:0;
+    display:flex;align-items:center;
+    padding:9rem 5rem 5rem;z-index:5;
+  }
+  .hcs-line{
+    width:3px;height:0;background:var(--blue-light);
+    margin-right:2rem;flex-shrink:0;
+    transition:height 1s 0.5s cubic-bezier(.16,1,.3,1);
+  }
+  .hcs-slide.active .hcs-line{height:100px;}
+  .hcs-text{max-width:580px;}
+  .hcs-cat{
+    font-family:'Montserrat',sans-serif;font-size:0.68rem;
+    color:var(--blue-light);letter-spacing:0.2em;text-transform:uppercase;
+    font-weight:800;opacity:0;transform:translateY(10px);
+    transition:opacity 0.6s 0.7s, transform 0.6s 0.7s;
+  }
+  .hcs-slide.active .hcs-cat{opacity:1;transform:translateY(0);}
+  .hcs-title{
+    font-family:'Montserrat',sans-serif;
+    font-size:clamp(2.8rem,5vw,5rem);
+    font-weight:900;color:var(--white);
+    text-transform:uppercase;letter-spacing:-0.025em;
+    line-height:0.95;margin-top:0.6rem;
+    opacity:0;transform:translateY(18px);
+    transition:opacity 0.7s 0.9s, transform 0.7s 0.9s;
+  }
+  .hcs-slide.active .hcs-title{opacity:1;transform:translateY(0);}
+  .hcs-desc{
+    font-family:'Open Sans',sans-serif;font-size:1rem;
+    color:rgba(240,246,255,0.5);line-height:1.75;
+    margin-top:1.2rem;max-width:460px;
+    opacity:0;transition:opacity 0.6s 1.1s;
+  }
+  .hcs-slide.active .hcs-desc{opacity:1;}
+  .hcs-actions{
+    margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;
+    opacity:0;transition:opacity 0.6s 1.3s;
+  }
+  .hcs-slide.active .hcs-actions{opacity:1;}
 
-  /* --- PROCESO ALINEADO AL TECHO --- */
-  #proceso{background:var(--dark);} .pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;} 
-  .pr-steps{display:flex;flex-direction:column;} .pr-step{display:flex;gap:1.8rem;padding:2.5rem 0;border-bottom:1px solid var(--card-border);} .pr-step:first-child{padding-top:0;} .pr-step:last-child{border-bottom:none; padding-bottom:0;}
-  .pr-intro p{color:var(--grey);line-height:1.75;margin-top:0;}
-  .pr-num{font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:900;color:rgba(50,101,166,0.16);line-height:1;flex-shrink:0;width:56px;letter-spacing:-0.04em;}
-  .pr-step h4{font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);margin-bottom:0.5rem;} .pr-step p{font-size:0.82rem;color:var(--grey);line-height:1.7;}
-
-  /* --- CONTACTO --- */
-  #contacto{background:#0D1829;} .ct-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;} .ct-text .lead{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
-  .ct-item{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.2rem;border:1px solid var(--card-border);border-radius:5px;background:var(--card-bg);margin-bottom:0.7rem;transition:0.3s;} .ct-item:hover{border-color:var(--blue);}
-  .ct-icon{width:38px;height:38px;flex-shrink:0;background:rgba(50,101,166,0.15);border-radius:5px;display:flex;align-items:center;justify-content:center;} .ct-lbl{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--blue-light);margin-bottom:0.2rem;} .ct-val{font-size:0.88rem;font-weight:600;color:var(--white);}
-  .form-wrap{display:flex;flex-direction:column;gap:0.9rem;} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;} .fg{display:flex;flex-direction:column;gap:0.35rem;}
-  .fg label{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--grey);}
-  .fg input,.fg select,.fg textarea{background:var(--card-bg);border:1px solid var(--card-border);border-radius:3px;padding:0.75rem 0.9rem;color:var(--white);font-family:inherit;font-size:0.87rem;outline:none;} .fg select option{background:#0d1829;} .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue-light);}
-  .btn-wa{display:flex;align-items:center;justify-content:center;gap:0.6rem;background:#25D366;color:#050505;padding:0.95rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;transition:0.2s;width:100%;} .btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3);}
-
-  /* --- FOOTER & COMPONENTES FLOTANTES --- */
-  footer{border-top:1px solid var(--card-border);padding:1.8rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;} .footer-copy{font-size:0.75rem;color:var(--grey);}
-  .back-to-top {position:fixed;bottom:2rem;right:2rem;width:45px;height:45px;background:var(--blue);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:0.3s;z-index:9990;} .back-to-top.visible {opacity:1;pointer-events:auto;}
-  .reveal{opacity:0;transform:translateY(30px);transition:0.6s ease;} .reveal.visible{opacity:1;transform:translateY(0);} .d1{transition-delay:0.1s;}
-
-  .wa-float { position: fixed; bottom: 2rem; left: 2rem; width: 55px; height: 55px; background: #25D366; color: #FFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9990; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; }
-  .wa-float:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 20px rgba(37,211,102,0.4); color: #fff;}
-  .wa-float svg { width: 32px; height: 32px; fill: currentColor; }
-
-  /* --- MODAL DE COTIZACIÓN --- */
-  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 26, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-  .modal-overlay.active { opacity: 1; pointer-events: auto; }
-  .modal-box { background: var(--card-bg); border: 1px solid var(--blue); border-radius: 6px; padding: 2.5rem 2rem; width: 90%; max-width: 500px; position: relative; transform: translateY(-30px); transition: transform 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-  .modal-overlay.active .modal-box { transform: translateY(0); }
-  .close-modal { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; color: var(--grey); cursor: pointer; transition: color 0.2s; line-height: 1; }
-  .close-modal:hover { color: var(--white); }
-  .modal-box h3 { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; color: var(--white); text-align: center; }
-
-  /* --- LIGHTBOX (GALERÍA DE FOTOS AMPLIADAS) --- */
-  .lightbox-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 999999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-  .lightbox-wrap.active { opacity: 1; pointer-events: auto; }
-  #lightbox-img { max-width: 90%; max-height: 85vh; border-radius: 4px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); object-fit: contain; transition: transform 0.3s ease; }
-  .lightbox-close { position: absolute; top: 1.5rem; right: 2.5rem; font-size: 3rem; color: var(--grey); cursor: pointer; transition: color 0.2s; line-height: 1; z-index: 2; }
-  .lightbox-close:hover { color: var(--white); }
-  .lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10, 15, 26, 0.7); color: var(--white); border: 1px solid var(--blue); border-radius: 50%; width: 55px; height: 55px; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s, transform 0.2s; z-index: 2; }
-  .lightbox-btn:hover { background: var(--blue); transform: translateY(-50%) scale(1.1); }
-  .lightbox-prev { left: 2rem; }
-  .lightbox-next { right: 2rem; }
+  .hcs-counter{
+    position:absolute;top:6rem;right:5rem;z-index:10;
+    font-family:'Montserrat',sans-serif;
+  }
+  .hcs-counter strong{font-size:1rem;color:var(--blue-light);font-weight:900;}
+  .hcs-counter span{font-size:0.75rem;color:rgba(255,255,255,0.3);letter-spacing:1px;}
+  .hcs-nav{
+    position:absolute;bottom:2.5rem;left:5rem;
+    display:flex;align-items:center;gap:6px;z-index:10;
+  }
+  .hcs-dot{
+    height:2px;width:18px;background:rgba(255,255,255,0.2);
+    cursor:pointer;border-radius:2px;
+    transition:background 0.3s, width 0.4s;
+  }
+  .hcs-dot.active{background:var(--blue-light);width:32px;}
+  .hcs-arrows{
+    position:absolute;bottom:2rem;right:5rem;
+    display:flex;gap:6px;z-index:10;
+  }
+  .hcs-btn{
+    background:rgba(50,101,166,0.2);color:var(--white);
+    border:1px solid rgba(91,163,245,0.25);
+    width:38px;height:38px;border-radius:50%;
+    font-size:16px;cursor:none;
+    display:flex;align-items:center;justify-content:center;
+    transition:background 0.2s,border-color 0.2s;
+  }
+  .hcs-btn:hover{background:rgba(50,101,166,0.6);border-color:var(--blue-light);}
+  .hcs-prog{
+    position:absolute;bottom:0;left:0;
+    height:2px;background:var(--blue-light);
+    transition:width 0.1s linear;z-index:10;
+  }
 
   @media(max-width:1024px){
-    nav{padding:1rem 1.5rem;} .nav-links{display:none;} #inicio{padding:7rem 1.5rem 3rem;} .hero-split-container {flex-direction:column-reverse;} .hero-text-side {width:100%;padding-right:0;} .hero-image-side {position:relative;right:auto;width:100%;height:350px;} .hero-slider {border-radius:0;border:none;border-bottom:3px solid var(--blue);}
-    section{padding:4rem 1.5rem;} .svc-grid,.pf-grid{grid-template-columns:1fr 1fr;} .imp-stats{flex-direction: column;} #impacto,.pr-grid,.ct-inner,.form-row{grid-template-columns:1fr;} footer{padding:1.5rem;flex-direction:column;}
-    .wa-float { bottom: 1.5rem; left: 1.5rem; } .imp-text-center{padding: 0 1.5rem;} .imp-stat{padding: 2rem 1rem;}
+    .hcs-content{padding:7rem 1.5rem 4rem;}
+    .hcs-counter{top:5rem;right:1.5rem;}
+    .hcs-nav{left:1.5rem;}
+    .hcs-arrows{right:1.5rem;}
+    .hcs-title{font-size:clamp(2rem,7vw,3.5rem);}
+    .hs1-h1{font-size:clamp(3rem,12vw,6rem);}
+  }
+
+  .btn-primary{background:var(--blue);color:var(--white);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;display:inline-block;position:relative;overflow:hidden;}
+  .btn-primary::after{content:'';position:absolute;inset:0;background:#fff;transform:translateX(-101%);transition:transform 0.35s cubic-bezier(.16,1,.3,1);z-index:0;}
+  .btn-primary:hover::after{transform:translateX(0);}
+  .btn-primary:hover{color:var(--navy);transform:translateY(-2px);box-shadow:0 8px 24px rgba(50,101,166,0.4);}
+  .btn-primary span{position:relative;z-index:1;}
+
+  .btn-secondary{border:1.5px solid rgba(91,163,245,0.25);color:var(--blue-pale);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;}
+  .btn-secondary:hover{border-color:var(--blue-light);background:rgba(91,163,245,0.08);color:var(--white);}
+
+  /* ═══════════════════════════════════════
+     ABOUT BANNER
+  ═══════════════════════════════════════ */
+  .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Montserrat',sans-serif;color:var(--blue-light);font-size:0.68rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;}
+  .eyebrow::before{content:'';display:block;width:24px;height:3px;background:var(--blue-light);}
+  h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem;}
+  #about-banner{background:var(--blue-deep);padding:3.5rem 5rem;text-align:center;margin-top:2rem;}
+  #about-banner h3{font-family:'Montserrat',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;margin:0;color:var(--white);}
+
+  /* ═══════════════════════════════════════
+     LOGOS
+  ═══════════════════════════════════════ */
+  .client-logos{background:var(--dark);padding:3.5rem 0;overflow:hidden;border-bottom:1px solid var(--card-border);}
+  .client-logos-track{display:flex;width:calc(220px * 20);animation:scroll-logos 80s linear infinite;align-items:center;}
+  .client-logos-track img{width:140px;margin:0 40px;filter:grayscale(100%) opacity(0.4);transition:all 0.3s ease;}
+  .client-logos-track img:hover{filter:grayscale(0%) opacity(1);transform:scale(1.08);}
+  @keyframes scroll-logos{0%{transform:translateX(0);}100%{transform:translateX(calc(-220px * 10));}}
+
+  /* ═══════════════════════════════════════
+     SERVICIOS — LISTA ESTILO EDITORIAL
+  ═══════════════════════════════════════ */
+  section{padding:6rem 5rem;}
+  #servicios{background:var(--dark);}
+
+  .svc-header{margin-bottom:0;padding-bottom:1.5rem;border-bottom:1px solid var(--card-border);}
+
+  /* Lista editorial */
+  .svc-list{list-style:none;margin-top:0;}
+  .svc-list-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.6rem 0;
+    border-bottom:1px solid rgba(28,46,71,0.8);
+    cursor:none;position:relative;overflow:hidden;
+    transition:padding-left 0.45s cubic-bezier(.16,1,.3,1);
+    opacity:1 !important;
+    transform:none !important;
+  }
+  .svc-list-item::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;
+    width:0;background:rgba(50,101,166,0.07);
+    transition:width 0.45s ease;
+  }
+  .svc-list-item:hover::before{width:100%;}
+  .svc-list-item:hover{padding-left:1.2rem;}
+  .svc-list-left{display:flex;align-items:center;gap:1.5rem;z-index:1;}
+  .svc-list-num{font-size:11px;color:rgba(139,164,194,0.4);font-family:'Montserrat',sans-serif;font-weight:400;min-width:28px;}
+  .svc-list-name{font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;transition:color 0.3s;}
+  .svc-list-item:hover .svc-list-name{color:var(--blue-light);}
+  .svc-list-right{display:flex;align-items:center;gap:1rem;z-index:1;}
+  .svc-list-tag{font-size:10px;color:rgba(139,164,194,0.4);letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',sans-serif;}
+  .svc-list-arrow{
+    width:32px;height:32px;border:1px solid rgba(28,46,71,0.8);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:14px;color:rgba(139,164,194,0.4);
+    transition:background 0.3s,border-color 0.3s,color 0.3s,transform 0.3s;
+  }
+  .svc-list-item:hover .svc-list-arrow{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(45deg);}
+
+  /* Preview imagen en cursor al hover servicios */
+  #svc-cursor-preview{
+    position:fixed;z-index:9997;pointer-events:none;
+    width:200px;height:130px;border-radius:6px;
+    background:var(--card-bg);border:1px solid var(--blue);
+    overflow:hidden;opacity:0;
+    transform:translate(-50%,-120%) rotate(-3deg);
+    transition:opacity 0.3s ease;
+    box-shadow:0 12px 32px rgba(0,0,0,0.6);
+  }
+  #svc-cursor-preview img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ═══════════════════════════════════════
+     PORTAFOLIO
+  ═══════════════════════════════════════ */
+  #portafolio{background:var(--navy);}
+  .pf-filters{display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:3rem;margin-top:2rem;}
+  .filter-btn{background:transparent;border:1px solid var(--card-border);color:var(--grey);padding:0.6rem 1.4rem;border-radius:30px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;cursor:none;transition:0.3s;}
+  .filter-btn:hover,.filter-btn.active{background:var(--blue);color:var(--white);border-color:var(--blue);}
+  .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+  .pf-card{border-radius:6px;overflow:hidden;border:1px solid var(--card-border);background:var(--card-bg);transition:border-color 0.4s ease,transform 0.4s ease;cursor:none;will-change:transform;}
+  .pf-card:hover{border-color:var(--blue);}
+  .pf-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#080E18;position:relative;}
+  .pf-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;display:block;}
+  .pf-card:hover .pf-img img{transform:scale(1.07);}
+  .pf-info{padding:1.2rem 1.4rem;text-align:center;}
+  .pf-title{font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.1em;}
+
+  /* ═══════════════════════════════════════
+     IMPACTO
+  ═══════════════════════════════════════ */
+  #impacto{background:#0D1829;padding:6rem 0;}
+  .imp-text-center{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:100%;padding:0 2rem 3.5rem 2rem;}
+  .imp-stats-container{width:100%;border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);background:var(--card-border);}
+  .imp-stats{display:flex;width:100%;gap:1px;}
+  .imp-stat{flex:1;background:var(--card-bg);padding:3.5rem 2rem;text-align:center;transition:background 0.3s;}
+  .imp-stat:hover{background:#152235;}
+  .imp-stat .n{font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:900;color:var(--blue-light);letter-spacing:-0.03em;line-height:1;}
+  .imp-stat .l{font-size:0.75rem;color:var(--grey);margin-top:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-family:'Montserrat',sans-serif;}
+
+  /* ═══════════════════════════════════════
+     PROCESO
+  ═══════════════════════════════════════ */
+  #proceso{background:var(--dark);}
+  .pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+  .pr-steps{display:flex;flex-direction:column;}
+  .pr-step{display:flex;gap:1.8rem;padding:2.5rem 0;border-bottom:1px solid var(--card-border);}
+  .pr-step:first-child{padding-top:0;}
+  .pr-step:last-child{border-bottom:none;padding-bottom:0;}
+  .pr-intro p{color:var(--grey);line-height:1.75;margin-top:0;}
+  .pr-num{font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:900;color:rgba(50,101,166,0.16);line-height:1;flex-shrink:0;width:56px;letter-spacing:-0.04em;}
+  .pr-step h4{font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);margin-bottom:0.5rem;}
+  .pr-step p{font-size:0.82rem;color:var(--grey);line-height:1.7;}
+
+  /* ═══════════════════════════════════════
+     CONTACTO
+  ═══════════════════════════════════════ */
+  #contacto{background:#0D1829;}
+  .ct-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+  .ct-text .lead{color:var(--grey);line-height:1.8;margin:1rem 0 2rem;}
+  .ct-item{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.2rem;border:1px solid var(--card-border);border-radius:5px;background:var(--card-bg);margin-bottom:0.7rem;transition:0.3s;}
+  .ct-item:hover{border-color:var(--blue);}
+  .ct-icon{width:38px;height:38px;flex-shrink:0;background:rgba(50,101,166,0.15);border-radius:5px;display:flex;align-items:center;justify-content:center;}
+  .ct-lbl{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--blue-light);margin-bottom:0.2rem;}
+  .ct-val{font-size:0.88rem;font-weight:600;color:var(--white);}
+  .form-wrap{display:flex;flex-direction:column;gap:0.9rem;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+  .fg{display:flex;flex-direction:column;gap:0.35rem;}
+  .fg label{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--grey);}
+  .fg input,.fg select,.fg textarea{background:var(--card-bg);border:1px solid var(--card-border);border-radius:3px;padding:0.75rem 0.9rem;color:var(--white);font-family:inherit;font-size:0.87rem;outline:none;transition:border-color 0.2s;}
+  .fg select option{background:#0d1829;}
+  .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue-light);}
+  .btn-wa{display:flex;align-items:center;justify-content:center;gap:0.6rem;background:#25D366;color:#050505;padding:0.95rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:none;transition:0.2s;width:100%;}
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3);}
+
+  /* ═══════════════════════════════════════
+     FOOTER & FLOTANTES
+  ═══════════════════════════════════════ */
+  footer{border-top:1px solid var(--card-border);padding:1.8rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  .footer-copy{font-size:0.75rem;color:var(--grey);}
+  .back-to-top{position:fixed;bottom:2rem;right:2rem;width:45px;height:45px;background:var(--blue);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:0.3s;z-index:9990;cursor:none;}
+  .back-to-top.visible{opacity:1;pointer-events:auto;}
+  .wa-float{position:fixed;bottom:2rem;left:2rem;width:55px;height:55px;background:#25D366;color:#FFF;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:9990;transition:transform 0.3s,box-shadow 0.3s;text-decoration:none;}
+  .wa-float:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 8px 20px rgba(37,211,102,0.4);color:#fff;}
+  .wa-float svg{width:32px;height:32px;fill:currentColor;}
+
+  /* ═══════════════════════════════════════
+     MODAL
+  ═══════════════════════════════════════ */
+  .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,15,26,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:99999;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+  .modal-overlay.active{opacity:1;pointer-events:auto;}
+  .modal-box{background:var(--card-bg);border:1px solid var(--blue);border-radius:6px;padding:2.5rem 2rem;width:90%;max-width:500px;position:relative;transform:translateY(-30px);transition:transform 0.3s ease;box-shadow:0 20px 40px rgba(0,0,0,0.5);}
+  .modal-overlay.active .modal-box{transform:translateY(0);}
+  .close-modal{position:absolute;top:1rem;right:1.5rem;font-size:2rem;color:var(--grey);cursor:none;transition:color 0.2s;line-height:1;}
+  .close-modal:hover{color:var(--white);}
+  .modal-box h3{font-family:'Montserrat',sans-serif;font-size:1.2rem;font-weight:800;text-transform:uppercase;margin-bottom:1.5rem;color:var(--white);text-align:center;}
+
+  /* ═══════════════════════════════════════
+     LIGHTBOX
+  ═══════════════════════════════════════ */
+  .lightbox-wrap{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,15,26,0.95);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;z-index:999999;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+  .lightbox-wrap.active{opacity:1;pointer-events:auto;}
+  #lightbox-img{max-width:90%;max-height:85vh;border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,0.8);object-fit:contain;transition:transform 0.3s ease;}
+  .lightbox-close{position:absolute;top:1.5rem;right:2.5rem;font-size:3rem;color:var(--grey);cursor:none;transition:color 0.2s;line-height:1;z-index:2;}
+  .lightbox-close:hover{color:var(--white);}
+  .lightbox-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,15,26,0.7);color:var(--white);border:1px solid var(--blue);border-radius:50%;width:55px;height:55px;font-size:1.5rem;display:flex;align-items:center;justify-content:center;cursor:none;transition:background 0.3s,transform 0.2s;z-index:2;}
+  .lightbox-btn:hover{background:var(--blue);transform:translateY(-50%) scale(1.1);}
+  .lightbox-prev{left:2rem;}
+  .lightbox-next{right:2rem;}
+
+  /* ═══════════════════════════════════════
+     SCROLL REVEAL
+  ═══════════════════════════════════════ */
+  .reveal{opacity:0;transform:translateY(35px);transition:opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .d1{transition-delay:0.12s;}
+  .d2{transition-delay:0.22s;}
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media(max-width:1024px){
+    nav{padding:1rem 1.5rem;}
+    .nav-links{display:none;}
+    #inicio{padding:7rem 1.5rem 3rem;}
+    .hero-split-container{flex-direction:column-reverse;}
+    .hero-text-side{width:100%;padding-right:0;}
+    .hero-image-side{position:relative;right:auto;width:100%;height:350px;}
+    .hero-slider{border-radius:0;border:none;border-bottom:3px solid var(--blue);}
+    section{padding:4rem 1.5rem;}
+    .svc-grid,.pf-grid{grid-template-columns:1fr 1fr;}
+    .imp-stats{flex-direction:column;}
+    #impacto,.pr-grid,.ct-inner,.form-row{grid-template-columns:1fr;}
+    footer{padding:1.5rem;flex-direction:column;}
+    .wa-float{bottom:1.5rem;left:1.5rem;}
+    .imp-text-center{padding:0 1.5rem;}
+    .imp-stat{padding:2rem 1rem;}
+    .svc-list-tag{display:none;}
   }
   @media(max-width:768px){
-    .pf-grid,.svc-grid{grid-template-columns:1fr;}
-    .lightbox-btn { width: 40px; height: 40px; font-size: 1.2rem; } .lightbox-prev { left: 1rem; } .lightbox-next { right: 1rem; } .lightbox-close { top: 1rem; right: 1rem; font-size: 2.5rem; }
+    .pf-grid{grid-template-columns:1fr;}
+    .lightbox-btn{width:40px;height:40px;font-size:1.2rem;}
+    .lightbox-prev{left:1rem;}
+    .lightbox-next{right:1rem;}
+    .lightbox-close{top:1rem;right:1rem;font-size:2.5rem;}
+    .svc-list-name{font-size:1.1rem;}
   }
 </style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div><div class="cursor-ring" id="cursorRing"></div>
 
-<nav>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Preview imagen para hover en servicios -->
+<div id="svc-cursor-preview"><img id="svc-cursor-preview-img" src="" alt=""></div>
+
+<nav id="mainNav">
   <div class="logo"><img src="https://i.postimg.cc/0yv4RdFc/Logo-LC-12.png" alt="Los Crafters" style="height:48px;width:auto;"></div>
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
@@ -195,30 +467,126 @@
   </ul>
 </nav>
 
+<!-- HERO — REVEAL ON INTERACTION -->
 <section id="inicio">
-  <div class="hero-bg"></div><div class="hero-grid"></div>
-  <div class="hero-split-container">
-    <div class="hero-text-side">
-      <div class="hero-content">
-        <div class="hero-tag">Taller Publicitario · Santo Domingo, RD</div>
-        <h1>Tu marca<br>merece<br><em>destacar.</em></h1>
-        <p class="hero-sub">Damos vida a las ideas a través del diseño y la producción de alta calidad. Somos tu aliado estratégico para potenciar la imagen de tu negocio en cada proyecto.</p>
-        <div class="hero-actions">
-          <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary">VER CATÁLOGO</a>
-          <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
+
+  <!-- ESTADO 1: Solo texto -->
+  <div class="hero-bg"></div>
+  <div class="hero-grid" id="heroGrid"></div>
+
+  <div class="hero-state1" id="heroState1">
+    <div class="hs1-tag" id="hs1Tag">Taller Publicitario · Santo Domingo, RD</div>
+    <h1 class="hs1-h1" id="hs1H1">
+      <span class="hs1-line"><span class="hs1-word">Tu</span></span>
+      <span class="hs1-line"><span class="hs1-word">marca</span></span>
+      <span class="hs1-line"><span class="hs1-word">merece</span></span>
+      <span class="hs1-line"><span class="hs1-word hs1-blue">destacar.</span></span>
+    </h1>
+    <div class="hs1-hint" id="hs1Hint">
+      <span class="hs1-hint-dot"></span>
+      Mueve el mouse para explorar
+    </div>
+  </div>
+
+  <!-- ESTADO 2: Slideshow cinematográfico -->
+  <div class="hero-state2" id="heroState2">
+
+    <div class="hcs-slide active" style="background-image:url('https://i.postimg.cc/wjmwZ2hD/IMG_7791.png')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Señalización</div>
+          <div class="hcs-title">Tu marca<br>merece destacar.</div>
+          <div class="hcs-desc">Letreros con tecnología avanzada para identificar y destacar tus espacios.</div>
+          <div class="hcs-actions">
+            <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
+            <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="hero-image-side">
-      <div class="hero-slider">
-        <img src="https://i.postimg.cc/vT0K8mB3/IMG_5184.png" class="slide active" alt="Portafolio Hero 1">
-        <img src="https://i.postimg.cc/QdwRWVq1/Grupo_1.png" class="slide" alt="Portafolio Hero 2">
-        <img src="https://i.postimg.cc/qM0n4LV7/IMG_1151.jpg" class="slide" alt="Portafolio Hero 3">
-        <img src="https://i.postimg.cc/s1FJHXrF/IMG_1990.avif" class="slide" alt="Portafolio Hero 4">
-        <img src="https://i.postimg.cc/fW3nPrNf/IMG_2022.avif" class="slide" alt="Portafolio Hero 5">
+
+    <div class="hcs-slide" style="background-image:url('https://i.postimg.cc/9f1qwfg4/PHOTO_2023_12_30_11_24_55.jpg')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Branding Vehicular</div>
+          <div class="hcs-title">Publicidad<br>en movimiento.</div>
+          <div class="hcs-desc">Ploteo de alta calidad que convierte tus vehículos en pasarelas publicitarias.</div>
+          <div class="hcs-actions">
+            <a href="#portafolio" class="btn-primary magnetic"><span>Ver proyectos</span></a>
+            <a href="#contacto" class="btn-secondary">Cotizar →</a>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="hcs-slide" style="background-image:url('https://i.postimg.cc/V6cpDTpY/IMG_2602.png')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Fachadas</div>
+          <div class="hcs-title">Impacto visual<br>24/7.</div>
+          <div class="hcs-desc">Cajas de luces e iluminación LED que hacen brillar tu negocio día y noche.</div>
+          <div class="hcs-actions">
+            <a href="#contacto" class="btn-primary magnetic"><span>Iniciar proyecto</span></a>
+            <a href="#servicios" class="btn-secondary">Nuestros servicios →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hcs-slide" style="background-image:url('https://i.postimg.cc/pdv6Xs40/IMG_5039.avif')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Exhibidores</div>
+          <div class="hcs-title">Diseño que<br>vende más.</div>
+          <div class="hcs-desc">Estructuras modulares que realzan tus productos en punto de venta.</div>
+          <div class="hcs-actions">
+            <a href="#portafolio" class="btn-primary magnetic"><span>Ver proyectos</span></a>
+            <a href="#contacto" class="btn-secondary">Cotizar →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hcs-slide" style="background-image:url('https://i.postimg.cc/FzT6FKRy/IMG_4654.png')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Letreros ACM + PVC</div>
+          <div class="hcs-title">Luz propia,<br>marca propia.</div>
+          <div class="hcs-desc">Vinilos y rótulos en ACM y PVC para darle carácter y presencia a cualquier espacio.</div>
+          <div class="hcs-actions">
+            <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
+            <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hcs-counter"><strong id="hcsNum">01</strong> <span>/ 05</span></div>
+    <div class="hcs-nav" id="hcsNav">
+      <div class="hcs-dot active" onclick="hcsGo(0)"></div>
+      <div class="hcs-dot" onclick="hcsGo(1)"></div>
+      <div class="hcs-dot" onclick="hcsGo(2)"></div>
+      <div class="hcs-dot" onclick="hcsGo(3)"></div>
+      <div class="hcs-dot" onclick="hcsGo(4)"></div>
+    </div>
+    <div class="hcs-arrows">
+      <button class="hcs-btn" onclick="hcsPrev()">‹</button>
+      <button class="hcs-btn" onclick="hcsNext()">›</button>
+    </div>
+    <div class="hcs-prog" id="hcsProg"></div>
+
   </div>
+
 </section>
 
 <div id="about-banner" class="reveal"><h3>Más que un Taller Publicitario, Somos el Aliado de tu Marca.</h3></div>
@@ -229,22 +597,28 @@
   </div>
 </div>
 
+<!-- SERVICIOS — Lista editorial -->
 <section id="servicios">
-  <div class="svc-header reveal"><div class="eyebrow">Nuestros Servicios</div><h2>Calidad en cada detalle</h2></div>
-  <div class="svc-grid reveal">
-    <div class="svc-card"><div class="svc-num">01</div><h3>Señalización</h3><p>Letreros con tecnología avanzada para identificar y destacar tus espacios.</p></div>
-    <div class="svc-card"><div class="svc-num">02</div><h3>Branding Vehicular</h3><p>Plotteo de alta calidad que convierte tus vehículos en pasarelas publicitarias.</p></div>
-    <div class="svc-card"><div class="svc-num">03</div><h3>Letreros</h3><p>Vinilos y rótulos decorativos para darle un aspecto renovado a cualquier superficie.</p></div>
-    <div class="svc-card"><div class="svc-num">04</div><h3>Bordados</h3><p>Uniformes y textiles personalizados con la identidad impecable de tu marca.</p></div>
+  <div class="svc-header reveal">
+    <div class="eyebrow">Nuestros Servicios</div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;">
+      <h2 style="margin-bottom:0;">Calidad en cada detalle</h2>
+      <span style="font-size:10px;color:rgba(139,164,194,0.4);letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',sans-serif;">08 especialidades</span>
+    </div>
   </div>
-  <div class="svc-grid reveal d1">
-    <div class="svc-card"><div class="svc-num">05</div><h3>Exhibidores</h3><p>Estructuras y monolitos modulares que realzan tus productos en punto de venta.</p></div>
-    <div class="svc-card"><div class="svc-num">06</div><h3>Fachadas</h3><p>Cajas de luces e iluminación LED de alto impacto visual 24/7.</p></div>
-    <div class="svc-card"><div class="svc-num">07</div><h3>Artículos Promocionales</h3><p>Impresiones que marcan la diferencia en tus eventos y personalizaciones.</p></div>
-    <div class="svc-card"><div class="svc-num">08</div><h3>Diseño Gráfico</h3><p>Soluciones integrales de identidad corporativa y publicidad gráfica.</p></div>
-  </div>
+  <ul class="svc-list">
+    <li class="svc-list-item" data-img="https://i.postimg.cc/wjmwZ2hD/IMG_7791.png"><div class="svc-list-left"><span class="svc-list-num">01</span><span class="svc-list-name">Señalización</span></div><div class="svc-list-right"><span class="svc-list-tag">Letreros · Espacios</span><div class="svc-list-arrow">→</div></div></li>
+    <li class="svc-list-item" data-img="https://i.postimg.cc/9f1qwfg4/PHOTO_2023_12_30_11_24_55.jpg"><div class="svc-list-left"><span class="svc-list-num">02</span><span class="svc-list-name">Branding Vehicular</span></div><div class="svc-list-right"><span class="svc-list-tag">Ploteo · Vinilo</span><div class="svc-list-arrow">→</div></div></li>
+    <li class="svc-list-item" data-img="https://i.postimg.cc/FzT6FKRy/IMG_4654.png"><div class="svc-list-left"><span class="svc-list-num">03</span><span class="svc-list-name">Letreros</span></div><div class="svc-list-right"><span class="svc-list-tag">ACM · PVC · Vinilos</span><div class="svc-list-arrow">→</div></div></li>
+    <li class="svc-list-item" data-img="https://i.postimg.cc/Fs1WgNz6/IMG_7286.png"><div class="svc-list-left"><span class="svc-list-num">04</span><span class="svc-list-name">Bordados</span></div><div class="svc-list-right"><span class="svc-list-tag">Uniformes · Textiles</span><div class="svc-list-arrow">→</div></div></li>
+    <li class="svc-list-item" data-img="https://i.postimg.cc/pdv6Xs40/IMG_5039.avif"><div class="svc-list-left"><span class="svc-list-num">05</span><span class="svc-list-name">Exhibidores</span></div><div class="svc-list-right"><span class="svc-list-tag">Punto de venta</span><div class="svc-list-arrow">→</div></div></li>
+    <li class="svc-list-item" data-img="https://i.postimg.cc/gjj5brQ4/IMG_4618.avif"><div class="svc-list-left"><span class="svc-list-num">06</span><span class="svc-list-name">Fachadas</span></div><div class="svc-list-right"><span class="svc-list-tag">Cajas de luz · LED</span><div class="svc-list-arrow">→</div></div></li>
+    <li class="svc-list-item" data-img="https://i.postimg.cc/3xdsR22j/0e58a7da_4e42_4b15_ac43_5dbc5c464363.png"><div class="svc-list-left"><span class="svc-list-num">07</span><span class="svc-list-name">Artículos Promocionales</span></div><div class="svc-list-right"><span class="svc-list-tag">Eventos · Regalos</span><div class="svc-list-arrow">→</div></div></li>
+    <li class="svc-list-item" data-img="https://i.postimg.cc/3JMGNbSj/Captura-de-pantalla-2026-03-22-a-la(s)-8-52-31-p-m.png"><div class="svc-list-left"><span class="svc-list-num">08</span><span class="svc-list-name">Diseño Gráfico</span></div><div class="svc-list-right"><span class="svc-list-tag">Identidad · Branding</span><div class="svc-list-arrow">→</div></div></li>
+  </ul>
 </section>
 
+<!-- PORTAFOLIO -->
 <section id="portafolio">
   <div class="pf-header reveal"><div><div class="eyebrow">Inspírate</div><h2>Proyectos Destacados</h2></div></div>
   <div class="pf-filters reveal">
@@ -256,29 +630,24 @@
     <button class="filter-btn" data-filter="promocionales">Artículos Promocionales</button>
     <button class="filter-btn" data-filter="letreros">Letreros</button>
   </div>
-  
   <div class="pf-grid reveal d1" id="portfolio-grid">
     <div class="pf-card destacado" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/wjmwZ2hD/IMG_7791.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
     <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/ZqNXPZ7K/IMG_1883.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
     <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/MT8Nd4Nx/IMG_1886.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
     <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/BZ2DrzyD/IMG_1168.jpg" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
     <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="https://i.postimg.cc/wvdZ0PZM/IMG_2672.png" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
-
     <div class="pf-card destacado" data-cat="branding"><div class="pf-img"><img src="https://i.postimg.cc/9f1qwfg4/PHOTO_2023_12_30_11_24_55.jpg" alt="Branding Vehicular"></div><div class="pf-info"><div class="pf-title">Branding Vehicular</div></div></div>
     <div class="pf-card" data-cat="branding"><div class="pf-img"><img src="https://i.postimg.cc/9FSxLKqF/IMG_7678.png" alt="Branding Vehicular"></div><div class="pf-info"><div class="pf-title">Branding Vehicular</div></div></div>
     <div class="pf-card" data-cat="branding"><div class="pf-img"><img src="https://i.postimg.cc/d0nTZ0Nh/PHOTO_2023_12_23_22_58_38.jpg" alt="Branding Vehicular"></div><div class="pf-info"><div class="pf-title">Branding Vehicular</div></div></div>
-
     <div class="pf-card destacado" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/gjj5brQ4/IMG_4618.avif" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
     <div class="pf-card" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/jS08Z8xL/IMG_1989.avif" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
     <div class="pf-card" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/VkCxNr6K/IMG_4571.avif" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
     <div class="pf-card" data-cat="fachadas"><div class="pf-img"><img src="https://i.postimg.cc/V6cpDTpY/IMG_2602.png" alt="Fachadas"></div><div class="pf-info"><div class="pf-title">Fachadas</div></div></div>
-
     <div class="pf-card destacado" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/pdv6Xs40/IMG_5039.avif" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
     <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/PxxvWk0P/PHOTO_2024_07_05_11_15_59.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
     <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/CKJfnKrk/PHOTO_2024_07_05_11_15_58_2.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
     <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/W4SJq4Y0/PHOTO_2024_07_05_11_15_58.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
     <div class="pf-card" data-cat="exhibidores"><div class="pf-img"><img src="https://i.postimg.cc/bvL2SvVb/PHOTO_2024_07_05_11_15_57.jpg" alt="Exhibidores"></div><div class="pf-info"><div class="pf-title">Exhibidores</div></div></div>
-
     <div class="pf-card destacado" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/3xdsR22j/0e58a7da_4e42_4b15_ac43_5dbc5c464363.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
     <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/VvzyLTFc/IMG_7224.avif" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
     <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/4xqrhn17/2738251f_e6d1_4f1e_82a7_1319896a5717.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
@@ -287,7 +656,6 @@
     <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/26wcT5ns/IMG_7195.avif" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
     <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/Fs1WgNz6/IMG_7286.png" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
     <div class="pf-card" data-cat="promocionales"><div class="pf-img"><img src="https://i.postimg.cc/Znngz02H/IMG_4857.avif" alt="Artículos Promocionales"></div><div class="pf-info"><div class="pf-title">Artículos Promocionales</div></div></div>
-
     <div class="pf-card destacado" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/FzT6FKRy/IMG_4654.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
     <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/wxw4m7qj/IMG_7273.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
     <div class="pf-card" data-cat="letreros"><div class="pf-img"><img src="https://i.postimg.cc/vT0K8mB3/IMG_5184.png" alt="Letreros"></div><div class="pf-info"><div class="pf-title">Letreros</div></div></div>
@@ -304,15 +672,13 @@
   </div>
 </section>
 
+<!-- IMPACTO -->
 <section id="impacto">
   <div class="imp-text-center reveal">
-    <div class="eyebrow" style="margin-left: -24px;">Nuestro Impacto</div>
-    <h2 style="text-align: center; white-space: nowrap; margin-top: 0; margin-bottom: 1.2rem;">Resultados que hablan</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--grey); line-height: 1.8;">
-      La calidad no se negocia. Cada proyecto es una oportunidad para demostrar<br>nuestro compromiso con la excelencia gráfica y potenciar la imagen de tu negocio.
-    </p>
+    <div class="eyebrow" style="margin-left:-24px;">Nuestro Impacto</div>
+    <h2 style="text-align:center;white-space:nowrap;margin-top:0;margin-bottom:1.2rem;">Resultados que hablan</h2>
+    <p style="text-align:center;max-width:800px;margin:0 auto;color:var(--grey);line-height:1.8;">La calidad no se negocia. Cada proyecto es una oportunidad para demostrar<br>nuestro compromiso con la excelencia gráfica y potenciar la imagen de tu negocio.</p>
   </div>
-  
   <div class="imp-stats-container reveal d1">
     <div class="imp-stats">
       <div class="imp-stat"><div class="n"><span class="counter" data-target="100">0</span>%</div><div class="l">Compromiso en calidad</div></div>
@@ -323,11 +689,12 @@
   </div>
 </section>
 
+<!-- PROCESO -->
 <section id="proceso">
   <div class="eyebrow reveal">Flujo de Trabajo</div>
   <h2 class="reveal">Nuestro Proceso</h2>
   <div class="pr-grid">
-    <div class="pr-intro reveal"><p>Trabajamos de la mano contigo en cada etapa para asegurar que el resultado final supere tus expectativas sin rodeos ni demoras.</p><br><a href="#contacto" class="btn-primary" style="display:inline-flex;margin-top:1rem;">Iniciar proyecto</a></div>
+    <div class="pr-intro reveal"><p>Trabajamos de la mano contigo en cada etapa para asegurar que el resultado final supere tus expectativas sin rodeos ni demoras.</p><br><a href="#contacto" class="btn-primary magnetic" style="display:inline-flex;margin-top:1rem;"><span>Iniciar proyecto</span></a></div>
     <div class="pr-steps reveal d1">
       <div class="pr-step"><div class="pr-num">1</div><div><h4>Idea & Concepto</h4><p>Capturamos tu visión y desarrollamos propuestas alineadas a tu identidad de marca.</p></div></div>
       <div class="pr-step"><div class="pr-num">2</div><div><h4>Producción</h4><p>Utilizamos materiales premium y tecnología de punta con supervisión rigurosa.</p></div></div>
@@ -336,13 +703,14 @@
   </div>
 </section>
 
+<!-- CONTACTO -->
 <section id="contacto">
   <div class="ct-inner">
     <div class="ct-text reveal">
       <div class="eyebrow">Contáctanos</div>
       <h2>¿Listo para el<br>siguiente paso?</h2>
       <p class="lead">Comunícate con nosotros y descubre cómo podemos llevar la imagen de tu negocio al siguiente nivel.</p>
-      <div class="ct-item"><div class="ct-icon">✉️</div><div><div class="ct-lbl">Email</div><div class="ct-val">info@loscrafters.net</div></div></div>
+      <div class="ct-item"><div class="ct-icon">✉️</div><div><div class="ct-lbl">Email</div><div class="ct-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2abaca4ad82aeadb1a1b0a3a4b6a7b0b1ecaca7b6">[email&#160;protected]</a></div></div></div>
       <div class="ct-item"><div class="ct-icon">📞</div><div><div class="ct-lbl">Teléfono</div><div class="ct-val">+1 809-568-6663</div></div></div>
     </div>
     <form class="form-wrap reveal d1" id="whatsapp-form">
@@ -387,6 +755,7 @@
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<!-- MODAL COTIZACIÓN -->
 <div class="modal-overlay" id="cotizarModal">
   <div class="modal-box">
     <span class="close-modal" id="closeModal">&times;</span>
@@ -409,12 +778,13 @@
           <option value="Otro">Otro</option>
         </select>
       </div>
-      <div class="fg"><label>Proyecto</label><textarea id="wa-modal-proyecto" placeholder="Describe brevemente lo que necesitas..." required style="min-height: 80px;"></textarea></div>
+      <div class="fg"><label>Proyecto</label><textarea id="wa-modal-proyecto" placeholder="Describe brevemente lo que necesitas..." required style="min-height:80px;"></textarea></div>
       <button type="submit" class="btn-wa">Enviar Solicitud a WhatsApp</button>
     </form>
   </div>
 </div>
 
+<!-- LIGHTBOX -->
 <div id="lightbox" class="lightbox-wrap">
   <span class="lightbox-close" id="lightboxClose">&times;</span>
   <button class="lightbox-btn lightbox-prev" id="lightboxPrev">&#10094;</button>
@@ -422,123 +792,313 @@
   <button class="lightbox-btn lightbox-next" id="lightboxNext">&#10095;</button>
 </div>
 
-<script>
-  // CURSOR PERSONALIZADO
-  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing'); let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  (function a(){cursor.style.transform=`translate(${mx-6}px,${my-6}px)`;rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(a);})();
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+gsap.registerPlugin(ScrollTrigger);
 
-  // EFECTOS DE APARICIÓN AL HACER SCROLL
-  const reveals=document.querySelectorAll('.reveal');
-  const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.1}); reveals.forEach(r=>observer.observe(r));
+// ═══════════════════════════════════════
+// CURSOR PERSONALIZADO
+// ═══════════════════════════════════════
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-  // BOTÓN VOLVER ARRIBA
-  const backToTopBtn = document.getElementById('backToTop'); window.addEventListener('scroll', () => { if (window.scrollY > 500) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); } });
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
-  // SLIDER DEL HERO (FOTOS)
-  const slides = document.querySelectorAll('.slide'); if(slides.length > 0) { let currentSlide = 0; setInterval(() => { slides[currentSlide].classList.remove('active'); currentSlide = (currentSlide + 1) % slides.length; slides[currentSlide].classList.add('active'); }, 5000); }
+(function animCursor() {
+  cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+  rx += (mx - rx - 19) * 0.1;
+  ry += (my - ry - 19) * 0.1;
+  ring.style.transform = `translate(${rx}px, ${ry}px)`;
+  requestAnimationFrame(animCursor);
+})();
 
-  // FILTRO DEL PORTAFOLIO
-  const filterBtns = document.querySelectorAll('.filter-btn'); const pfCards = document.querySelectorAll('.pf-card');
-  function initPortfolio() { pfCards.forEach(card => { if (card.classList.contains('destacado')) { card.style.display = 'block'; setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50); } else { card.style.display = 'none'; card.style.opacity = '0'; card.style.transform = 'scale(0.8)'; } }); }
-  initPortfolio();
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); const filterValue = btn.getAttribute('data-filter');
-      pfCards.forEach(card => {
-        let shouldShow = (filterValue === 'all') ? card.classList.contains('destacado') : (card.getAttribute('data-cat') === filterValue);
-        if(shouldShow) { card.style.display = 'block'; setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50); } 
-        else { card.style.opacity = '0'; card.style.transform = 'scale(0.8)'; setTimeout(() => { card.style.display = 'none'; }, 300); }
-      });
-    });
+document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+document.addEventListener('mouseup', () => document.body.classList.remove('cursor-click'));
+
+document.querySelectorAll('a, button, .filter-btn, .pf-card, .svc-list-item, .ct-item').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+// ═══════════════════════════════════════
+// HERO — REVEAL ON INTERACTION
+// ═══════════════════════════════════════
+const heroState1 = document.getElementById('heroState1');
+const heroState2 = document.getElementById('heroState2');
+let heroTriggered = false;
+
+// Entrada del texto
+setTimeout(() => {
+  document.getElementById('hs1Tag').classList.add('loaded');
+  const words = document.querySelectorAll('.hs1-word');
+  words.forEach((w, i) => setTimeout(() => w.classList.add('loaded'), 200 + i * 160));
+  setTimeout(() => document.getElementById('hs1Hint').classList.add('loaded'), 200 + words.length * 160 + 300);
+}, 300);
+
+// Trigger al mover el mouse
+document.getElementById('inicio').addEventListener('mousemove', () => {
+  if (heroTriggered) return;
+  heroTriggered = true;
+  setTimeout(() => {
+    heroState1.classList.add('triggered');
+    heroState2.classList.add('triggered');
+    hcsGo(0);
+  }, 150);
+}, { once: false });
+
+// ── SLIDESHOW CINEMATOGRÁFICO ──
+let hcsCur = 0, hcsTotal = 5, hcsPW = 0, hcsPT;
+const hcsSlides = document.querySelectorAll('.hcs-slide');
+const hcsDots = document.querySelectorAll('.hcs-dot');
+const hcsProgEl = document.getElementById('hcsProg');
+const hcsNumEl = document.getElementById('hcsNum');
+
+function hcsGo(n) {
+  hcsSlides[hcsCur].classList.remove('active');
+  hcsDots[hcsCur].classList.remove('active');
+  hcsDots[hcsCur].style.width = '18px';
+  hcsCur = (n + hcsTotal) % hcsTotal;
+  hcsSlides[hcsCur].classList.add('active');
+  hcsDots[hcsCur].classList.add('active');
+  hcsDots[hcsCur].style.width = '32px';
+  hcsNumEl.textContent = String(hcsCur + 1).padStart(2, '0');
+  hcsPW = 0; hcsProgEl.style.width = '0%';
+  clearInterval(hcsPT);
+  hcsPT = setInterval(() => {
+    hcsPW += 100 / 55;
+    hcsProgEl.style.width = hcsPW + '%';
+    if (hcsPW >= 100) hcsNext();
+  }, 100);
+}
+function hcsNext() { hcsGo(hcsCur + 1); }
+function hcsPrev() { hcsGo(hcsCur - 1); }
+
+// ═══════════════════════════════════════
+// NAV — SE COMPACTA AL HACER SCROLL
+// ═══════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('nav-scrolled', window.scrollY > 80);
+  document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 500);
+});
+
+// ═══════════════════════════════════════
+// PARALLAX — GRILLA DEL HERO
+// ═══════════════════════════════════════
+gsap.to('#heroGrid', {
+  yPercent: 30,
+  ease: 'none',
+  scrollTrigger: { trigger: '#inicio', start: 'top top', end: 'bottom top', scrub: true }
+});
+
+// ═══════════════════════════════════════
+// SCROLL REVEAL GLOBAL
+// ═══════════════════════════════════════
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(r => revealObserver.observe(r));
+
+// ═══════════════════════════════════════
+// SERVICIOS — CURSOR PREVIEW + GSAP ENTRADA
+// ═══════════════════════════════════════
+const svcPreview = document.getElementById('svc-cursor-preview');
+const svcPreviewImg = document.getElementById('svc-cursor-preview-img');
+
+document.querySelectorAll('.svc-list-item').forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    const img = item.dataset.img;
+    if (img) {
+      svcPreviewImg.src = img;
+      svcPreview.style.opacity = '1';
+    }
   });
-
-  // ENVÍO DE FORMULARIO PRINCIPAL A WHATSAPP
-  document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
-    e.preventDefault(); 
-    const nombre = document.getElementById('wa-nombre').value.trim(), apellido = document.getElementById('wa-apellido').value.trim(), empresa = document.getElementById('wa-empresa').value.trim(), rnc = document.getElementById('wa-rnc').value.trim(), correo = document.getElementById('wa-correo').value.trim(), servicio = document.getElementById('wa-servicio').value.trim(), proyecto = document.getElementById('wa-proyecto').value.trim();
-    const nombreCompleto = [nombre, apellido].filter(Boolean).join(' ');
-    const mensajeText = `*NUEVA SOLICITUD - LOS CRAFTERS*\n\n- *NOMBRE:* ${nombreCompleto}\n- *EMPRESA:* ${empresa}\n- *RNC:* ${rnc}\n- *CORREO ELECTRÓNICO:* ${correo}\n- *SERVICIO DE INTERÉS:* ${servicio}\n\n*CUÉNTANOS DE TU PROYECTO:*\n${proyecto}`;
-    window.open(`https://wa.me/18294109362?text=${encodeURIComponent(mensajeText)}`, '_blank');
+  item.addEventListener('mousemove', e => {
+    svcPreview.style.left = e.clientX + 'px';
+    svcPreview.style.top = (e.clientY - 20) + 'px';
   });
-
-  // LÓGICA DEL POP-UP (MODAL) COTIZACIÓN RÁPIDA
-  const modal = document.getElementById('cotizarModal'); const btnNav = document.getElementById('navCotizar'); const closeBtn = document.getElementById('closeModal');
-  btnNav.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
-  closeBtn.addEventListener('click', () => { modal.classList.remove('active'); });
-  window.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('active'); } });
-  document.getElementById('whatsapp-modal-form').addEventListener('submit', function(e) {
-    e.preventDefault(); 
-    const nombre = document.getElementById('wa-modal-nombre').value.trim(); const empresa = document.getElementById('wa-modal-empresa').value.trim(); const servicio = document.getElementById('wa-modal-servicio').value.trim(); const proyecto = document.getElementById('wa-modal-proyecto').value.trim();
-    const mensajeText = `*NUEVA COTIZACIÓN RÁPIDA - LOS CRAFTERS*\n\n- *NOMBRE:* ${nombre}\n- *EMPRESA:* ${empresa}\n- *SERVICIO DE INTERÉS:* ${servicio}\n\n*DETALLES DEL PROYECTO:*\n${proyecto}`;
-    window.open(`https://wa.me/18294109362?text=${encodeURIComponent(mensajeText)}`, '_blank');
-    modal.classList.remove('active');
+  item.addEventListener('mouseleave', () => {
+    svcPreview.style.opacity = '0';
   });
+});
 
-  // ANIMACIÓN LENTA DE LOS NÚMEROS DE IMPACTO
-  const counters=document.querySelectorAll('.counter');
-  const counterObserver=new IntersectionObserver((entries,obs)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const target=+entry.target.getAttribute('data-target'); const duration=4000; const increment=target/(duration/16); let current=0;
-        const update=()=>{
-          current+=increment;
-          if(current<target){ entry.target.innerText=Math.ceil(current); requestAnimationFrame(update); }
-          else{ entry.target.innerText=target; }
-        };
-        update(); obs.unobserve(entry.target);
+gsap.utils.toArray('.svc-list-item').forEach((item, i) => {
+  gsap.fromTo(item,
+    { opacity: 0, x: -30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: i * 0.07, ease: 'power2.out',
+      scrollTrigger: { trigger: '#servicios .svc-list', start: 'top 85%' }
+    }
+  );
+});
+
+// ═══════════════════════════════════════
+// PORTAFOLIO — TILT 3D AL HOVER
+// ═══════════════════════════════════════
+document.querySelectorAll('.pf-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    if (card.style.display === 'none') return;
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transition = 'border-color 0.4s ease';
+    card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-6px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform 0.6s cubic-bezier(.16,1,.3,1), border-color 0.4s ease';
+    card.style.transform = 'perspective(800px) rotateY(0) rotateX(0) translateY(0)';
+  });
+});
+
+// ═══════════════════════════════════════
+// BOTONES MAGNÉTICOS
+// ═══════════════════════════════════════
+document.querySelectorAll('.magnetic').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width / 2) * 0.3;
+    const y = (e.clientY - r.top - r.height / 2) * 0.3;
+    gsap.to(btn, { x, y, duration: 0.4, ease: 'power2.out' });
+  });
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+  });
+});
+
+// ═══════════════════════════════════════
+// PROCESO — PASOS ENTRAN DESDE LA DERECHA
+// ═══════════════════════════════════════
+gsap.utils.toArray('.pr-step').forEach((step, i) => {
+  gsap.from(step, {
+    opacity: 0, x: 50, duration: 0.7, delay: i * 0.15, ease: 'power3.out',
+    scrollTrigger: { trigger: '.pr-steps', start: 'top 80%' }
+  });
+});
+
+// ═══════════════════════════════════════
+// CONTADORES ANIMADOS
+// ═══════════════════════════════════════
+const counterObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const target = +entry.target.dataset.target;
+    const duration = 2200;
+    const step = target / (duration / 16);
+    let current = 0;
+    const update = () => {
+      current += step;
+      if (current < target) { entry.target.innerText = Math.ceil(current); requestAnimationFrame(update); }
+      else { entry.target.innerText = target; }
+    };
+    update();
+    obs.unobserve(entry.target);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
+
+// slider removido — reemplazado por hcs cinematográfico
+
+// ═══════════════════════════════════════
+// FILTRO PORTAFOLIO
+// ═══════════════════════════════════════
+const filterBtns = document.querySelectorAll('.filter-btn');
+const pfCards = document.querySelectorAll('.pf-card');
+
+function initPortfolio() {
+  pfCards.forEach(card => {
+    if (card.classList.contains('destacado')) {
+      card.style.display = 'block';
+      setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+    } else {
+      card.style.display = 'none'; card.style.opacity = '0'; card.style.transform = 'scale(0.8)';
+    }
+  });
+}
+initPortfolio();
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    pfCards.forEach(card => {
+      const show = f === 'all' ? card.classList.contains('destacado') : card.dataset.cat === f;
+      if (show) {
+        card.style.display = 'block';
+        setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+      } else {
+        card.style.opacity = '0'; card.style.transform = 'scale(0.8)';
+        setTimeout(() => { card.style.display = 'none'; }, 300);
       }
     });
-  },{threshold:0.5});
-  counters.forEach(c=>counterObserver.observe(c));
-
-  // --- LÓGICA DEL LIGHTBOX (TODAS LAS FOTOS) ---
-  const lightboxWrap = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCloseBtn = document.getElementById('lightboxClose');
-  const lightboxPrevBtn = document.getElementById('lightboxPrev');
-  const lightboxNextBtn = document.getElementById('lightboxNext');
-  
-  // Aquí está el truco: Ahora tomamos TODAS las imágenes desde el principio, sin importar si están filtradas
-  const allPortfolioImages = Array.from(document.querySelectorAll('.pf-card img'));
-  let currentImageIndex = 0;
-
-  function showLightboxImage(index) {
-    if (allPortfolioImages.length === 0) return;
-    if (index < 0) index = allPortfolioImages.length - 1; 
-    if (index >= allPortfolioImages.length) index = 0;    
-    
-    currentImageIndex = index;
-    lightboxImg.src = allPortfolioImages[currentImageIndex].src;
-  }
-
-  document.querySelectorAll('.pf-card').forEach((card) => {
-    card.addEventListener('click', () => {
-      // Al hacer clic, buscamos en qué posición de la lista global está esa foto
-      const clickedImg = card.querySelector('img');
-      currentImageIndex = allPortfolioImages.indexOf(clickedImg);
-      
-      if (currentImageIndex !== -1) {
-        lightboxImg.src = clickedImg.src;
-        lightboxWrap.classList.add('active');
-      }
-    });
   });
+});
 
-  lightboxCloseBtn.addEventListener('click', () => lightboxWrap.classList.remove('active'));
-  lightboxWrap.addEventListener('click', (e) => {
-    if (e.target === lightboxWrap) lightboxWrap.classList.remove('active'); 
+// ═══════════════════════════════════════
+// FORMULARIOS WHATSAPP
+// ═══════════════════════════════════════
+document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('wa-nombre').value.trim();
+  const apellido = document.getElementById('wa-apellido').value.trim();
+  const empresa = document.getElementById('wa-empresa').value.trim();
+  const rnc = document.getElementById('wa-rnc').value.trim();
+  const correo = document.getElementById('wa-correo').value.trim();
+  const servicio = document.getElementById('wa-servicio').value.trim();
+  const proyecto = document.getElementById('wa-proyecto').value.trim();
+  const msg = `*NUEVA SOLICITUD - LOS CRAFTERS*\n\n- *NOMBRE:* ${[nombre,apellido].filter(Boolean).join(' ')}\n- *EMPRESA:* ${empresa}\n- *RNC:* ${rnc}\n- *CORREO:* ${correo}\n- *SERVICIO:* ${servicio}\n\n*PROYECTO:*\n${proyecto}`;
+  window.open(`https://wa.me/18294109362?text=${encodeURIComponent(msg)}`, '_blank');
+});
+
+// ═══════════════════════════════════════
+// MODAL COTIZACIÓN
+// ═══════════════════════════════════════
+const modal = document.getElementById('cotizarModal');
+document.getElementById('navCotizar').addEventListener('click', e => { e.preventDefault(); modal.classList.add('active'); });
+document.getElementById('closeModal').addEventListener('click', () => modal.classList.remove('active'));
+window.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+
+document.getElementById('whatsapp-modal-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('wa-modal-nombre').value.trim();
+  const empresa = document.getElementById('wa-modal-empresa').value.trim();
+  const servicio = document.getElementById('wa-modal-servicio').value.trim();
+  const proyecto = document.getElementById('wa-modal-proyecto').value.trim();
+  const msg = `*NUEVA COTIZACIÓN RÁPIDA - LOS CRAFTERS*\n\n- *NOMBRE:* ${nombre}\n- *EMPRESA:* ${empresa}\n- *SERVICIO:* ${servicio}\n\n*DETALLES:*\n${proyecto}`;
+  window.open(`https://wa.me/18294109362?text=${encodeURIComponent(msg)}`, '_blank');
+  modal.classList.remove('active');
+});
+
+// ═══════════════════════════════════════
+// LIGHTBOX
+// ═══════════════════════════════════════
+const lightboxWrap = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const allImgs = Array.from(document.querySelectorAll('.pf-card img'));
+let curImg = 0;
+
+function showImg(i) {
+  if (i < 0) i = allImgs.length - 1;
+  if (i >= allImgs.length) i = 0;
+  curImg = i;
+  lightboxImg.src = allImgs[curImg].src;
+}
+
+document.querySelectorAll('.pf-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const idx = allImgs.indexOf(card.querySelector('img'));
+    if (idx !== -1) { showImg(idx); lightboxWrap.classList.add('active'); }
   });
+});
 
-  lightboxPrevBtn.addEventListener('click', () => showLightboxImage(currentImageIndex - 1));
-  lightboxNextBtn.addEventListener('click', () => showLightboxImage(currentImageIndex + 1));
-
-  document.addEventListener('keydown', (e) => {
-    if (!lightboxWrap.classList.contains('active')) return; 
-    if (e.key === 'ArrowLeft') showLightboxImage(currentImageIndex - 1);
-    if (e.key === 'ArrowRight') showLightboxImage(currentImageIndex + 1);
-    if (e.key === 'Escape') lightboxWrap.classList.remove('active');
-  });
+document.getElementById('lightboxClose').addEventListener('click', () => lightboxWrap.classList.remove('active'));
+lightboxWrap.addEventListener('click', e => { if (e.target === lightboxWrap) lightboxWrap.classList.remove('active'); });
+document.getElementById('lightboxPrev').addEventListener('click', () => showImg(curImg - 1));
+document.getElementById('lightboxNext').addEventListener('click', () => showImg(curImg + 1));
+document.addEventListener('keydown', e => {
+  if (!lightboxWrap.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') showImg(curImg - 1);
+  if (e.key === 'ArrowRight') showImg(curImg + 1);
+  if (e.key === 'Escape') lightboxWrap.classList.remove('active');
+});
 </script>
 </body>
 </html>
