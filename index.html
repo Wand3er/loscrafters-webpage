@@ -258,7 +258,7 @@
   @keyframes scroll-logos{0%{transform:translateX(0);}100%{transform:translateX(calc(-220px * 10));}}
 
   /* ═══════════════════════════════════════
-     SERVICIOS — LISTA ESTILO EDITORIAL
+     SERVICIOS — DYNAMIC HORIZONTAL PINNED SHOWCASE
   ═══════════════════════════════════════ */
   section{padding:6rem 5rem;}
 
@@ -273,78 +273,460 @@
     overflow: hidden;
   }
 
-  #servicios.gradient-untitled > * {
+  #servicios.svc-pin-section {
     position: relative;
-    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    padding: 5rem 0 4rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  #servicios.gradient-untitled h2,
-  #servicios.gradient-untitled .svc-list-name {
-    color: #ffffff;
-    text-shadow: 0 2px 10px rgba(8, 14, 24, 0.7), 0 1px 3px rgba(8, 14, 24, 0.9);
+  @media (min-width: 1025px) {
+    #servicios.svc-pin-section {
+      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
+    }
   }
-  #servicios.gradient-untitled .svc-list-num,
-  #servicios.gradient-untitled .svc-list-tag {
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 1px 6px rgba(8, 14, 24, 0.8);
+
+  .svc-pin-container {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  #servicios.gradient-untitled .svc-list-arrow {
+
+  @media (min-width: 1025px) {
+    .svc-pin-container {
+      height: 100vh;
+      padding: 3.2rem 0 2.2rem 0;
+      box-sizing: border-box;
+    }
+  }
+
+  /* Header Superior de la Sección Pinned */
+  .svc-top-bar {
+    padding: 0 5rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 5;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-top-bar {
+      padding: 0 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .svc-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .svc-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-pale);
+  }
+
+  .svc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue-light);
+    box-shadow: 0 0 12px var(--blue-light);
+    display: inline-block;
+    animation: svcDotGlow 2s infinite ease-in-out;
+  }
+
+  @keyframes svcDotGlow {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+  }
+
+  .svc-sep {
+    opacity: 0.4;
+    color: var(--grey);
+  }
+
+  .svc-count-tag {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 700;
+  }
+
+  .svc-main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    line-height: 1.05;
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.35);
-    background: rgba(10, 15, 26, 0.35);
+    margin: 0;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  }
+
+  .svc-main-title span {
+    color: var(--blue-light);
+    position: relative;
+  }
+
+  .svc-controls-wrap {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+  }
+
+  .svc-progress-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-controls-wrap {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .svc-progress-box {
+      align-items: flex-start;
+    }
+  }
+
+  .svc-counter-display {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+
+  .svc-active-num {
+    font-size: 2.3rem;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 10px rgba(91, 163, 245, 0.4);
+  }
+
+  .svc-total-num {
+    font-size: 1rem;
+    color: rgba(139, 164, 194, 0.65);
+    font-weight: 600;
+  }
+
+  .svc-progress-track {
+    width: 140px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .svc-progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 12.5%;
+    background: linear-gradient(90deg, var(--blue), var(--blue-light));
+    border-radius: 999px;
+    transition: width 0.15s ease-out;
+    box-shadow: 0 0 10px var(--blue-light);
+  }
+
+  .svc-scroll-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .svc-scroll-hint svg {
+    animation: svcArrowPulse 1.8s infinite ease-in-out;
+  }
+
+  @keyframes svcArrowPulse {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  .svc-nav-arrows {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .svc-arrow-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(91, 163, 245, 0.35);
+    background: rgba(16, 25, 41, 0.7);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .svc-arrow-btn:hover {
+    background: var(--blue);
+    border-color: var(--blue-light);
+    transform: scale(1.08);
+    box-shadow: 0 0 18px rgba(91, 163, 245, 0.45);
+  }
+
+  /* Viewport y Riel Horizontal */
+  .svc-track-viewport {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-track-viewport {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+    }
+    .svc-track-viewport::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .svc-h-track {
+    display: flex;
+    gap: 2rem;
+    padding: 0.5rem 5rem 1.5rem 5rem;
+    width: max-content;
+    will-change: transform;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-h-track {
+      padding: 0;
+      gap: 1.2rem;
+    }
+  }
+
+  /* Tarjeta de Servicio Cinemática */
+  .svc-h-card {
+    width: clamp(340px, 30vw, 440px);
+    height: clamp(470px, 58vh, 550px);
+    background: linear-gradient(160deg, rgba(16, 26, 43, 0.86) 0%, rgba(9, 14, 24, 0.96) 100%);
+    border: 1px solid rgba(91, 163, 245, 0.24);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-h-card {
+      width: 84vw;
+      max-width: 380px;
+      height: 510px;
+      scroll-snap-align: center;
+    }
+  }
+
+  .svc-h-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(91, 163, 245, 0.6);
+    box-shadow: 0 26px 55px rgba(0, 0, 0, 0.7), 0 0 30px rgba(50, 101, 166, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .svc-card-media {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    background: #080E18;
+  }
+
+  .svc-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .svc-h-card:hover .svc-card-media img {
+    transform: scale(1.08);
+  }
+
+  .svc-card-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 14, 24, 0.15) 0%, rgba(9, 14, 24, 0.9) 100%);
+  }
+
+  .svc-card-num-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(10, 15, 26, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(91, 163, 245, 0.4);
+    color: var(--blue-pale);
+  }
+
+  .svc-card-cat-badge {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 1.2rem;
+    z-index: 2;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: rgba(50, 101, 166, 0.65);
+    padding: 0.28rem 0.7rem;
+    border-radius: 4px;
+    border: 1px solid rgba(91, 163, 245, 0.45);
     backdrop-filter: blur(6px);
   }
-  #servicios.gradient-untitled .svc-list-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+
+  .svc-card-body {
+    padding: 1.4rem 1.6rem 1.6rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50%;
+    position: relative;
+    z-index: 2;
   }
 
-  #servicios:not(.gradient-untitled){background:var(--dark);}
+  .svc-card-body-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
 
-  .svc-header{margin-bottom:0;padding-bottom:1.5rem;border-bottom:1px solid var(--card-border);}
+  .svc-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.28rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
 
-  /* Lista editorial */
-  .svc-list{list-style:none;margin-top:0;}
-  .svc-list-item{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:1.6rem 0;
-    border-bottom:1px solid rgba(28,46,71,0.8);
-    cursor:pointer;position:relative;overflow:hidden;
-    transition:padding-left 0.45s cubic-bezier(.16,1,.3,1);
-    opacity:1 !important;
-    transform:none !important;
+  .svc-h-card:hover .svc-card-title {
+    color: var(--blue-light);
   }
-  .svc-list-item::before{
-    content:'';position:absolute;left:0;top:0;bottom:0;
-    width:0;background:rgba(50,101,166,0.07);
-    transition:width 0.45s ease;
-  }
-  .svc-list-item:hover::before{width:100%;}
-  .svc-list-item:hover{padding-left:1.2rem;}
-  .svc-list-left{display:flex;align-items:center;gap:1.5rem;z-index:1;}
-  .svc-list-num{font-size:11px;color:rgba(139,164,194,0.4);font-family:'Montserrat',sans-serif;font-weight:400;min-width:28px;}
-  .svc-list-name{font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;transition:color 0.3s;}
-  .svc-list-item:hover .svc-list-name{color:var(--blue-light);}
-  .svc-list-right{display:flex;align-items:center;gap:1rem;z-index:1;}
-  .svc-list-tag{font-size:10px;color:rgba(139,164,194,0.4);letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',sans-serif;}
-  .svc-list-arrow{
-    width:32px;height:32px;border:1px solid rgba(28,46,71,0.8);
-    border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-size:14px;color:rgba(139,164,194,0.4);
-    transition:background 0.3s,border-color 0.3s,color 0.3s,transform 0.3s;
-  }
-  .svc-list-item:hover .svc-list-arrow{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(45deg);}
 
-  /* Preview imagen en cursor al hover servicios */
-  #svc-cursor-preview{
-    position:fixed;z-index:9997;pointer-events:none;
-    width:200px;height:130px;border-radius:6px;
-    background:var(--card-bg);border:1px solid var(--blue);
-    overflow:hidden;opacity:0;
-    transform:translate(-50%,-120%) rotate(-3deg);
-    transition:opacity 0.3s ease;
-    box-shadow:0 12px 32px rgba(0,0,0,0.6);
+  .svc-card-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--grey);
+    margin: 0;
   }
-  #svc-cursor-preview img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .svc-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.2rem;
+  }
+
+  .svc-card-tags span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.64rem;
+    font-weight: 600;
+    color: rgba(240, 246, 255, 0.85);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+  }
+
+  .svc-card-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 1.1rem;
+    border-radius: 8px;
+    background: rgba(50, 101, 166, 0.18);
+    border: 1px solid rgba(91, 163, 245, 0.32);
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.9rem;
+  }
+
+  .svc-card-cta .arrow {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .svc-card-cta:hover {
+    background: var(--blue);
+    border-color: var(--blue-light);
+    box-shadow: 0 0 16px rgba(91, 163, 245, 0.4);
+  }
+
+  .svc-card-cta:hover .arrow {
+    transform: translateX(4px);
+  }
 
   /* ═══════════════════════════════════════
      PORTAFOLIO
@@ -484,10 +866,6 @@
 </style>
 </head>
 <body>
-
-<!-- CURSOR -->
-<!-- Preview imagen para hover en servicios -->
-<div id="svc-cursor-preview"><img id="svc-cursor-preview-img" src="" alt=""></div>
 
 <nav id="mainNav">
   <div class="logo"><img src="assets/images/Logo-LC-12.png" alt="Los Crafters" style="height:48px;width:auto;"></div>
@@ -664,25 +1042,242 @@
   </div>
 </div>
 
-<!-- SERVICIOS — Lista editorial -->
-<section id="servicios" class="gradient-untitled">
-  <div class="svc-header reveal">
-    <div class="eyebrow">Nuestros Servicios</div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;">
-      <h2 style="margin-bottom:0;">Calidad en cada detalle</h2>
-      <span style="font-size:10px;color:rgba(139,164,194,0.4);letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',sans-serif;">08 especialidades</span>
+<!-- SERVICIOS — Pinned Horizontal Showcase -->
+<section id="servicios" class="svc-pin-section gradient-untitled">
+  <div class="svc-pin-container">
+    
+    <!-- Top Header Bar (Dentro de la sección pinned) -->
+    <div class="svc-top-bar">
+      <div class="svc-title-wrap">
+        <div class="svc-eyebrow">
+          <span class="svc-dot"></span>
+          <span>NUESTROS SERVICIOS</span>
+          <span class="svc-sep">/</span>
+          <span class="svc-count-tag">08 ESPECIALIDADES</span>
+        </div>
+        <h2 class="svc-main-title">Soluciones que <span>impactan</span></h2>
+      </div>
+
+      <div class="svc-controls-wrap">
+        <div class="svc-progress-box">
+          <div class="svc-counter-display">
+            <span id="svcActiveCount" class="svc-active-num">01</span>
+            <span class="svc-total-num">/ 08</span>
+          </div>
+          <div class="svc-progress-track">
+            <div id="svcProgressBar" class="svc-progress-bar"></div>
+          </div>
+          <div class="svc-scroll-hint">
+            <span>Scroll para explorar</span>
+            <svg width="18" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 6H19M19 6L14 1M19 6L14 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="svc-nav-arrows">
+          <button id="svcBtnPrev" aria-label="Servicio anterior" class="svc-arrow-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <button id="svcBtnNext" aria-label="Siguiente servicio" class="svc-arrow-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
+
+    <!-- Viewport con Track Desplazable Horizontalmente -->
+    <div class="svc-track-viewport">
+      <div class="svc-h-track" id="svcTrack">
+
+        <!-- 01: Señalización -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">01</span>
+            <span class="svc-card-cat-badge">Espacios · Arquitectura</span>
+            <img src="assets/images/IMG_7791.webp" alt="Señalización Arquitectónica y Vial" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Señalización Corporativa</h3>
+              <p class="svc-card-desc">Sistemas de orientación interna y externa de alta durabilidad para empresas, torres y proyectos comerciales.</p>
+              <div class="svc-card-tags">
+                <span>Acrílico & PVC</span>
+                <span>Fotoluminiscente</span>
+                <span>Normativa Vial</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Señalización')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 02: Branding Vehicular -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">02</span>
+            <span class="svc-card-cat-badge">Flotas · Publicidad Móvil</span>
+            <img src="assets/images/PHOTO_2023_12_30_11_24_55.webp" alt="Branding Vehicular Comercial" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Branding Vehicular</h3>
+              <p class="svc-card-desc">Rotulación completa o parcial de camiones y flotas con viniles cast de grado automotriz y máxima resistencia UV.</p>
+              <div class="svc-card-tags">
+                <span>Vinil Cast Automotriz</span>
+                <span>Laminado UV</span>
+                <span>Microperforado</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Branding Vehicular')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 03: Letreros Corpóreos 3D -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">03</span>
+            <span class="svc-card-cat-badge">Relieve 3D · Volumen</span>
+            <img src="assets/images/letrero-af-school.webp" alt="Letrero Corpóreo 3D AF School" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Letreros Corpóreos 3D</h3>
+              <p class="svc-card-desc">Letras volumétricas y logotipos en relieve con y sin retroiluminación LED para una presencia corporativa inconfundible.</p>
+              <div class="svc-card-tags">
+                <span>Alucobond / ACM</span>
+                <span>Acrílico Termoformado</span>
+                <span>LED Samsung IP67</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Letreros')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 04: Rotulación Comercial & Murales -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">04</span>
+            <span class="svc-card-cat-badge">Interiores · Decoración</span>
+            <img src="assets/images/rotulacion-mural-interior.webp" alt="Rotulación Mural en Vinil Mate" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Rotulación & Murales</h3>
+              <p class="svc-card-desc">Murales decorativos en vinil mate, rotulación de ventanales y viniles esmerilados para oficinas y locales comerciales.</p>
+              <div class="svc-card-tags">
+                <span>Vinil Mate Antirreflejo</span>
+                <span>Esmerilado / Sandblast</span>
+                <span>Corte de Precisión</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Letreros')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 05: Exhibidores & Punto de Venta -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">05</span>
+            <span class="svc-card-cat-badge">Trade Marketing · Retail</span>
+            <img src="assets/images/IMG_5039.webp" alt="Exhibidores Comerciales Punto de Venta" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Exhibidores & Displays</h3>
+              <p class="svc-card-desc">Displays, stands modulares y material POP a la medida para destacar productos e impulsar la rotación en góndola.</p>
+              <div class="svc-card-tags">
+                <span>MDF & Acrílico</span>
+                <span>Estructuras Modulares</span>
+                <span>Branding Total</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Exhibidores')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 06: Fachadas & Cajas de Luz -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">06</span>
+            <span class="svc-card-cat-badge">Estructuras · Iluminación</span>
+            <img src="assets/images/IMG_4618.webp" alt="Fachadas Comerciales y Cajas de Luz" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Fachadas & Cajas de Luz</h3>
+              <p class="svc-card-desc">Revestimiento en panel compuesto de aluminio (ACM) y cajas lumínicas con perfiles reforzados y módulos LED de bajo consumo.</p>
+              <div class="svc-card-tags">
+                <span>Panel ACM Exterior</span>
+                <span>Lona Backlight HD</span>
+                <span>Perfilería Reforzada</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Fachadas')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 07: Artículos Promocionales -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">07</span>
+            <span class="svc-card-cat-badge">Merchandising · Eventos</span>
+            <img src="assets/images/0e58a7da_4e42_4b15_ac43_5dbc5c464363.webp" alt="Artículos Promocionales Personalizados" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Artículos Promocionales</h3>
+              <p class="svc-card-desc">Merchandising corporativo de alta gama: termos térmicos, bolígrafos metálicos, libretas y kits de bienvenida para clientes.</p>
+              <div class="svc-card-tags">
+                <span>Grabado Láser HD</span>
+                <span>Sublimación & Tampo</span>
+                <span>Kits Corporativos</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Artículos Promocionales')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 08: Uniformes & Bordados Industriales -->
+        <article class="svc-h-card">
+          <div class="svc-card-media">
+            <span class="svc-card-num-badge">08</span>
+            <span class="svc-card-cat-badge">Textil · Identidad Laboral</span>
+            <img src="assets/images/IMG_7286.webp" alt="Uniformes y Bordados Computarizados" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-card-body-top">
+              <h3 class="svc-card-title">Bordados & Uniformes</h3>
+              <p class="svc-card-desc">Bordados computarizados de alta densidad y serigrafía sobre gorras, polos ejecutivos, t-shirts y ropa técnica de trabajo.</p>
+              <div class="svc-card-tags">
+                <span>Bordado 3D Relieve</span>
+                <span>Hilos de Alta Torsión</span>
+                <span>Textil Corporativo</span>
+              </div>
+            </div>
+            <button class="svc-card-cta" onclick="openCotizarConServicio('Bordados')">
+              <span>Cotizar servicio</span><span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
   </div>
-  <ul class="svc-list">
-    <li class="svc-list-item" data-img="assets/images/IMG_7791.webp"><div class="svc-list-left"><span class="svc-list-num">01</span><span class="svc-list-name">Señalización</span></div><div class="svc-list-right"><span class="svc-list-tag">Letreros · Espacios</span><div class="svc-list-arrow">→</div></div></li>
-    <li class="svc-list-item" data-img="assets/images/PHOTO_2023_12_30_11_24_55.webp"><div class="svc-list-left"><span class="svc-list-num">02</span><span class="svc-list-name">Branding Vehicular</span></div><div class="svc-list-right"><span class="svc-list-tag">Ploteo · Vinilo</span><div class="svc-list-arrow">→</div></div></li>
-    <li class="svc-list-item" data-img="assets/images/IMG_4654.webp"><div class="svc-list-left"><span class="svc-list-num">03</span><span class="svc-list-name">Letreros</span></div><div class="svc-list-right"><span class="svc-list-tag">ACM · PVC · Vinilos</span><div class="svc-list-arrow">→</div></div></li>
-    <li class="svc-list-item" data-img="assets/images/IMG_7286.webp"><div class="svc-list-left"><span class="svc-list-num">04</span><span class="svc-list-name">Bordados</span></div><div class="svc-list-right"><span class="svc-list-tag">Uniformes · Textiles</span><div class="svc-list-arrow">→</div></div></li>
-    <li class="svc-list-item" data-img="assets/images/IMG_5039.webp"><div class="svc-list-left"><span class="svc-list-num">05</span><span class="svc-list-name">Exhibidores</span></div><div class="svc-list-right"><span class="svc-list-tag">Punto de venta</span><div class="svc-list-arrow">→</div></div></li>
-    <li class="svc-list-item" data-img="assets/images/IMG_4618.webp"><div class="svc-list-left"><span class="svc-list-num">06</span><span class="svc-list-name">Fachadas</span></div><div class="svc-list-right"><span class="svc-list-tag">Cajas de luz · LED</span><div class="svc-list-arrow">→</div></div></li>
-    <li class="svc-list-item" data-img="assets/images/0e58a7da_4e42_4b15_ac43_5dbc5c464363.webp"><div class="svc-list-left"><span class="svc-list-num">07</span><span class="svc-list-name">Artículos Promocionales</span></div><div class="svc-list-right"><span class="svc-list-tag">Eventos · Regalos</span><div class="svc-list-arrow">→</div></div></li>
-    <li class="svc-list-item" data-img="assets/images/Captura-de-pantalla-2026-03-22-a-la_s_-8-52-31-p-m.webp"><div class="svc-list-left"><span class="svc-list-num">08</span><span class="svc-list-name">Diseño Gráfico</span></div><div class="svc-list-right"><span class="svc-list-tag">Identidad · Branding</span><div class="svc-list-arrow">→</div></div></li>
-  </ul>
 </section>
 
 <!-- PORTAFOLIO -->
@@ -803,6 +1398,7 @@
           <option value="Exhibidores">Exhibidores</option>
           <option value="Artículos Promocionales">Artículos Promocionales</option>
           <option value="Letreros">Letreros</option>
+          <option value="Bordados">Bordados / Textiles</option>
           <option value="Otro">Otro</option>
         </select>
       </div>
@@ -845,6 +1441,7 @@
           <option value="Exhibidores">Exhibidores / Monolitos</option>
           <option value="Artículos Promocionales">Artículos Promocionales</option>
           <option value="Letreros">Letreros / Rotulaciones</option>
+          <option value="Bordados">Bordados / Textiles</option>
           <option value="Otro">Otro</option>
         </select>
       </div>
@@ -958,36 +1555,114 @@ const revealObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(r => revealObserver.observe(r));
 
 // ═══════════════════════════════════════
-// SERVICIOS — CURSOR PREVIEW + GSAP ENTRADA
+// SERVICIOS — HORIZONTAL PINNED SHOWCASE (GSAP ScrollTrigger)
 // ═══════════════════════════════════════
-const svcPreview = document.getElementById('svc-cursor-preview');
-const svcPreviewImg = document.getElementById('svc-cursor-preview-img');
+window.openCotizarConServicio = function(servicio) {
+  const modal = document.getElementById('cotizarModal');
+  const select = document.getElementById('wa-modal-servicio');
+  if (select && servicio) {
+    for (let i = 0; i < select.options.length; i++) {
+      const val = select.options[i].value.toLowerCase();
+      const txt = select.options[i].text.toLowerCase();
+      const s = servicio.toLowerCase();
+      if (val === s || txt.includes(s) || s.includes(val)) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+  }
+  if (modal) modal.classList.add('active');
+};
 
-document.querySelectorAll('.svc-list-item').forEach(item => {
-  item.addEventListener('mouseenter', () => {
-    const img = item.dataset.img;
-    if (img) {
-      svcPreviewImg.src = img;
-      svcPreview.style.opacity = '1';
+const svcTrack = document.getElementById('svcTrack');
+const svcProgressBar = document.getElementById('svcProgressBar');
+const svcActiveCount = document.getElementById('svcActiveCount');
+const svcBtnPrev = document.getElementById('svcBtnPrev');
+const svcBtnNext = document.getElementById('svcBtnNext');
+
+if (svcTrack) {
+  let svcMM = gsap.matchMedia();
+
+  svcMM.add("(min-width: 1025px)", () => {
+    function getScrollDist() {
+      const vw = window.innerWidth;
+      const tw = svcTrack.scrollWidth;
+      return Math.max(0, tw - vw + 100);
+    }
+
+    const svcTween = gsap.to(svcTrack, {
+      x: () => -getScrollDist(),
+      ease: "none"
+    });
+
+    const svcST = ScrollTrigger.create({
+      id: "svcHorizontalScroll",
+      trigger: "#servicios",
+      start: "top top",
+      end: () => "+=" + (getScrollDist() + 450),
+      pin: true,
+      animation: svcTween,
+      scrub: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const p = self.progress;
+        if (svcProgressBar) svcProgressBar.style.width = Math.min(100, Math.max(12.5, p * 100)) + '%';
+        const cardIndex = Math.min(8, Math.max(1, Math.floor(p * 8) + 1));
+        if (svcActiveCount) svcActiveCount.textContent = String(cardIndex).padStart(2, '0');
+      }
+    });
+
+    if (svcBtnNext) {
+      svcBtnNext.onclick = () => {
+        const step = (svcST.end - svcST.start) / 7;
+        window.scrollTo({
+          top: Math.min(svcST.end, window.scrollY + step),
+          behavior: 'smooth'
+        });
+      };
+    }
+    if (svcBtnPrev) {
+      svcBtnPrev.onclick = () => {
+        const step = (svcST.end - svcST.start) / 7;
+        window.scrollTo({
+          top: Math.max(svcST.start, window.scrollY - step),
+          behavior: 'smooth'
+        });
+      };
+    }
+
+    return () => {
+      if (svcST) svcST.kill();
+      svcTween.kill();
+    };
+  });
+
+  svcMM.add("(max-width: 1024px)", () => {
+    const viewport = document.querySelector('.svc-track-viewport');
+    if (viewport) {
+      viewport.addEventListener('scroll', () => {
+        const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+        if (maxScroll > 0) {
+          const ratio = viewport.scrollLeft / maxScroll;
+          if (svcProgressBar) svcProgressBar.style.width = Math.min(100, Math.max(12.5, ratio * 100)) + '%';
+          const cardIndex = Math.min(8, Math.max(1, Math.round(ratio * 7) + 1));
+          if (svcActiveCount) svcActiveCount.textContent = String(cardIndex).padStart(2, '0');
+        }
+      }, { passive: true });
+
+      if (svcBtnNext) {
+        svcBtnNext.onclick = () => {
+          viewport.scrollBy({ left: viewport.clientWidth * 0.85, behavior: 'smooth' });
+        };
+      }
+      if (svcBtnPrev) {
+        svcBtnPrev.onclick = () => {
+          viewport.scrollBy({ left: -viewport.clientWidth * 0.85, behavior: 'smooth' });
+        };
+      }
     }
   });
-  item.addEventListener('mousemove', e => {
-    svcPreview.style.left = e.clientX + 'px';
-    svcPreview.style.top = (e.clientY - 20) + 'px';
-  });
-  item.addEventListener('mouseleave', () => {
-    svcPreview.style.opacity = '0';
-  });
-});
-
-gsap.utils.toArray('.svc-list-item').forEach((item, i) => {
-  gsap.fromTo(item,
-    { opacity: 0, x: -30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: i * 0.07, ease: 'power2.out',
-      scrollTrigger: { trigger: '#servicios .svc-list', start: 'top 85%' }
-    }
-  );
-});
+}
 
 // ═══════════════════════════════════════
 // PORTAFOLIO — TILT 3D AL HOVER
