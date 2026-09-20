@@ -282,6 +282,18 @@
     flex-direction: column;
   }
 
+  /* Luz interactiva blanca que sigue el cursor sobre el degradado */
+  .svc-mouse-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    mix-blend-mode: screen;
+    will-change: background;
+  }
+
   .svc-pin-container {
     width: 100%;
     position: relative;
@@ -1015,6 +1027,9 @@
 
 <!-- SERVICIOS — Horizontal Showcase -->
 <section id="servicios" class="svc-pin-section gradient-untitled">
+  <!-- Luz dinámica interactiva que sigue el cursor -->
+  <div class="svc-mouse-glow" id="svcMouseGlow"></div>
+
   <div class="svc-pin-container">
     
     <!-- Top Header Bar — 2 líneas y espacio reducido -->
@@ -1588,6 +1603,55 @@ if (svcViewport) {
       svcViewport.scrollBy({ left: -getStep(), behavior: 'smooth' });
     };
   }
+}
+
+// ── Luz interactiva que sigue el cursor sobre el degradado ──
+const svcSect = document.getElementById('servicios');
+const svcMouseGlow = document.getElementById('svcMouseGlow');
+
+if (svcSect && svcMouseGlow) {
+  let targetX = -1000, targetY = -1000;
+  let currentX = -1000, currentY = -1000;
+  let isHovering = false;
+  let glowRaf = null;
+
+  function renderGlow() {
+    if (isHovering || Math.abs(targetX - currentX) > 0.5 || Math.abs(targetY - currentY) > 0.5) {
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+      svcMouseGlow.style.background = `radial-gradient(650px circle at ${currentX}px ${currentY}px, rgba(255, 255, 255, 0.40) 0%, rgba(190, 225, 255, 0.22) 25%, rgba(91, 163, 245, 0.10) 50%, transparent 75%)`;
+      glowRaf = requestAnimationFrame(renderGlow);
+    } else {
+      glowRaf = null;
+    }
+  }
+
+  svcSect.addEventListener('mouseenter', (e) => {
+    isHovering = true;
+    const r = svcSect.getBoundingClientRect();
+    targetX = e.clientX - r.left;
+    targetY = e.clientY - r.top;
+    currentX = targetX;
+    currentY = targetY;
+    svcMouseGlow.style.opacity = '1';
+    if (!glowRaf) glowRaf = requestAnimationFrame(renderGlow);
+  });
+
+  svcSect.addEventListener('mousemove', (e) => {
+    const r = svcSect.getBoundingClientRect();
+    targetX = e.clientX - r.left;
+    targetY = e.clientY - r.top;
+    if (!isHovering) {
+      isHovering = true;
+      svcMouseGlow.style.opacity = '1';
+    }
+    if (!glowRaf) glowRaf = requestAnimationFrame(renderGlow);
+  });
+
+  svcSect.addEventListener('mouseleave', () => {
+    isHovering = false;
+    svcMouseGlow.style.opacity = '0';
+  });
 }
 
 // ═══════════════════════════════════════
