@@ -62,77 +62,25 @@
   .nav-cta:hover{background:var(--blue-mid)!important;}
 
   /* ═══════════════════════════════════════
-     HERO REVEAL ON INTERACTION
+     HERO — SLIDESHOW CINEMATOGRÁFICO DIRECTO
   ═══════════════════════════════════════ */
-  #inicio{min-height:100vh;position:relative;overflow:hidden;padding:0;}
+  #inicio{min-height:100vh;position:relative;overflow:hidden;padding:0;background:var(--navy);}
 
-  /* Estado 1 — Solo texto */
-  .hero-state1{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;
-    align-items:center;justify-content:center;
-    z-index:10;text-align:center;padding:2rem;
-    transition:transform 1.2s cubic-bezier(.16,1,.3,1), opacity 1.2s ease;
+  /* Efecto de ruido idéntico a servicios sobre el fondo del hero */
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    pointer-events: none;
+    background-image: url('assets/images/noise.png');
+    background-repeat: repeat;
+    opacity: 0.28;
+    mix-blend-mode: overlay;
   }
-  .hero-state1.triggered{
-    transform:translateX(-40%) scale(0.5);
-    opacity:0;
-    pointer-events:none;
-    z-index:1;
-  }
-  .hs1-tag{
-    display:inline-flex;align-items:center;gap:0.5rem;
-    background:rgba(50,101,166,0.12);border:1px solid rgba(91,163,245,0.25);
-    color:var(--blue-pale);font-family:'Montserrat',sans-serif;
-    font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;
-    padding:0.4rem 1rem;border-radius:2px;margin-bottom:2rem;
-    opacity:0;transform:translateY(20px);
-    transition:opacity 0.6s ease, transform 0.6s ease;
-  }
-  .hs1-tag::before{content:'';width:6px;height:6px;background:var(--blue-light);border-radius:50%;}
-  .hs1-tag.loaded{opacity:1;transform:translateY(0);}
-  .hs1-h1{
-    font-family:'Montserrat',sans-serif;
-    font-size:clamp(4rem,9vw,8.5rem);
-    font-weight:900;line-height:0.95;
-    letter-spacing:-0.03em;text-transform:uppercase;
-    margin-bottom:2.5rem;
-  }
-  .hs1-line{display:block;overflow:hidden;line-height:1;}
-  .hs1-word{
-    display:inline-block;color:var(--white);
-    transform:translateY(110%);opacity:0;
-    transition:transform 0.9s cubic-bezier(.16,1,.3,1), opacity 0.9s ease;
-  }
-  .hs1-word.loaded{transform:translateY(0);opacity:1;}
-  .hs1-blue{color:var(--blue-light);}
-  .hs1-hint{
-    display:flex;align-items:center;gap:10px;
-    font-family:'Montserrat',sans-serif;
-    font-size:0.68rem;color:rgba(255,255,255,0.3);
-    letter-spacing:0.2em;text-transform:uppercase;
-    opacity:0;transition:opacity 0.8s ease;
-  }
-  .hs1-hint.loaded{opacity:1;}
-  .hs1-hint-dot{
-    width:10px;height:10px;border-radius:50%;
-    border:1px solid rgba(91,163,245,0.4);
-    position:relative;flex-shrink:0;
-  }
-  .hs1-hint-dot::after{
-    content:'';position:absolute;inset:2px;
-    border-radius:50%;background:var(--blue-light);
-    animation:hintpulse 1.6s ease infinite;
-  }
-  @keyframes hintpulse{0%,100%{transform:scale(1);opacity:1;}60%{transform:scale(2);opacity:0;}}
 
-  /* Estado 2 — Slideshow */
   .hero-state2{
-    position:absolute;inset:0;z-index:8;
-    clip-path:inset(0 100% 0 0);
-    transition:clip-path 1.3s cubic-bezier(.16,1,.3,1);
+    position:absolute;inset:0;z-index:4;
   }
-  .hero-state2.triggered{clip-path:inset(0 0% 0 0);}
 
   .hcs-slide{
     position:absolute;inset:0;opacity:0;
@@ -147,7 +95,7 @@
   .hcs-content{
     position:absolute;inset:0;
     display:flex;align-items:center;
-    padding:9rem 5rem 5rem;z-index:5;
+    padding:9rem 5rem 5rem;z-index:10;
   }
   .hcs-line{
     width:3px;height:0;background:var(--blue-light);
@@ -227,7 +175,6 @@
     .hcs-nav{left:1.5rem;}
     .hcs-arrows{right:1.5rem;}
     .hcs-title{font-size:clamp(2rem,7vw,3.5rem);}
-    .hs1-h1{font-size:clamp(3rem,12vw,6rem);}
   }
 
   .btn-primary{background:var(--blue);color:var(--white);padding:0.9rem 2.2rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:0.2s;display:inline-block;position:relative;overflow:hidden;}
@@ -240,13 +187,11 @@
   .btn-secondary:hover{border-color:var(--blue-light);background:rgba(91,163,245,0.08);color:var(--white);}
 
   /* ═══════════════════════════════════════
-     ABOUT BANNER
+     EYEBROWS & HEADINGS
   ═══════════════════════════════════════ */
   .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Montserrat',sans-serif;color:var(--blue-light);font-size:0.68rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;}
   .eyebrow::before{content:'';display:block;width:24px;height:3px;background:var(--blue-light);}
   h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem;}
-  #about-banner{background:var(--blue-deep);padding:3.5rem 5rem;text-align:center;margin-top:2rem;}
-  #about-banner h3{font-family:'Montserrat',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;margin:0;color:var(--white);}
 
   /* ═══════════════════════════════════════
      LOGOS
@@ -258,20 +203,9 @@
   @keyframes scroll-logos{0%{transform:translateX(0);}100%{transform:translateX(calc(-220px * 10));}}
 
   /* ═══════════════════════════════════════
-     SERVICIOS — DYNAMIC HORIZONTAL PINNED SHOWCASE
+     SERVICIOS — DEGRADADO LÍQUIDO INTERACTIVO CON RUIDO
   ═══════════════════════════════════════ */
   section{padding:6rem 5rem;}
-
-  /* Feral UI Gradient — Blue Brand Blend */
-  .gradient-untitled {
-    position: relative;
-    background-color: #0A0F1A;
-    background-image: url('assets/images/gradient-servicios.webp?v=2');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-  }
 
   #servicios.svc-pin-section {
     position: relative;
@@ -280,24 +214,38 @@
     padding: 4.5rem 0 5rem 0;
     display: flex;
     flex-direction: column;
+    background-color: #080E18;
   }
 
-  /* Luz interactiva blanca que sigue el cursor sobre el degradado */
-  .svc-mouse-glow {
+  /* Canvas fluido interactivo en 60fps */
+  .svc-fluid-canvas {
+    position: absolute;
+    inset: -15%;
+    width: 130%;
+    height: 130%;
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(80px);
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  /* Textura de grano/ruido cinematográfico sobre los colores en movimiento */
+  .svc-noise-overlay {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    mix-blend-mode: screen;
-    will-change: background;
+    z-index: 2;
+    background-image: url('assets/images/noise.png');
+    background-repeat: repeat;
+    opacity: 0.30;
+    mix-blend-mode: overlay;
   }
 
   .svc-pin-container {
     width: 100%;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     display: flex;
     flex-direction: column;
   }
@@ -861,28 +809,14 @@
   </ul>
 </nav>
 
-<!-- HERO — REVEAL ON INTERACTION -->
+<!-- HERO — SLIDESHOW DIRECTO CON TEXTURA DE RUIDO -->
 <section id="inicio">
 
-  <!-- ESTADO 1: Solo texto -->
   <div class="hero-bg"></div>
   <div class="hero-grid" id="heroGrid"></div>
+  <div class="hero-noise"></div>
 
-  <div class="hero-state1" id="heroState1">
-    <div class="hs1-tag" id="hs1Tag">Taller Publicitario · Santo Domingo, RD</div>
-    <h1 class="hs1-h1" id="hs1H1">
-      <span class="hs1-line"><span class="hs1-word">Tu</span></span>
-      <span class="hs1-line"><span class="hs1-word">marca</span></span>
-      <span class="hs1-line"><span class="hs1-word">merece</span></span>
-      <span class="hs1-line"><span class="hs1-word hs1-blue">destacar.</span></span>
-    </h1>
-    <div class="hs1-hint" id="hs1Hint">
-      <span class="hs1-hint-dot"></span>
-      Mueve el mouse para explorar
-    </div>
-  </div>
-
-  <!-- ESTADO 2: Slideshow cinematográfico -->
+  <!-- ESTADO: Slideshow cinematográfico directo -->
   <div class="hero-state2" id="heroState2">
 
     <div class="hcs-slide active" style="background-image:url('assets/images/letrero-af-school.webp')">
@@ -1017,8 +951,6 @@
 
 </section>
 
-<div id="about-banner" class="reveal"><h3>Más que un Taller Publicitario, Somos el Aliado de tu Marca.</h3></div>
-
 <div class="client-logos">
   <div class="client-logos-track">
     <img src="assets/images/LOGOS_SLIDER_20.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_11.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_18.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_12.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_19.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_13.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_14.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_15.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_16.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_17.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_20.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_11.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_18.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_12.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_19.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_13.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_14.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_15.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_16.png" alt="Cliente"><img src="assets/images/LOGOS_SLIDER_17.png" alt="Cliente">
@@ -1026,9 +958,10 @@
 </div>
 
 <!-- SERVICIOS — Horizontal Showcase -->
-<section id="servicios" class="svc-pin-section gradient-untitled">
-  <!-- Luz dinámica interactiva que sigue el cursor -->
-  <div class="svc-mouse-glow" id="svcMouseGlow"></div>
+<section id="servicios" class="svc-pin-section">
+  <!-- Fondo degradado fluido interactivo que se mueve con el cursor -->
+  <canvas id="svcFluidCanvas" class="svc-fluid-canvas"></canvas>
+  <div class="svc-noise-overlay"></div>
 
   <div class="svc-pin-container">
     
@@ -1416,30 +1349,8 @@ gsap.registerPlugin(ScrollTrigger);
 // ═══════════════════════════════════════
 
 // ═══════════════════════════════════════
-// HERO — REVEAL ON INTERACTION
+// HERO — SLIDESHOW CINEMATOGRÁFICO DIRECTO
 // ═══════════════════════════════════════
-const heroState1 = document.getElementById('heroState1');
-const heroState2 = document.getElementById('heroState2');
-let heroTriggered = false;
-
-// Entrada del texto
-setTimeout(() => {
-  document.getElementById('hs1Tag').classList.add('loaded');
-  const words = document.querySelectorAll('.hs1-word');
-  words.forEach((w, i) => setTimeout(() => w.classList.add('loaded'), 200 + i * 160));
-  setTimeout(() => document.getElementById('hs1Hint').classList.add('loaded'), 200 + words.length * 160 + 300);
-}, 300);
-
-// Trigger al mover el mouse
-document.getElementById('inicio').addEventListener('mousemove', () => {
-  if (heroTriggered) return;
-  heroTriggered = true;
-  setTimeout(() => {
-    heroState1.classList.add('triggered');
-    heroState2.classList.add('triggered');
-    hcsGo(0);
-  }, 150);
-}, { once: false });
 
 // ── SLIDESHOW CINEMATOGRÁFICO ──
 const hcsSlides = document.querySelectorAll('.hcs-slide');
@@ -1474,6 +1385,9 @@ function hcsGo(n) {
 }
 function hcsNext() { hcsGo(hcsCur + 1); }
 function hcsPrev() { hcsGo(hcsCur - 1); }
+
+// Iniciar slideshow inmediatamente
+hcsGo(0);
 
 // ═══════════════════════════════════════
 // NAV — SE COMPACTA AL HACER SCROLL
@@ -1605,54 +1519,212 @@ if (svcViewport) {
   }
 }
 
-// ── Luz interactiva que sigue el cursor sobre el degradado ──
-const svcSect = document.getElementById('servicios');
-const svcMouseGlow = document.getElementById('svcMouseGlow');
+// ═══════════════════════════════════════
+// SERVICIOS — DEGRADADO FLUIDO INTERACTIVO EN CANVAS (60 FPS)
+// ═══════════════════════════════════════
+(function initFluidCanvas() {
+  const canvas = document.getElementById('svcFluidCanvas');
+  const svcSect = document.getElementById('servicios');
+  if (!canvas || !svcSect) return;
 
-if (svcSect && svcMouseGlow) {
-  let targetX = -1000, targetY = -1000;
-  let currentX = -1000, currentY = -1000;
-  let isHovering = false;
-  let glowRaf = null;
+  const ctx = canvas.getContext('2d');
+  let width = 0, height = 0;
+  let rafId = null;
+  let isVisible = false;
+  let isHovered = false;
 
-  function renderGlow() {
-    if (isHovering || Math.abs(targetX - currentX) > 0.5 || Math.abs(targetY - currentY) > 0.5) {
-      currentX += (targetX - currentX) * 0.12;
-      currentY += (targetY - currentY) * 0.12;
-      svcMouseGlow.style.background = `radial-gradient(650px circle at ${currentX}px ${currentY}px, rgba(255, 255, 255, 0.40) 0%, rgba(190, 225, 255, 0.22) 25%, rgba(91, 163, 245, 0.10) 50%, transparent 75%)`;
-      glowRaf = requestAnimationFrame(renderGlow);
-    } else {
-      glowRaf = null;
+  // Coordenadas relativas del cursor dentro de la sección
+  let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  let lastClientX = 0, lastClientY = 0;
+
+  function resize() {
+    const rect = svcSect.getBoundingClientRect();
+    width = Math.max(400, Math.floor(rect.width * 0.5));
+    height = Math.max(260, Math.floor(rect.height * 0.5));
+    canvas.width = width;
+    canvas.height = height;
+
+    if (!isHovered) {
+      mouse.targetX = width * 0.45;
+      mouse.targetY = height * 0.45;
+      mouse.x = mouse.targetX;
+      mouse.y = mouse.targetY;
     }
   }
 
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  // Nodos de color orgánicos del degradado fluido (paleta Los Crafters)
+  const nodes = [
+    // 0: Nodo blanco luminoso (sigue al mouse de forma fluida y orgánica)
+    {
+      type: 'white',
+      x: width * 0.45, y: height * 0.45,
+      radiusRatio: 0.26
+    },
+    // 1: Azul eléctrico / Cyan (rebote reactivo al movimiento)
+    {
+      type: 'color',
+      baseRelX: 0.35, baseRelY: 0.40,
+      x: 0, y: 0, pushX: 0, pushY: 0,
+      radiusRatio: 0.36,
+      r: 91, g: 163, b: 245, a: 0.65,
+      freqX: 0.0008, freqY: 0.0011, ampX: 0.12, ampY: 0.10, phase: 0.5
+    },
+    // 2: Azul Corporativo / Brand Blue Los Crafters
+    {
+      type: 'color',
+      baseRelX: 0.70, baseRelY: 0.30,
+      x: 0, y: 0, pushX: 0, pushY: 0,
+      radiusRatio: 0.48,
+      r: 44, g: 100, b: 176, a: 0.80,
+      freqX: 0.0006, freqY: 0.0009, ampX: 0.14, ampY: 0.12, phase: 2.1
+    },
+    // 3: Azul Royal Profundo
+    {
+      type: 'color',
+      baseRelX: 0.20, baseRelY: 0.75,
+      x: 0, y: 0, pushX: 0, pushY: 0,
+      radiusRatio: 0.52,
+      r: 21, g: 48, b: 91, a: 0.90,
+      freqX: 0.0007, freqY: 0.0005, ampX: 0.10, ampY: 0.15, phase: 4.2
+    },
+    // 4: Cobalto vibrante lateral
+    {
+      type: 'color',
+      baseRelX: 0.85, baseRelY: 0.70,
+      x: 0, y: 0, pushX: 0, pushY: 0,
+      radiusRatio: 0.44,
+      r: 32, g: 78, b: 148, a: 0.75,
+      freqX: 0.0009, freqY: 0.0007, ampX: 0.12, ampY: 0.14, phase: 1.3
+    }
+  ];
+
+  // Interacción del ratón sobre la sección de servicios
   svcSect.addEventListener('mouseenter', (e) => {
-    isHovering = true;
-    const r = svcSect.getBoundingClientRect();
-    targetX = e.clientX - r.left;
-    targetY = e.clientY - r.top;
-    currentX = targetX;
-    currentY = targetY;
-    svcMouseGlow.style.opacity = '1';
-    if (!glowRaf) glowRaf = requestAnimationFrame(renderGlow);
+    isHovered = true;
+    const rect = svcSect.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width;
+    const relY = (e.clientY - rect.top) / rect.height;
+    mouse.targetX = relX * width;
+    mouse.targetY = relY * height;
+    lastClientX = e.clientX;
+    lastClientY = e.clientY;
   });
 
   svcSect.addEventListener('mousemove', (e) => {
-    const r = svcSect.getBoundingClientRect();
-    targetX = e.clientX - r.left;
-    targetY = e.clientY - r.top;
-    if (!isHovering) {
-      isHovering = true;
-      svcMouseGlow.style.opacity = '1';
-    }
-    if (!glowRaf) glowRaf = requestAnimationFrame(renderGlow);
-  });
+    isHovered = true;
+    const rect = svcSect.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width;
+    const relY = (e.clientY - rect.top) / rect.height;
+    mouse.targetX = relX * width;
+    mouse.targetY = relY * height;
+
+    const dx = e.clientX - lastClientX;
+    const dy = e.clientY - lastClientY;
+    lastClientX = e.clientX;
+    lastClientY = e.clientY;
+
+    // Onda elástica que empuja sutilmente las masas de color
+    nodes.forEach(node => {
+      if (node.type === 'color') {
+        const dist = Math.hypot(node.x - mouse.targetX, node.y - mouse.targetY);
+        const force = Math.max(0, 1 - dist / (width * 0.45));
+        node.pushX += dx * force * 0.35;
+        node.pushY += dy * force * 0.35;
+      }
+    });
+  }, { passive: true });
 
   svcSect.addEventListener('mouseleave', () => {
-    isHovering = false;
-    svcMouseGlow.style.opacity = '0';
+    isHovered = false;
   });
-}
+
+  // Render loop continuo y fluido a 60fps
+  let startTime = performance.now();
+
+  function drawFrame(now) {
+    if (!isVisible) return;
+
+    const t = now - startTime;
+
+    // Amortiguar velocidad del cursor
+    mouse.x += (mouse.targetX - mouse.x) * 0.08;
+    mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+    // Si el mouse no está sobre la sección, generar oscilación armónica suave
+    if (!isHovered) {
+      mouse.targetX = (0.50 + Math.sin(t * 0.0006) * 0.25) * width;
+      mouse.targetY = (0.45 + Math.cos(t * 0.0008) * 0.20) * height;
+    }
+
+    // Fondo base oscuro azul medianoche
+    ctx.fillStyle = '#080E18';
+    ctx.fillRect(0, 0, width, height);
+
+    // Dibujar masas orgánicas de azul
+    nodes.forEach(node => {
+      if (node.type === 'color') {
+        // Amortiguación de empuje elástico
+        node.pushX *= 0.92;
+        node.pushY *= 0.92;
+
+        const waveX = Math.sin(t * node.freqX + node.phase) * (width * node.ampX);
+        const waveY = Math.cos(t * node.freqY + node.phase) * (height * node.ampY);
+        node.x = node.baseRelX * width + waveX + node.pushX;
+        node.y = node.baseRelY * height + waveY + node.pushY;
+
+        const radius = width * node.radiusRatio;
+        const grad = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius);
+        grad.addColorStop(0, `rgba(${node.r}, ${node.g}, ${node.b}, ${node.a})`);
+        grad.addColorStop(0.55, `rgba(${node.r}, ${node.g}, ${node.b}, ${node.a * 0.45})`);
+        grad.addColorStop(1, `rgba(${node.r}, ${node.g}, ${node.b}, 0)`);
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+
+    // Dibujar el nodo blanco luminoso que sigue exactamente el cursor
+    const whiteNode = nodes[0];
+    whiteNode.x = mouse.x;
+    whiteNode.y = mouse.y;
+    const whiteRad = width * whiteNode.radiusRatio * (1 + Math.sin(t * 0.0015) * 0.08);
+
+    const whiteGrad = ctx.createRadialGradient(whiteNode.x, whiteNode.y, 0, whiteNode.x, whiteNode.y, whiteRad);
+    whiteGrad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
+    whiteGrad.addColorStop(0.25, 'rgba(215, 238, 255, 0.45)');
+    whiteGrad.addColorStop(0.60, 'rgba(91, 163, 245, 0.15)');
+    whiteGrad.addColorStop(1, 'rgba(91, 163, 245, 0)');
+
+    ctx.fillStyle = whiteGrad;
+    ctx.beginPath();
+    ctx.arc(whiteNode.x, whiteNode.y, whiteRad, 0, Math.PI * 2);
+    ctx.fill();
+
+    rafId = requestAnimationFrame(drawFrame);
+  }
+
+  // Pausar animación cuando la sección no esté en pantalla (optimización máxima de batería y CPU)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        if (!rafId) rafId = requestAnimationFrame(drawFrame);
+      } else {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }
+    });
+  }, { threshold: 0.05 });
+
+  observer.observe(svcSect);
+})();
 
 // ═══════════════════════════════════════
 // PORTAFOLIO — TILT 3D AL HOVER
