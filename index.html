@@ -261,7 +261,44 @@
      SERVICIOS — LISTA ESTILO EDITORIAL
   ═══════════════════════════════════════ */
   section{padding:6rem 5rem;}
-  #servicios{background:var(--dark);}
+
+  /* Feral UI Gradient — Untitled Blend */
+  .gradient-untitled {
+    position: relative;
+    background-color: #0A0F1A;
+    background-image: url('assets/images/gradient-servicios.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  #servicios.gradient-untitled > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  #servicios.gradient-untitled h2,
+  #servicios.gradient-untitled .svc-list-name {
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(8, 14, 24, 0.7), 0 1px 3px rgba(8, 14, 24, 0.9);
+  }
+  #servicios.gradient-untitled .svc-list-num,
+  #servicios.gradient-untitled .svc-list-tag {
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 6px rgba(8, 14, 24, 0.8);
+  }
+  #servicios.gradient-untitled .svc-list-arrow {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(10, 15, 26, 0.35);
+    backdrop-filter: blur(6px);
+  }
+  #servicios.gradient-untitled .svc-list-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  #servicios:not(.gradient-untitled){background:var(--dark);}
 
   .svc-header{margin-bottom:0;padding-bottom:1.5rem;border-bottom:1px solid var(--card-border);}
 
@@ -487,7 +524,55 @@
   <!-- ESTADO 2: Slideshow cinematográfico -->
   <div class="hero-state2" id="heroState2">
 
-    <div class="hcs-slide active" style="background-image:url('assets/images/IMG_7791.webp')">
+    <div class="hcs-slide active" style="background-image:url('assets/images/letrero-af-school.webp')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Letreros Corpóreos 3D</div>
+          <div class="hcs-title">Elegancia y<br>relieve 3D.</div>
+          <div class="hcs-desc">Letras corpóreas volumétricas y emblemas institucionales de máxima durabilidad y distinción.</div>
+          <div class="hcs-actions">
+            <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
+            <a href="#contacto" class="btn-secondary">Cotizar →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hcs-slide" style="background-image:url('assets/images/letrero-elenma-construcciones.webp')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Letreros & Rotulación</div>
+          <div class="hcs-title">Presencia corporativa<br>que genera confianza.</div>
+          <div class="hcs-desc">Identidad de fachada con logotipos corpóreos 3D y rotulación comercial en vinil de ventanas.</div>
+          <div class="hcs-actions">
+            <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
+            <a href="#contacto" class="btn-secondary">Cotizar →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hcs-slide" style="background-image:url('assets/images/rotulacion-mural-interior.webp')">
+      <div class="hcs-overlay"></div>
+      <div class="hcs-content">
+        <div class="hcs-line"></div>
+        <div class="hcs-text">
+          <div class="hcs-cat">Rotulación & Murales</div>
+          <div class="hcs-title">Espacios que<br>inspiran y comunican.</div>
+          <div class="hcs-desc">Rotulación mural en vinil de gran formato para ambientación corporativa, comercial y educativa.</div>
+          <div class="hcs-actions">
+            <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
+            <a href="#contacto" class="btn-secondary">Cotizar →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hcs-slide" style="background-image:url('assets/images/IMG_7791.webp')">
       <div class="hcs-overlay"></div>
       <div class="hcs-content">
         <div class="hcs-line"></div>
@@ -497,7 +582,7 @@
           <div class="hcs-desc">Letreros con tecnología avanzada para identificar y destacar tus espacios.</div>
           <div class="hcs-actions">
             <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
-            <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
+            <a href="#contacto" class="btn-secondary">Cotizar →</a>
           </div>
         </div>
       </div>
@@ -512,24 +597,8 @@
           <div class="hcs-title">Publicidad<br>en movimiento.</div>
           <div class="hcs-desc">Ploteo de alta calidad que convierte tus vehículos en pasarelas publicitarias.</div>
           <div class="hcs-actions">
-            <a href="#portafolio" class="btn-primary magnetic"><span>Ver proyectos</span></a>
+            <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
             <a href="#contacto" class="btn-secondary">Cotizar →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hcs-slide" style="background-image:url('assets/images/IMG_2602.webp')">
-      <div class="hcs-overlay"></div>
-      <div class="hcs-content">
-        <div class="hcs-line"></div>
-        <div class="hcs-text">
-          <div class="hcs-cat">Fachadas</div>
-          <div class="hcs-title">Impacto visual<br>24/7.</div>
-          <div class="hcs-desc">Cajas de luces e iluminación LED que hacen brillar tu negocio día y noche.</div>
-          <div class="hcs-actions">
-            <a href="#contacto" class="btn-primary magnetic"><span>Iniciar proyecto</span></a>
-            <a href="#servicios" class="btn-secondary">Nuestros servicios →</a>
           </div>
         </div>
       </div>
@@ -544,7 +613,7 @@
           <div class="hcs-title">Diseño que<br>vende más.</div>
           <div class="hcs-desc">Estructuras modulares que realzan tus productos en punto de venta.</div>
           <div class="hcs-actions">
-            <a href="#portafolio" class="btn-primary magnetic"><span>Ver proyectos</span></a>
+            <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
             <a href="#contacto" class="btn-secondary">Cotizar →</a>
           </div>
         </div>
@@ -561,19 +630,21 @@
           <div class="hcs-desc">Vinilos y rótulos en ACM y PVC para darle carácter y presencia a cualquier espacio.</div>
           <div class="hcs-actions">
             <a href="https://drive.google.com/file/d/1S1DoP-ZQEbCIRiCjIFdfrzE1bGpqKmhf/view?usp=sharing" target="_blank" class="btn-primary magnetic"><span>Ver catálogo</span></a>
-            <a href="#portafolio" class="btn-secondary">Ver proyectos →</a>
+            <a href="#contacto" class="btn-secondary">Cotizar →</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="hcs-counter"><strong id="hcsNum">01</strong> <span>/ 05</span></div>
+    <div class="hcs-counter"><strong id="hcsNum">01</strong> <span id="hcsTotalNum">/ 07</span></div>
     <div class="hcs-nav" id="hcsNav">
       <div class="hcs-dot active" onclick="hcsGo(0)"></div>
       <div class="hcs-dot" onclick="hcsGo(1)"></div>
       <div class="hcs-dot" onclick="hcsGo(2)"></div>
       <div class="hcs-dot" onclick="hcsGo(3)"></div>
       <div class="hcs-dot" onclick="hcsGo(4)"></div>
+      <div class="hcs-dot" onclick="hcsGo(5)"></div>
+      <div class="hcs-dot" onclick="hcsGo(6)"></div>
     </div>
     <div class="hcs-arrows">
       <button class="hcs-btn" onclick="hcsPrev()">‹</button>
@@ -594,7 +665,7 @@
 </div>
 
 <!-- SERVICIOS — Lista editorial -->
-<section id="servicios">
+<section id="servicios" class="gradient-untitled">
   <div class="svc-header reveal">
     <div class="eyebrow">Nuestros Servicios</div>
     <div style="display:flex;align-items:baseline;justify-content:space-between;">
@@ -624,9 +695,12 @@
     <button class="filter-btn" data-filter="fachadas">Fachadas</button>
     <button class="filter-btn" data-filter="exhibidores">Exhibidores</button>
     <button class="filter-btn" data-filter="promocionales">Artículos Promocionales</button>
-    <button class="filter-btn" data-filter="letreros">Letreros</button>
+    <button class="filter-btn" data-filter="letreros">Letreros & Rotulación</button>
   </div>
   <div class="pf-grid reveal d1" id="portfolio-grid">
+    <div class="pf-card destacado" data-cat="letreros"><div class="pf-img"><img src="assets/images/letrero-af-school.webp" alt="Letrero Corpóreo 3D AF School"></div><div class="pf-info"><div class="pf-title">Letrero Corpóreo 3D</div></div></div>
+    <div class="pf-card destacado" data-cat="letreros"><div class="pf-img"><img src="assets/images/letrero-elenma-construcciones.webp" alt="Letrero y Rotulación Elenma"></div><div class="pf-info"><div class="pf-title">Letrero & Rotulación Comercial</div></div></div>
+    <div class="pf-card destacado" data-cat="letreros"><div class="pf-img"><img src="assets/images/rotulacion-mural-interior.webp" alt="Rotulación Mural en Vinil"></div><div class="pf-info"><div class="pf-title">Rotulación Mural en Vinil</div></div></div>
     <div class="pf-card destacado" data-cat="senalizacion"><div class="pf-img"><img src="assets/images/IMG_7791.webp" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
     <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="assets/images/IMG_1883.webp" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
     <div class="pf-card" data-cat="senalizacion"><div class="pf-img"><img src="assets/images/IMG_1886.webp" alt="Señalización"></div><div class="pf-info"><div class="pf-title">Señalización</div></div></div>
@@ -825,20 +899,27 @@ document.getElementById('inicio').addEventListener('mousemove', () => {
 }, { once: false });
 
 // ── SLIDESHOW CINEMATOGRÁFICO ──
-let hcsCur = 0, hcsTotal = 5, hcsPW = 0, hcsPT;
 const hcsSlides = document.querySelectorAll('.hcs-slide');
 const hcsDots = document.querySelectorAll('.hcs-dot');
 const hcsProgEl = document.getElementById('hcsProg');
 const hcsNumEl = document.getElementById('hcsNum');
+const hcsTotalNumEl = document.getElementById('hcsTotalNum');
+let hcsCur = 0, hcsTotal = hcsSlides.length, hcsPW = 0, hcsPT;
+if (hcsTotalNumEl) hcsTotalNumEl.textContent = `/ ${String(hcsTotal).padStart(2, '0')}`;
 
 function hcsGo(n) {
+  if (!hcsSlides.length) return;
   hcsSlides[hcsCur].classList.remove('active');
-  hcsDots[hcsCur].classList.remove('active');
-  hcsDots[hcsCur].style.width = '18px';
+  if (hcsDots[hcsCur]) {
+    hcsDots[hcsCur].classList.remove('active');
+    hcsDots[hcsCur].style.width = '18px';
+  }
   hcsCur = (n + hcsTotal) % hcsTotal;
   hcsSlides[hcsCur].classList.add('active');
-  hcsDots[hcsCur].classList.add('active');
-  hcsDots[hcsCur].style.width = '32px';
+  if (hcsDots[hcsCur]) {
+    hcsDots[hcsCur].classList.add('active');
+    hcsDots[hcsCur].style.width = '32px';
+  }
   hcsNumEl.textContent = String(hcsCur + 1).padStart(2, '0');
   hcsPW = 0; hcsProgEl.style.width = '0%';
   clearInterval(hcsPT);
