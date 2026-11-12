@@ -368,13 +368,10 @@ def log_sent_email(empresa: str, correo: str, nicho: str, subject: str, status: 
 def send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, to_email, subject, html, include_images=True):
     context = get_ssl_context()
     msg_root = create_mime_message(smtp_user, to_email, subject, html, include_images=include_images)
-    recipients = [to_email]
-    if to_email.strip().lower() != smtp_user.strip().lower():
-        recipients.append(smtp_user)
 
     with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
         server.login(smtp_user, smtp_pass)
-        server.sendmail(smtp_user, recipients, msg_root.as_string())
+        server.sendmail(smtp_user, [to_email], msg_root.as_string())
 
 
 def decode_mime_words(s):
@@ -414,10 +411,10 @@ def check_inbox(imap_host, smtp_user, smtp_pass, limit=10):
 
 
 def audit_crm_inbox(imap_host, smtp_host, smtp_port, smtp_user, smtp_pass, csv_path: Path, auto_reply: bool = False):
-    """Revisa por IMAP quién respondió de la lista de prospectos, si hubo rebotes, y envía acuse automático si se solicita."""
+    """Revisa por IMAP quién respondió de todas las listas de prospectos, si hubo rebotes, y envía acuse automático si se solicita."""
     prospects = {}
-    if csv_path.exists():
-        with open(csv_path, newline="", encoding="utf-8") as f:
+    for p_file in sorted(SCRIPTS_DIR.glob("prospectos_*.csv")):
+        with open(p_file, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 em = row.get("correo", "").strip().lower()
                 if em:
@@ -578,12 +575,9 @@ def main():
                 subject, html = build_html_email(nombre, empresa, nicho, servicio, zona, use_cid=True)
                 msg_root = create_mime_message(smtp_user, email_to, subject, html, include_images=row_imgs)
 
-                recipients = [email_to]
-                if email_to.lower() != smtp_user.lower():
-                    recipients.append(smtp_user)
-                server.sendmail(smtp_user, recipients, msg_root.as_string())
-                log_sent_email(empresa, email_to, nicho, subject, "ENVIADO_CAMPANA_CON_COPIA")
-                print(f"📨 Enviado a {nombre} ({empresa}) <{email_to}> + copia a <{smtp_user}> [{nicho}]")
+                server.sendmail(smtp_user, [email_to], msg_root.as_string())
+                log_sent_email(empresa, email_to, nicho, subject, "ENVIADO_CAMPANA")
+                print(f"📨 Enviado a {nombre} ({empresa}) <{email_to}> [{nicho}]")
                 time.sleep(4)
 
 
