@@ -1,22 +1,29 @@
 #!/usr/bin/env python3
 """
-LOS CRAFTERS SRL — Motor de Email Marketing B2B e Inbox CRM (SMTP + IMAP)
-Diseñado con tono humano, directo y visual (75% menos texto, sin mencionar ciudades en el copy,
-usando las zonas únicamente como parámetro de búsqueda/prospección en el CSV).
+LOS CRAFTERS SRL — Motor de Email Marketing B2B, Tracking de Clics e Inbox CRM (SMTP + IMAP)
 
-Comandos disponibles:
-  1. Enviar correo real de prueba a info@loscrafters.net:
-     python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --test --nicho residencial_punta_cana
+Capacidades incluidas:
+  1. Envío de campaña personalizada con galería visual (CID Inline Images).
+  2. Tracking de Clics por Empresa (?utm_source=email_b2b&empresa=...) conectado a GA4 y alertas en vivo.
+  3. Botón de WhatsApp pre-identificado con el nombre de la constructora.
+  4. Registro automático de envíos en `campana_log.csv`.
+  5. Monitoreo CRM (`--crm`) por IMAP para detectar:
+     - Quién respondió de la lista de prospectos.
+     - Si algún correo rebotó (Mailer-Daemon / Delivery Status).
+     - Auto-respuesta humana inmediata (`--crm --auto-reply`) cuando un prospecto contesta.
 
-  2. Enviar a un prospecto específico:
-     python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --send-one --to ventas@constructora.do --nombre "Ing. Carlos" --empresa "Constructora" --nicho residencial_punta_cana
-
-  3. Enviar campaña a toda la lista CSV:
-     python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --send --csv .agents/skills/loscrafters-email-marketing/scripts/prospectos_b2b_rd.csv
+Comandos principales:
+  • Probar correo en info@loscrafters.net:
+    python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --test --nicho residencial_punta_cana
+  • Enviar campaña completa a las 18 constructoras:
+    python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --send
+  • Auditar respuestas, rebotes y activar auto-respuesta a interesados:
+    python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --crm --auto-reply
 """
 
 import argparse
 import csv
+from datetime import datetime
 import email
 from email.header import decode_header
 from email.mime.image import MIMEImage
@@ -27,11 +34,15 @@ import os
 import smtplib
 import ssl
 import time
+import urllib.parse
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parents[4]
 ENV_PATH = ROOT_DIR / ".env"
 IMAGES_DIR = ROOT_DIR / "assets" / "images"
+SCRIPTS_DIR = Path(__file__).resolve().parent
+LOG_CSV_PATH = SCRIPTS_DIR / "campana_log.csv"
+AUTO_REPLY_LOG = SCRIPTS_DIR / "auto_replies_sent.txt"
 
 
 def load_dotenv():
@@ -121,20 +132,20 @@ TEMPLATES = {
         "cta_note": "¿Cuántas unidades manejan actualmente? Respóndenos y te cotizamos hoy mismo."
     },
     "seguimiento": {
-        "subject": "Seguimiento a tu cotización — {empresa}",
+        "subject": "Re: Señalización para los proyectos de {empresa}",
         "eyebrow": "LOS CRAFTERS",
-        "headline": "¿Qué te pareció nuestra propuesta?",
+        "headline": "Seguimiento rápido a tus próximos proyectos.",
         "intro": (
-            "Te escribo brevemente para saber si pudiste revisar la información de "
-            "<strong>{servicio}</strong> para <strong>{empresa}</strong>."
+            "Te escribo brevemente para confirmar que hayas podido ver nuestro correo anterior sobre "
+            "señalización y letreros 3D para los desarrollos de <strong>{empresa}</strong>."
         ),
         "show_gallery": True,
         "bullets": [
-            "<strong>Taller propio:</strong> Control total de tiempos y acabados.",
-            "<strong>Garantía real:</strong> Materiales de primera e instalación limpia.",
-            "<strong>Facturación formal:</strong> Comprobante Fiscal y entrega puntual."
+            "<strong>Muestras físicas sin compromiso:</strong> Podemos llevarles muestras de nuestros acabados en relieve 3D a su oficina.",
+            "<strong>Cotización sobre planos:</strong> Cotizamos partidas completas de señalética residencial y letreros de entrada.",
+            "<strong>Facturación formal:</strong> Comprobante Fiscal (B01 / E-CF) y garantía de instalación."
         ],
-        "cta_note": "Tenemos espacio en agenda esta semana. ¿Ajustamos algún detalle o coordinamos el levantamiento?"
+        "cta_note": "¿Tienen algún edificio o residencial próximo a entrega donde podamos presentarles propuesta?"
     }
 }
 
@@ -152,6 +163,12 @@ def build_html_email(
     intro_html = tpl["intro"].format(nombre=nombre, empresa=empresa, servicio=servicio)
     cta_note = tpl["cta_note"].format(nombre=nombre, empresa=empresa, servicio=servicio)
     bullets_html = "".join(f'<li style="margin-bottom: 8px;">{b}</li>' for b in tpl["bullets"])
+
+    empresa_param = urllib.parse.quote_plus(empresa)
+    tracked_portfolio_url = f"https://www.loscrafters.net/?utm_source=email_b2b&utm_medium=email&utm_campaign={nicho}&empresa={empresa_param}#portafolio"
+    tracked_home_url = f"https://www.loscrafters.net/?utm_source=email_b2b&utm_medium=email&utm_campaign={nicho}&empresa={empresa_param}"
+    wa_text = urllib.parse.quote(f"Hola Los Crafters, les escribo de {empresa}. Vi su correo sobre señalización de proyectos y me gustaría cotizar.")
+    wa_url = f"https://wa.me/18095686663?text={wa_text}"
 
     if use_cid:
         img_sundistrict = "cid:sun_district"
@@ -172,7 +189,7 @@ def build_html_email(
                 </div>
                 <!-- Imagen Principal: Entrada Sun District -->
                 <div style="margin-bottom:12px;">
-                  <a href="https://www.loscrafters.net/#portafolio" target="_blank" style="text-decoration:none;">
+                  <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
                     <img src="{img_sundistrict}" alt="Letrero Monumental 3D en Entrada de Proyecto Residencial Sun District" width="502" style="width:100%;max-width:502px;height:auto;border-radius:6px;border:1px solid #3265A6;display:block;">
                   </a>
                   <div style="font-size:12px;color:#8BA4C2;margin-top:6px;">Identidad y letrero corpóreo 3D para entrada principal de proyecto residencial</div>
@@ -181,13 +198,13 @@ def build_html_email(
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
                   <tr>
                     <td width="49%" valign="top" style="padding-right:5px;">
-                      <a href="https://www.loscrafters.net/#portafolio" target="_blank" style="text-decoration:none;">
+                      <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
                         <img src="{img_closeup}" alt="Detalle de Numeración 3D en Relieve" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
                       </a>
                       <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Numeración 3D en relieve (acrílico y aluminio)</div>
                     </td>
                     <td width="49%" valign="top" style="padding-left:5px;">
-                      <a href="https://www.loscrafters.net/#portafolio" target="_blank" style="text-decoration:none;">
+                      <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
                         <img src="{img_basalto}" alt="Señalización Vial y de Proyectos" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
                       </a>
                       <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Señalización vial e interna de proyectos</div>
@@ -231,7 +248,7 @@ def build_html_email(
               <table role="presentation" cellspacing="0" cellpadding="0" style="margin:20px 0 6px;">
                 <tr>
                   <td style="border-radius:4px;background-color:#25D366;">
-                    <a href="https://wa.me/18095686663?text=Hola%20Los%20Crafters,%20vi%20su%20correo%20sobre%20se%C3%B1alizaci%C3%B3n%20de%20proyectos%20y%20me%20gustar%C3%ADa%20cotizar." target="_blank" style="display:inline-block;padding:12px 18px;color:#050505;text-decoration:none;font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:0.6px;">Escribir por WhatsApp →</a>
+                    <a href="{wa_url}" target="_blank" style="display:inline-block;padding:12px 18px;color:#050505;text-decoration:none;font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:0.6px;">Escribir por WhatsApp →</a>
                   </td>
                   <td width="12"></td>
                   <td style="border-radius:4px;background-color:#3265A6;">
@@ -246,7 +263,7 @@ def build_html_email(
             <td style="padding:18px 30px;background-color:#080E18;border-top:1px solid #1C2E47;color:#8BA4C2;font-size:12px;line-height:1.6;">
               <strong style="color:#F0F6FF;">Los Crafters SRL</strong><br>
               📞 Teléfono y WhatsApp: +1 (809) 568-6663<br>
-              🌐 <a href="https://www.loscrafters.net" style="color:#5BA3F5;text-decoration:none;">www.loscrafters.net</a> · ✉️ <a href="mailto:info@loscrafters.net" style="color:#5BA3F5;text-decoration:none;">info@loscrafters.net</a>
+              🌐 <a href="{tracked_home_url}" style="color:#5BA3F5;text-decoration:none;">www.loscrafters.net</a> · ✉️ <a href="mailto:info@loscrafters.net" style="color:#5BA3F5;text-decoration:none;">info@loscrafters.net</a>
             </td>
           </tr>
         </table>
@@ -256,6 +273,39 @@ def build_html_email(
 </body>
 </html>"""
     return subject, html
+
+
+def build_auto_reply_html(empresa: str) -> str:
+    return f"""<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:16px 8px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="580" cellspacing="0" cellpadding="0" style="max-width:580px;width:100%;background-color:#0A0F1A;border:1px solid #1C2E47;border-radius:10px;overflow:hidden;">
+          <tr>
+            <td style="padding:22px 28px;color:#F0F6FF;font-size:15px;line-height:1.6;">
+              <p style="margin:0 0 12px;">¡Hola! Muchas gracias por respondernos.</p>
+              <p style="margin:0 0 12px;color:#dbeafe;">
+                Acabamos de recibir tu mensaje de <strong>{empresa}</strong> y nuestro equipo de proyectos ya lo está revisando para darte respuesta hoy mismo.
+              </p>
+              <p style="margin:0 0 16px;color:#dbeafe;">
+                Si deseas adelantarnos algún listado de unidades, planos o medidas directamente por WhatsApp, estamos disponibles en el <strong>+1 (809) 568-6663</strong>.
+              </p>
+              <p style="margin:0;color:#8BA4C2;font-size:13px;">
+                Un cordial saludo,<br>
+                <strong style="color:#F0F6FF;">Equipo de Proyectos · Los Crafters SRL</strong><br>
+                📞 Teléfono y WhatsApp: +1 (809) 568-6663
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>"""
 
 
 def attach_inline_images(msg_root: MIMEMultipart):
@@ -287,6 +337,15 @@ def create_mime_message(smtp_user: str, to_email: str, subject: str, html: str, 
         attach_inline_images(msg_root)
 
     return msg_root
+
+
+def log_sent_email(empresa: str, correo: str, nicho: str, subject: str, status: str = "ENVIADO"):
+    file_exists = LOG_CSV_PATH.exists()
+    with open(LOG_CSV_PATH, "a", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        if not file_exists:
+            writer.writerow(["fecha_hora", "empresa", "correo", "nicho", "asunto", "estado"])
+        writer.writerow([datetime.now().strftime("%Y-%m-%d %H:%M:%S"), empresa, correo, nicho, subject, status])
 
 
 def send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, to_email, subject, html, include_images=True):
@@ -334,14 +393,87 @@ def check_inbox(imap_host, smtp_user, smtp_pass, limit=10):
     mail.logout()
 
 
+def audit_crm_inbox(imap_host, smtp_host, smtp_port, smtp_user, smtp_pass, csv_path: Path, auto_reply: bool = False):
+    """Revisa por IMAP quién respondió de la lista de prospectos, si hubo rebotes, y envía acuse automático si se solicita."""
+    prospects = {}
+    if csv_path.exists():
+        with open(csv_path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                em = row.get("correo", "").strip().lower()
+                if em:
+                    prospects[em] = row.get("empresa", "su empresa").strip()
+
+    already_replied = set()
+    if AUTO_REPLY_LOG.exists():
+        already_replied = set(AUTO_REPLY_LOG.read_text(encoding="utf-8").splitlines())
+
+    mail = imaplib.IMAP4_SSL(imap_host, ssl_context=get_ssl_context())
+    mail.login(smtp_user, smtp_pass)
+    mail.select("INBOX")
+    status, messages = mail.search(None, "ALL")
+    if status != "OK" or not messages[0]:
+        print("Bandeja vacía.")
+        return
+
+    ids = messages[0].split()[-80:][::-1]
+    replies_found = []
+    bounces_found = []
+    clicks_found = []
+
+    for num in ids:
+        res, msg_data = mail.fetch(num, "(RFC822.HEADER)")
+        for response_part in msg_data:
+            if not isinstance(response_part, tuple):
+                continue
+            msg = email.message_from_bytes(response_part[1])
+            subj = decode_mime_words(msg.get("Subject", ""))
+            sender = decode_mime_words(msg.get("From", ""))
+            sender_lower = sender.lower()
+            date = msg.get("Date", "")
+
+            if "[clic en correo]" in subj.lower():
+                clicks_found.append((subj, date))
+            elif "mailer-daemon" in sender_lower or "delivery status" in subj.lower() or "undeliverable" in subj.lower():
+                bounces_found.append((sender, subj, date))
+            else:
+                for p_email, p_emp in prospects.items():
+                    if p_email in sender_lower:
+                        replies_found.append((p_emp, p_email, subj, date))
+                        if auto_reply and p_email not in already_replied:
+                            reply_subj = subj if subj.lower().startswith("re:") else f"Re: {subj}"
+                            ack_html = build_auto_reply_html(p_emp)
+                            send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, p_email, reply_subj, ack_html, include_images=False)
+                            already_replied.add(p_email)
+                            with open(AUTO_REPLY_LOG, "a", encoding="utf-8") as af:
+                                af.write(p_email + "\n")
+                            print(f"🤖 Auto-respuesta inmediata enviada a {p_emp} (<{p_email}>)")
+
+    mail.logout()
+
+    print("📊 REPORTE CRM DE CAMPAÑA B2B — LOS CRAFTERS SRL")
+    print("=" * 68)
+    print(f"• Prospectos monitoreados en base de datos: {len(prospects)}")
+    print(f"• Clics hacia el portafolio detectados:     {len(clicks_found)}")
+    for c_subj, c_date in clicks_found[:10]:
+        print(f"   🔔 {c_subj} ({c_date})")
+    print(f"• Respuestas directas de constructoras:     {len(replies_found)}")
+    for emp, em, s, d in replies_found:
+        print(f"   💬 {emp} (<{em}>) — '{s}' ({d})")
+    print(f"• Rebotes / Correos no entregados:          {len(bounces_found)}")
+    for b_s, b_subj, b_d in bounces_found[:5]:
+        print(f"   ⚠️ {b_subj} ({b_d})")
+
+
 def main():
     load_dotenv()
-    parser = argparse.ArgumentParser(description="Motor de Email Marketing B2B e Inbox — Los Crafters SRL")
+    parser = argparse.ArgumentParser(description="Motor de Email Marketing B2B e Inbox CRM — Los Crafters SRL")
     parser.add_argument("--preview", action="store_true", help="Genera archivo HTML de vista previa sin enviar correo")
     parser.add_argument("--test", action="store_true", help="Envía un correo real de prueba a info@loscrafters.net")
     parser.add_argument("--send-one", action="store_true", help="Envía un correo individual personalizado")
     parser.add_argument("--send", action="store_true", help="Envía los correos de la lista CSV por SMTP")
     parser.add_argument("--inbox", action="store_true", help="Lista los últimos correos recibidos en info@loscrafters.net")
+    parser.add_argument("--crm", action="store_true", help="Audita clics, respuestas de prospectos y rebotes en el inbox")
+    parser.add_argument("--auto-reply", action="store_true", help="Con --crm, responde automáticamente con acuse cálido a los prospectos que contesten")
     parser.add_argument("--limit", type=int, default=8, help="Cantidad de correos a mostrar con --inbox")
     parser.add_argument("--to", default="", help="Correo destino para --send-one o --test")
     parser.add_argument("--nombre", default="Equipo de Proyectos", help="Nombre del contacto")
@@ -362,6 +494,10 @@ def main():
         check_inbox(imap_host, smtp_user, smtp_pass, args.limit)
         return
 
+    if args.crm:
+        audit_crm_inbox(imap_host, smtp_host, smtp_port, smtp_user, smtp_pass, Path(args.csv), auto_reply=args.auto_reply)
+        return
+
     tpl_info = TEMPLATES.get(args.nicho, TEMPLATES["residencial_punta_cana"])
     inc_imgs = bool(tpl_info.get("show_gallery", True))
 
@@ -379,6 +515,7 @@ def main():
             return
         subject, html = build_html_email(args.nombre, args.empresa, args.nicho, args.servicio, args.zona, use_cid=True)
         send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, args.to, subject, html, include_images=inc_imgs)
+        log_sent_email(args.empresa, args.to, args.nicho, subject, "ENVIADO_INDIVIDUAL")
         print(f"✅ Correo enviado exitosamente a {args.nombre} ({args.empresa}) <{args.to}>!")
         return
 
@@ -417,8 +554,9 @@ def main():
                 msg_root = create_mime_message(smtp_user, email_to, subject, html, include_images=row_imgs)
 
                 server.sendmail(smtp_user, email_to, msg_root.as_string())
+                log_sent_email(empresa, email_to, nicho, subject, "ENVIADO_CAMPANA")
                 print(f"📨 Enviado a {nombre} ({empresa}) <{email_to}> [{nicho}]")
-                time.sleep(4)
+                time.sleep(5)
 
 
 if __name__ == "__main__":

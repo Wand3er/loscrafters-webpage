@@ -2031,6 +2031,35 @@ document.querySelectorAll('a[href*="drive.google.com"]').forEach(link => {
   });
 });
 
+// Detección en tiempo real cuando un prospecto B2B hace clic desde la campaña de Email
+(function detectEmailCampaignClick() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('utm_source');
+    const empresa = params.get('empresa');
+    if (source === 'email_b2b' && empresa && !sessionStorage.getItem('crafters_b2b_tracked_' + empresa)) {
+      sessionStorage.setItem('crafters_b2b_tracked_' + empresa, '1');
+      trackCraftersEvent('email_b2b_click', {
+        company_name: empresa,
+        campaign: params.get('utm_campaign') || 'senalizacion_proyectos'
+      });
+      fetch('https://formsubmit.co/ajax/info@loscrafters.net', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `🔔 [CLIC EN CORREO] ${empresa} está viendo el portafolio web`,
+          _template: 'table',
+          _captcha: 'false',
+          evento: 'Clic en campaña de Email Marketing B2B',
+          empresa_prospecto: empresa,
+          campana: params.get('utm_campaign') || 'senalizacion_proyectos',
+          fecha_hora: new Date().toLocaleString('es-DO')
+        })
+      }).catch(() => {});
+    }
+  } catch (e) {}
+})();
+
 // ═══════════════════════════════════════
 // LIGHTBOX
 // ═══════════════════════════════════════
