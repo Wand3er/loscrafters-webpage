@@ -44,7 +44,7 @@ IMAGES_DIR = ROOT_DIR / "assets" / "images"
 SCRIPTS_DIR = Path(__file__).resolve().parent
 LOG_CSV_PATH = SCRIPTS_DIR / "campana_log.csv"
 AUTO_REPLY_LOG = SCRIPTS_DIR / "auto_replies_sent.txt"
-NTFY_TOPIC = "loscrafters-vip-alertas-8095686663"
+NTFY_TOPIC = "loscrafters-alertas-8294109362"
 
 
 def notify_phone(title: str, message: str, priority: str = "high"):
@@ -58,6 +58,15 @@ def notify_phone(title: str, message: str, priority: str = "high"):
         urllib.request.urlopen(req, timeout=6, context=get_ssl_context())
     except Exception:
         pass
+    # Soporte opcional para WhatsApp directo al 829-410-9362 via CallMeBot si CALLMEBOT_APIKEY está en .env
+    wa_apikey = os.environ.get("CALLMEBOT_APIKEY", "").strip()
+    if wa_apikey:
+        try:
+            wa_text = urllib.parse.quote(f"*{title}*\n{message}")
+            wa_url = f"https://api.callmebot.com/whatsapp.php?phone=18294109362&text={wa_text}&apikey={wa_apikey}"
+            urllib.request.urlopen(wa_url, timeout=8, context=get_ssl_context())
+        except Exception:
+            pass
 
 
 def load_dotenv():
