@@ -2033,17 +2033,19 @@ document.querySelectorAll('a[href*="drive.google.com"]').forEach(link => {
 
 // Notificación Push instantánea al celular (ntfy.sh)
 function notifyCraftersPhone(title, message, priority) {
-  try {
-    fetch('https://ntfy.sh/loscrafters-alertas-8294109362', {
-      method: 'POST',
-      headers: {
-        'Title': title,
-        'Priority': priority || 'high',
-        'Tags': 'bell,briefcase'
-      },
-      body: message
-    }).catch(() => {});
-  } catch (e) {}
+  ['loscrafters-alertas-8294109362', 'loscrafters-vip-alertas-8095686663'].forEach(topic => {
+    try {
+      fetch('https://ntfy.sh/' + topic, {
+        method: 'POST',
+        headers: {
+          'Title': title,
+          'Priority': priority || '5',
+          'Tags': 'bell,briefcase'
+        },
+        body: message
+      }).catch(() => {});
+    } catch (e) {}
+  });
 }
 
 // Detección en tiempo real cuando un prospecto B2B hace clic desde la campaña de Email
