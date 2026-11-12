@@ -1,19 +1,28 @@
 #!/usr/bin/env python3
 """
-LOS CRAFTERS SRL — Motor Propio de Email Marketing B2B (Sin depender de Google Workspace Admin)
-Permite previsualizar y enviar campañas HTML con diseño corporativo de Los Crafters
-usando cualquier servidor SMTP (cPanel, Hostinger, Zoho, Gmail App Password, Brevo, Resend).
+LOS CRAFTERS SRL — Motor Completo de Email Marketing B2B e Inbox CRM (SMTP + IMAP)
+Conecta directamente con info@loscrafters.net vía Google Workspace (smtp.gmail.com / imap.gmail.com)
+leyendo automáticamente las credenciales desde el archivo .env en la raíz del proyecto.
 
-Uso rápido:
-  1. Generar vista previa HTML de los correos sin enviar:
-     python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --preview --nicho constructora
+Comandos disponibles:
+  1. Enviar correo de prueba real a info@loscrafters.net:
+     python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --test --nicho constructora
 
-  2. Enviar campaña real leyendo el archivo CSV de prospectos:
+  2. Enviar un correo personalizado individual:
+     python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --send-one --to cliente@empresa.com --nombre "Ing. Pérez" --empresa "Constructora Pérez" --nicho constructora
+
+  3. Enviar campaña masiva desde el CSV de prospectos:
      python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --send --csv .agents/skills/loscrafters-email-marketing/scripts/prospectos_b2b_rd.csv
+
+  4. Revisar últimos correos / leads recibidos en la bandeja de entrada (IMAP):
+     python3 .agents/skills/loscrafters-email-marketing/scripts/crafters_mailer.py --inbox --limit 10
 """
 
 import argparse
 import csv
+import email
+from email.header import decode_header
+import imaplib
 import os
 import smtplib
 import ssl
@@ -21,6 +30,20 @@ import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parents[4]
+ENV_PATH = ROOT_DIR / ".env"
+
+
+def load_dotenv():
+    if ENV_PATH.exists():
+        for line in ENV_PATH.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
 
 TEMPLATES = {
     "constructora": {
@@ -150,16 +173,107 @@ def build_html_email(nombre: str, empresa: str, nicho: str, servicio: str = "Let
     return subject, html
 
 
+def get_ssl_context():
+    cafile = "/etc/ssl/cert.pem" if Path("/etc/ssl/cert.pem").exists() else None
+    return ssl.create_default_context(cafile=cafile)
+
+
+def send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, to_email, subject, html):
+    context = get_ssl_context()
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = f"Los Crafters SRL <{smtp_user}>"
+    msg["To"] = to_email
+    msg["Reply-To"] = smtp_user
+    msg.attach(MIMEText(html, "html", "utf-8"))
+
+    with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
+        server.login(smtp_user, smtp_pass)
+        server.sendmail(smtp_user, to_email, msg.as_string())
+
+
+def decode_mime_words(s):
+    if not s:
+        return ""
+    decoded = decode_header(s)
+    parts = []
+    for content, charset in decoded:
+        if isinstance(content, bytes):
+            parts.append(content.decode(charset or "utf-8", errors="replace"))
+        else:
+            parts.append(str(content))
+    return "".join(parts)
+
+
+def check_inbox(imap_host, smtp_user, smtp_pass, limit=10):
+    mail = imaplib.IMAP4_SSL(imap_host, ssl_context=get_ssl_context())
+    mail.login(smtp_user, smtp_pass)
+    mail.select("INBOX")
+    status, messages = mail.search(None, "ALL")
+    if status != "OK" or not messages[0]:
+        print("Bandeja de entrada vacía.")
+        return
+    ids = messages[0].split()
+    recent_ids = ids[-limit:][::-1]
+    print(f"📬 Últimos {len(recent_ids)} correos en {smtp_user}:\n" + "-" * 70)
+    for num in recent_ids:
+        res, msg_data = mail.fetch(num, "(RFC822.HEADER)")
+        for response_part in msg_data:
+            if isinstance(response_part, tuple):
+                msg = email.message_from_bytes(response_part[1])
+                subj = decode_mime_words(msg.get("Subject", "(Sin asunto)"))
+                sender = decode_mime_words(msg.get("From", ""))
+                date = msg.get("Date", "")
+                print(f"• De: {sender}\n  Asunto: {subj}\n  Fecha: {date}\n")
+    mail.logout()
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Motor de Email Marketing B2B — Los Crafters SRL")
+    load_dotenv()
+    parser = argparse.ArgumentParser(description="Motor de Email Marketing B2B e Inbox — Los Crafters SRL")
     parser.add_argument("--preview", action="store_true", help="Genera archivo HTML de vista previa sin enviar correo")
+    parser.add_argument("--test", action="store_true", help="Envía un correo real de prueba a info@loscrafters.net")
+    parser.add_argument("--send-one", action="store_true", help="Envía un correo individual personalizado")
     parser.add_argument("--send", action="store_true", help="Envía los correos de la lista CSV por SMTP")
+    parser.add_argument("--inbox", action="store_true", help="Lista los últimos correos recibidos en info@loscrafters.net")
+    parser.add_argument("--limit", type=int, default=8, help="Cantidad de correos a mostrar con --inbox")
+    parser.add_argument("--to", default="", help="Correo destino para --send-one o --test")
+    parser.add_argument("--nombre", default="Ing. Carlos Méndez", help="Nombre del contacto")
+    parser.add_argument("--empresa", default="Constructora del Caribe SRL", help="Nombre de la empresa")
+    parser.add_argument("--servicio", default="Letreros Corpóreos 3D y Señalización", help="Servicio")
     parser.add_argument("--nicho", default="constructora", choices=list(TEMPLATES.keys()), help="Plantilla de nicho a usar")
-    parser.add_argument("--csv", default=".agents/skills/loscrafters-email-marketing/scripts/prospectos_b2b_rd.csv", help="Ruta al archivo CSV de prospectos")
+    parser.add_argument("--csv", default=str(ROOT_DIR / ".agents/skills/loscrafters-email-marketing/scripts/prospectos_b2b_rd.csv"), help="Ruta al archivo CSV de prospectos")
     args = parser.parse_args()
 
+    smtp_host = os.environ.get("CRAFTERS_SMTP_HOST", "smtp.gmail.com")
+    smtp_port = int(os.environ.get("CRAFTERS_SMTP_PORT", "465"))
+    imap_host = os.environ.get("CRAFTERS_IMAP_HOST", "imap.gmail.com")
+    smtp_user = os.environ.get("CRAFTERS_SMTP_USER", "info@loscrafters.net")
+    smtp_pass = os.environ.get("CRAFTERS_SMTP_PASS", "").replace(" ", "")
+
+    if args.inbox:
+        check_inbox(imap_host, smtp_user, smtp_pass, args.limit)
+        return
+
+    if args.test:
+        target = args.to or smtp_user
+        subject, html = build_html_email(args.nombre, args.empresa, args.nicho, args.servicio)
+        send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, target, f"[PRUEBA CAMPAÑA] {subject}", html)
+        print(f"✅ Correo de prueba enviado exitosamente desde {smtp_user} hacia {target}!")
+        print(f"   Asunto: [PRUEBA CAMPAÑA] {subject}")
+        return
+
+    if args.send_one:
+        if not args.to:
+            print("❌ Debes indicar --to correo@destino.com")
+            return
+        subject, html = build_html_email(args.nombre, args.empresa, args.nicho, args.servicio)
+        send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, args.to, subject, html)
+        print(f"✅ Correo enviado exitosamente a {args.nombre} ({args.empresa}) <{args.to}>!")
+        return
+
     if args.preview or not args.send:
-        subject, html = build_html_email("Ing. Carlos Méndez", "Constructora del Caribe SRL", args.nicho)
+        subject, html = build_html_email(args.nombre, args.empresa, args.nicho, args.servicio)
         out_path = Path(f"/tmp/preview_email_{args.nicho}.html")
         out_path.write_text(html, encoding="utf-8")
         print(f"✅ Vista previa generada con éxito:")
@@ -167,32 +281,19 @@ def main():
         print(f"   Archivo: {out_path}")
         return
 
-    smtp_host = os.environ.get("CRAFTERS_SMTP_HOST", "")
-    smtp_port = int(os.environ.get("CRAFTERS_SMTP_PORT", "465"))
-    smtp_user = os.environ.get("CRAFTERS_SMTP_USER", "info@loscrafters.net")
-    smtp_pass = os.environ.get("CRAFTERS_SMTP_PASS", "")
-
-    if not smtp_host or not smtp_pass:
-        print("⚠️ Para enviar correos reales, configura tus credenciales SMTP en variables de entorno o en tu archivo .env:")
-        print("   CRAFTERS_SMTP_HOST=mail.loscrafters.net (o smtp.gmail.com / smtp-relay.brevo.com)")
-        print("   CRAFTERS_SMTP_PORT=465")
-        print("   CRAFTERS_SMTP_USER=info@loscrafters.net")
-        print("   CRAFTERS_SMTP_PASS=tu_clave_smtp")
-        return
-
     csv_path = Path(args.csv)
     if not csv_path.exists():
         print(f"❌ No se encontró el archivo CSV: {csv_path}")
         return
 
-    context = ssl.create_default_context()
+    context = get_ssl_context()
     with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
         server.login(smtp_user, smtp_pass)
         with open(csv_path, newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 email_to = row.get("correo", "").strip()
-                if not email_to or "@" not in email_to:
+                if not email_to or "@" not in email_to or "ejemplo-" in email_to:
                     continue
                 nombre = row.get("nombre", "Estimado/a").strip()
                 empresa = row.get("empresa", "su empresa").strip()
@@ -204,6 +305,7 @@ def main():
                 msg["Subject"] = subject
                 msg["From"] = f"Los Crafters SRL <{smtp_user}>"
                 msg["To"] = email_to
+                msg["Reply-To"] = smtp_user
                 msg.attach(MIMEText(html, "html", "utf-8"))
 
                 server.sendmail(smtp_user, email_to, msg.as_string())
