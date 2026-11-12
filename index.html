@@ -1489,15 +1489,46 @@ function trackCraftersEvent(eventName, params) {
 }
 
 function sendCraftersLeadWebhook(payload) {
-  if (!window.LOSCRAFTERS_WEBHOOK_URL) return;
+  const enriched = Object.assign({
+    timestamp: new Date().toISOString(),
+    source: window.location.href
+  }, payload);
+
+  // 1. Envío automático por correo a info@loscrafters.net sin necesidad de servidor ni Google Admin
   try {
-    fetch(window.LOSCRAFTERS_WEBHOOK_URL, {
+    fetch('https://formsubmit.co/ajax/info@loscrafters.net', {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(Object.assign({ timestamp: new Date().toISOString(), source: window.location.href }, payload))
-    });
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: 'Nueva Cotización Web — ' + (payload.empresa || payload.nombre || 'Cliente') + ' (' + (payload.servicio || 'General') + ')',
+        _template: 'table',
+        _captcha: 'false',
+        Formulario: payload.form_type || 'Web',
+        Nombre: payload.nombre || '-',
+        Empresa: payload.empresa || '-',
+        RNC: payload.rnc || '-',
+        Correo: payload.correo || '-',
+        Servicio: payload.servicio || '-',
+        Proyecto: payload.proyecto || '-',
+        Fecha: new Date().toLocaleString('es-DO')
+      })
+    }).catch(function() {});
   } catch (err) {}
+
+  // 2. Webhook adicional opcional (Google Sheets / Make / n8n)
+  if (window.LOSCRAFTERS_WEBHOOK_URL) {
+    try {
+      fetch(window.LOSCRAFTERS_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(enriched)
+      }).catch(function() {});
+    } catch (err) {}
+  }
 }
 
 // ═══════════════════════════════════════
