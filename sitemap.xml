@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.loscrafters.net/</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.loscrafters.net/assets/images/letrero-af-school.webp</image:loc>
+      <image:title>Letreros Corpóreos 3D en Santo Domingo — Los Crafters</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.loscrafters.net/assets/images/letrero-elenma-construcciones.webp</image:loc>
+      <image:title>Letreros y Rotulación Comercial — Los Crafters</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.loscrafters.net/assets/images/rotulacion-mural-interior.webp</image:loc>
+      <image:title>Rotulación Mural en Vinil de Gran Formato — Los Crafters</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.loscrafters.net/assets/images/PHOTO_2023_12_30_11_24_55.webp</image:loc>
+      <image:title>Branding y Rotulación Vehicular de Flotillas en RD — Los Crafters</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.loscrafters.net/assets/images/IMG_7791.webp</image:loc>
+      <image:title>Señalización Corporativa y Arquitectónica — Los Crafters</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.loscrafters.net/assets/images/IMG_5039.webp</image:loc>
+      <image:title>Exhibidores y Displays Punto de Venta — Los Crafters</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.loscrafters.net/assets/images/IMG_4618.webp</image:loc>
+      <image:title>Fachadas Comerciales en ACM y Cajas de Luz — Los Crafters</image:title>
+    </image:image>
+  </url>
+</urlset>
