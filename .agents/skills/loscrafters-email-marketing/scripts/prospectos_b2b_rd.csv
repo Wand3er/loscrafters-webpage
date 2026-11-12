@@ -1,4 +1,11 @@
-nombre,empresa,correo,nicho,servicio,telefono,notas
-Ing. Roberto Sanchez,Constructora Ejemplo RD,compras@ejemplo-constructora.do,constructora,Letreros 3D y Señalización,809-555-0101,Torre en Piantini en etapa de terminación
-Lic. Laura Gomez,Colegio Bilingüe Santo Domingo,direccion@ejemplo-colegio.edu.do,colegio,Murales en Vinil y Escudo 3D,809-555-0102,Renovación de áreas comunes
-Lic. Miguel Peña,Distribuidora Nacional SRL,logistica@ejemplo-distribuidora.do,flotilla,Branding Vehicular de Flotilla,809-555-0103,Flota de 12 camiones de reparto
+nombre,empresa,correo,nicho,zona,servicio,telefono,notas
+Equipo de Proyectos y Compras,Tralles Developers Group,ventas@tralles.do,residencial_punta_cana,Bávaro - Punta Cana y Santo Domingo,Señalización Residencial y Numeración 3D,+1 (849) 912-8446,Desarrolladores de proyectos residenciales modernos en Punta Cana y SD
+Dirección de Proyectos,Morada Development Group,info@morada.do,residencial_punta_cana,Punta Cana y Santo Domingo,Señalética para Villas y Suites (Atalía / DAOS),+1 (809) 466-3026,Desarrollos residenciales y urbanísticos en Punta Cana y SD
+Departamento de Ingeniería y Compras,Grupo Dupla,Info@grupodupla.com,residencial_punta_cana,Punta Cana y Santo Domingo,Señalización Arquitectónica y Letreros 3D,+1 (809) 959-0333,Más de 25 años desarrollando proyectos turísticos y residenciales
+Equipo Comercial y de Obra,Realstar Group (Luxury & Investments),comercial@realstar.com.do,residencial_punta_cana,Punta Cana - Bávaro y Santo Domingo,Señalización de Villas Townhouses y Apartamentos,+1 (849) 503-7827,Construcción de villas townhouses y torres residenciales
+Dirección de Arquitectura y Obra,Apilo Construcciones,info@apiloconstrucciones.com,residencial_punta_cana,Cap Cana - Punta Cana y Santo Domingo,Numeración 3D y Señalética de Villas,+1 (829) 277-3462,Gestión de proyectos y construcción de obras residenciales y villas
+Gerencia de Proyectos,Punta Cana Realtors & Developers (Delgado Simmons),info@puntacanarealtor.com,residencial_punta_cana,Bávaro y Punta Cana,Señalización de Condominios y Residenciales,+1 (809) 285-4219,Construcción y mantenimiento de proyectos residenciales en Punta Cana
+Dirección de Ingeniería,Construfuturo Development Group,admconstrufuturo@gmail.com,residencial_punta_cana,Verón - Bávaro - Punta Cana,Señalética para Proyectos Habitacionales,+1 (809) 413-1280,Obras civiles y proyectos de apartamentos en Bávaro y Punta Cana
+Equipo de Desarrollo Residencial,Propiedades Vistacana,info@propiedadesvistacana.com,residencial_punta_cana,Vistacana - Punta Cana,Señalización de Villas y Edificios en Vistacana,+1 (829) 626-3900,Proyectos residenciales dentro de la comunidad Vistacana
+Gerencia de Operaciones,Punta Cana Solutions,Info@puntacanasolutions.com,residencial_punta_cana,Vista Cana Business Center - Punta Cana,Señalización Corporativa y Residencial,+1 (809) 385-3735,Desarrollos y gestión en Boulevard Turístico del Este / Vista Cana
+Dirección Comercial,Vive Punta Cana,info@vivepuntacana.com,residencial_punta_cana,Bávaro - Punta Cana,Señalización de Proyectos Inmobiliarios,+1 (829) 626-3900,Proyectos residenciales y villas en Punta Cana
