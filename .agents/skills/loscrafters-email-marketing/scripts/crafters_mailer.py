@@ -78,17 +78,18 @@ def get_ssl_context():
 
 TEMPLATES = {
     "residencial_punta_cana": {
-        "subject": "Señalización para los proyectos de {empresa}",
+        "subject": "Señalización y letreros 3D para los proyectos de {empresa}",
         "eyebrow": "LOS CRAFTERS",
         "headline": "Señalización a la altura de tus desarrollos.",
         "intro": (
-            "En <strong>Los Crafters</strong> acompañamos a constructoras y desarrolladores a vestir sus edificios "
-            "y residenciales con señalización moderna, limpia y hecha para durar."
+            "En <strong>Los Crafters</strong> acompañamos a constructoras y desarrolladores a vestir sus proyectos "
+            "—desde el letrero principal de entrada y áreas comerciales hasta la numeración de cada unidad— "
+            "con acabados modernos, limpios y hechos para durar."
         ),
         "show_gallery": True,
         "bullets": [
-            "<strong>Numeración 3D en relieve:</strong> Acabados limpios y resistentes al sol, humedad y salitre.",
-            "<strong>Señalética de edificios y áreas comunes:</strong> Niveles, parqueos, lobbies, calles e indicadores.",
+            "<strong>Entradas y fachadas:</strong> Letras corpóreas 3D y tótems en acrílico, ACM y metales con o sin luz LED.",
+            "<strong>Numeración y señalética:</strong> Placas en relieve 3D para apartamentos, villas, niveles, parqueos y áreas comunes.",
             "<strong>Producción e instalación a tiempo:</strong> Taller propio para fabricar en serie y cumplir con tu fecha de entrega."
         ],
         "cta_note": (
@@ -188,12 +189,12 @@ def build_html_email(
 
     if use_cid:
         img_sundistrict = "cid:sun_district"
-        img_closeup = "cid:pc_detalle"
-        img_basalto = "cid:via_basalto"
+        img_closeup = "cid:num_02"
+        img_onestop = "cid:onestop_3d"
     else:
         img_sundistrict = "https://www.loscrafters.net/assets/images/email-sun-district.jpg"
-        img_closeup = "https://www.loscrafters.net/assets/images/email-punta-cana-2.jpg"
-        img_basalto = "https://www.loscrafters.net/assets/images/email-via-basalto.jpg"
+        img_closeup = "https://www.loscrafters.net/assets/images/email-numeracion-02.jpg"
+        img_onestop = "https://www.loscrafters.net/assets/images/email-letrero-3d-onestop.jpg"
 
     gallery_html = ""
     if tpl.get("show_gallery", True):
@@ -208,22 +209,22 @@ def build_html_email(
                   <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
                     <img src="{img_sundistrict}" alt="Letrero Monumental 3D en Entrada de Proyecto Residencial Sun District" width="502" style="width:100%;max-width:502px;height:auto;border-radius:6px;border:1px solid #3265A6;display:block;">
                   </a>
-                  <div style="font-size:12px;color:#8BA4C2;margin-top:6px;">Identidad y letrero corpóreo 3D para entrada principal de proyecto residencial</div>
+                  <div style="font-size:12px;color:#8BA4C2;margin-top:6px;">Identidad y letrero corpóreo 3D para entrada principal de proyecto</div>
                 </div>
-                <!-- 2 imágenes en simetría: Close-up 108 + Señalización Vial -->
+                <!-- 2 imágenes en simetría: Numeración 02 + Letras 3D -->
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
                   <tr>
                     <td width="49%" valign="top" style="padding-right:5px;">
                       <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
                         <img src="{img_closeup}" alt="Detalle de Numeración 3D en Relieve" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
                       </a>
-                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Numeración 3D en relieve (acrílico y aluminio)</div>
+                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Numeración 3D en relieve para unidades</div>
                     </td>
                     <td width="49%" valign="top" style="padding-left:5px;">
                       <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
-                        <img src="{img_basalto}" alt="Señalización Vial y de Proyectos" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
+                        <img src="{img_onestop}" alt="Letras Corpóreas 3D para Fachadas y Locales" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
                       </a>
-                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Señalización vial e interna de proyectos</div>
+                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Letras corpóreas 3D para fachadas y locales</div>
                     </td>
                   </tr>
                 </table>
@@ -327,8 +328,8 @@ def build_auto_reply_html(empresa: str) -> str:
 def attach_inline_images(msg_root: MIMEMultipart):
     inline_map = {
         "sun_district": IMAGES_DIR / "email-sun-district.jpg",
-        "pc_detalle": IMAGES_DIR / "email-punta-cana-2.jpg",
-        "via_basalto": IMAGES_DIR / "email-via-basalto.jpg",
+        "num_02": IMAGES_DIR / "email-numeracion-02.jpg",
+        "onestop_3d": IMAGES_DIR / "email-letrero-3d-onestop.jpg",
     }
     for cid, img_path in inline_map.items():
         if img_path.exists():
