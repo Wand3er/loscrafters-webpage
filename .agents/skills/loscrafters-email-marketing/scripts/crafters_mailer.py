@@ -133,20 +133,24 @@ TEMPLATES = {
         "cta_note": "Si planean renovar algún área del plantel, escríbenos para coordinar un levantamiento sin costo."
     },
     "flotilla": {
-        "subject": "Rotulación vehicular para la flota de {empresa}",
+        "subject": "Rotulación para los vehículos y flotilla de {empresa}",
         "eyebrow": "LOS CRAFTERS",
         "headline": "Tu marca en movimiento todos los días.",
         "intro": (
-            "Convertimos los vehículos comerciales de <strong>{empresa}</strong> en publicidad activa "
-            "con materiales que no se levantan ni pierden color con el sol."
+            "En <strong>Los Crafters</strong> acompañamos a empresas de distribución y servicios a convertir "
+            "sus camiones, furgonetas y flotillas en publicidad activa, con materiales hechos para aguantar "
+            "el sol diario y el lavado frecuente sin despegarse ni perder color."
         ),
-        "show_gallery": False,
+        "show_gallery": True,
         "bullets": [
-            "<strong>Vinil automotriz con protección UV:</strong> Larga vida útil y acabado impecable.",
-            "<strong>Camiones, furgonetas y flotas:</strong> Rotulación completa, parcial o microperforado.",
-            "<strong>Instalación ágil:</strong> Nos adaptamos a tu horario para no frenar tus rutas."
+            "<strong>Vinil grado automotriz + laminado UV:</strong> No se cuartea, no se levanta ni pierde intensidad con el sol.",
+            "<strong>Camiones, furgonetas y camionetas:</strong> Rotulación completa, parcial, en corte o microperforado.",
+            "<strong>Instalación ágil sin frenar tu operación:</strong> Coordinamos por unidades o en fin de semana para que tus rutas no paren."
         ],
-        "cta_note": "¿Cuántas unidades manejan actualmente? Respóndenos y te cotizamos hoy mismo."
+        "cta_note": (
+            "¿Tienen unidades nuevas por rotular o vehículos cuya imagen quieran renovar? "
+            "Escríbenos por aquí o por WhatsApp y con gusto les preparamos una propuesta."
+        )
     },
     "seguimiento": {
         "subject": "Re: Señalización para los proyectos de {empresa}",
@@ -198,7 +202,31 @@ def build_html_email(
 
     gallery_html = ""
     if tpl.get("show_gallery", True):
-        gallery_html = f"""
+        if nicho == "flotilla":
+            img_camion = "cid:flota_camion" if use_cid else "https://www.loscrafters.net/assets/images/email-flota-camion.jpg"
+            img_van = "cid:flota_van" if use_cid else "https://www.loscrafters.net/assets/images/email-flota-furgoneta.jpg"
+            gallery_html = f"""
+              <!-- Galería de Branding Vehicular -->
+              <div style="margin:20px 0;background-color:#101929;border:1px solid #1C2E47;border-radius:8px;padding:16px;">
+                <div style="font-size:11px;font-weight:800;letter-spacing:1.4px;color:#5BA3F5;text-transform:uppercase;margin-bottom:10px;">
+                  TRABAJOS DE BRANDING VEHICULAR REALIZADOS
+                </div>
+                <div style="margin-bottom:12px;">
+                  <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
+                    <img src="{img_camion}" alt="Rotulación Integral de Camión Furgón Comercial" width="502" style="width:100%;max-width:502px;height:auto;border-radius:6px;border:1px solid #3265A6;display:block;">
+                  </a>
+                  <div style="font-size:12px;color:#8BA4C2;margin-top:6px;">Rotulación integral de camiones y furgones con laminado protector UV</div>
+                </div>
+                <div style="margin-top:10px;">
+                  <a href="{tracked_portfolio_url}" target="_blank" style="text-decoration:none;">
+                    <img src="{img_van}" alt="Rotulación de Furgonetas y Vehículos de Reparto" width="502" style="width:100%;max-width:502px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
+                  </a>
+                  <div style="font-size:12px;color:#8BA4C2;margin-top:6px;">Rotulación en vinil de alta durabilidad para furgonetas de reparto y servicio técnico</div>
+                </div>
+              </div>
+            """
+        else:
+            gallery_html = f"""
               <!-- Galería de Trabajos Reales -->
               <div style="margin:20px 0;background-color:#101929;border:1px solid #1C2E47;border-radius:8px;padding:16px;">
                 <div style="font-size:11px;font-weight:800;letter-spacing:1.4px;color:#5BA3F5;text-transform:uppercase;margin-bottom:10px;">
@@ -325,13 +353,17 @@ def build_auto_reply_html(empresa: str) -> str:
 </html>"""
 
 
-def attach_inline_images(msg_root: MIMEMultipart):
+def attach_inline_images(msg_root: MIMEMultipart, html: str = ""):
     inline_map = {
         "sun_district": IMAGES_DIR / "email-sun-district.jpg",
         "num_02": IMAGES_DIR / "email-numeracion-02.jpg",
         "onestop_3d": IMAGES_DIR / "email-letrero-3d-onestop.jpg",
+        "flota_camion": IMAGES_DIR / "email-flota-camion.jpg",
+        "flota_van": IMAGES_DIR / "email-flota-furgoneta.jpg",
     }
     for cid, img_path in inline_map.items():
+        if html and f"cid:{cid}" not in html:
+            continue
         if img_path.exists():
             img_part = MIMEImage(img_path.read_bytes(), _subtype="jpeg")
             img_part.add_header("Content-ID", f"<{cid}>")
@@ -351,7 +383,7 @@ def create_mime_message(smtp_user: str, to_email: str, subject: str, html: str, 
     msg_alt.attach(MIMEText(html, "html", "utf-8"))
 
     if include_images:
-        attach_inline_images(msg_root)
+        attach_inline_images(msg_root, html)
 
     return msg_root
 
