@@ -35,6 +35,7 @@ import smtplib
 import ssl
 import time
 import urllib.parse
+import urllib.request
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parents[4]
@@ -43,6 +44,20 @@ IMAGES_DIR = ROOT_DIR / "assets" / "images"
 SCRIPTS_DIR = Path(__file__).resolve().parent
 LOG_CSV_PATH = SCRIPTS_DIR / "campana_log.csv"
 AUTO_REPLY_LOG = SCRIPTS_DIR / "auto_replies_sent.txt"
+NTFY_TOPIC = "loscrafters-vip-alertas-8095686663"
+
+
+def notify_phone(title: str, message: str, priority: str = "high"):
+    try:
+        req = urllib.request.Request(
+            f"https://ntfy.sh/{NTFY_TOPIC}",
+            data=message.encode("utf-8"),
+            headers={"Title": title, "Priority": priority, "Tags": "incoming_envelope,fire"},
+            method="POST"
+        )
+        urllib.request.urlopen(req, timeout=6, context=get_ssl_context())
+    except Exception:
+        pass
 
 
 def load_dotenv():
@@ -442,14 +457,19 @@ def audit_crm_inbox(imap_host, smtp_host, smtp_port, smtp_user, smtp_pass, csv_p
                 for p_email, p_emp in prospects.items():
                     if p_email in sender_lower:
                         replies_found.append((p_emp, p_email, subj, date))
-                        if auto_reply and p_email not in already_replied:
-                            reply_subj = subj if subj.lower().startswith("re:") else f"Re: {subj}"
-                            ack_html = build_auto_reply_html(p_emp)
-                            send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, p_email, reply_subj, ack_html, include_images=False)
+                        if p_email not in already_replied:
+                            notify_phone(
+                                f"Respuesta B2B: {p_emp}",
+                                f"{p_emp} ({p_email}) acaba de responder al correo: '{subj}'"
+                            )
+                            if auto_reply:
+                                reply_subj = subj if subj.lower().startswith("re:") else f"Re: {subj}"
+                                ack_html = build_auto_reply_html(p_emp)
+                                send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, p_email, reply_subj, ack_html, include_images=False)
+                                print(f"🤖 Auto-respuesta inmediata enviada a {p_emp} (<{p_email}>)")
                             already_replied.add(p_email)
                             with open(AUTO_REPLY_LOG, "a", encoding="utf-8") as af:
                                 af.write(p_email + "\n")
-                            print(f"🤖 Auto-respuesta inmediata enviada a {p_emp} (<{p_email}>)")
 
     mail.logout()
 

@@ -2031,6 +2031,21 @@ document.querySelectorAll('a[href*="drive.google.com"]').forEach(link => {
   });
 });
 
+// Notificación Push instantánea al celular (ntfy.sh)
+function notifyCraftersPhone(title, message, priority) {
+  try {
+    fetch('https://ntfy.sh/loscrafters-vip-alertas-8095686663', {
+      method: 'POST',
+      headers: {
+        'Title': title,
+        'Priority': priority || 'high',
+        'Tags': 'bell,briefcase'
+      },
+      body: message
+    }).catch(() => {});
+  } catch (e) {}
+}
+
 // Detección en tiempo real cuando un prospecto B2B hace clic desde la campaña de Email
 (function detectEmailCampaignClick() {
   try {
@@ -2043,6 +2058,11 @@ document.querySelectorAll('a[href*="drive.google.com"]').forEach(link => {
         company_name: empresa,
         campaign: params.get('utm_campaign') || 'senalizacion_proyectos'
       });
+      notifyCraftersPhone(
+        `Clic en Correo B2B: ${empresa}`,
+        `${empresa} acaba de abrir tu portafolio en www.loscrafters.net desde el correo.`,
+        'high'
+      );
       fetch('https://formsubmit.co/ajax/info@loscrafters.net', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
