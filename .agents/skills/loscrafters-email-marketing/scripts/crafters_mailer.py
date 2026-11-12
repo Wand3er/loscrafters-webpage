@@ -154,13 +154,13 @@ def build_html_email(
     bullets_html = "".join(f'<li style="margin-bottom: 8px;">{b}</li>' for b in tpl["bullets"])
 
     if use_cid:
+        img_sundistrict = "cid:sun_district"
         img_closeup = "cid:pc_detalle"
         img_basalto = "cid:via_basalto"
-        img_libreria = "cid:libreria_sign"
     else:
+        img_sundistrict = "https://www.loscrafters.net/assets/images/email-sun-district.jpg"
         img_closeup = "https://www.loscrafters.net/assets/images/email-punta-cana-2.jpg"
         img_basalto = "https://www.loscrafters.net/assets/images/email-via-basalto.jpg"
-        img_libreria = "https://www.loscrafters.net/assets/images/email-libreria-senalizacion.jpg"
 
     gallery_html = ""
     if tpl.get("show_gallery", True):
@@ -168,29 +168,29 @@ def build_html_email(
               <!-- Galería de Trabajos Reales -->
               <div style="margin:20px 0;background-color:#101929;border:1px solid #1C2E47;border-radius:8px;padding:16px;">
                 <div style="font-size:11px;font-weight:800;letter-spacing:1.4px;color:#5BA3F5;text-transform:uppercase;margin-bottom:10px;">
-                  TRABAJOS REALIZADOS POR NUESTRO EQUIPO
+                  PROYECTOS Y SEÑALIZACIÓN REALIZADOS
                 </div>
-                <!-- Imagen principal (Close-up 108) -->
-                <div style="margin-bottom:10px;">
+                <!-- Imagen Principal: Entrada Sun District -->
+                <div style="margin-bottom:12px;">
                   <a href="https://www.loscrafters.net/#portafolio" target="_blank" style="text-decoration:none;">
-                    <img src="{img_closeup}" alt="Detalle de Numeración 3D en Relieve" width="502" style="width:100%;max-width:502px;height:auto;border-radius:6px;border:1px solid #3265A6;display:block;">
+                    <img src="{img_sundistrict}" alt="Letrero Monumental 3D en Entrada de Proyecto Residencial Sun District" width="502" style="width:100%;max-width:502px;height:auto;border-radius:6px;border:1px solid #3265A6;display:block;">
                   </a>
-                  <div style="font-size:12px;color:#8BA4C2;margin-top:6px;">Numeración residencial en relieve 3D (acrílico de alto brillo sobre aluminio cepillado)</div>
+                  <div style="font-size:12px;color:#8BA4C2;margin-top:6px;">Identidad y letrero corpóreo 3D para entrada principal de proyecto residencial</div>
                 </div>
-                <!-- 2 imágenes complementarias de señalización de la web -->
+                <!-- 2 imágenes en simetría: Close-up 108 + Señalización Vial -->
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
                   <tr>
                     <td width="49%" valign="top" style="padding-right:5px;">
                       <a href="https://www.loscrafters.net/#portafolio" target="_blank" style="text-decoration:none;">
-                        <img src="{img_basalto}" alt="Señalización Vial y de Proyectos" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
+                        <img src="{img_closeup}" alt="Detalle de Numeración 3D en Relieve" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
                       </a>
-                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Señalización exterior de proyectos</div>
+                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Numeración 3D en relieve (acrílico y aluminio)</div>
                     </td>
                     <td width="49%" valign="top" style="padding-left:5px;">
                       <a href="https://www.loscrafters.net/#portafolio" target="_blank" style="text-decoration:none;">
-                        <img src="{img_libreria}" alt="Señalética Arquitectónica" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
+                        <img src="{img_basalto}" alt="Señalización Vial y de Proyectos" width="246" style="width:100%;max-width:246px;height:auto;border-radius:6px;border:1px solid #1C2E47;display:block;">
                       </a>
-                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Señalética para áreas y edificios</div>
+                      <div style="font-size:11px;color:#8BA4C2;margin-top:5px;">Señalización vial e interna de proyectos</div>
                     </td>
                   </tr>
                 </table>
@@ -260,9 +260,9 @@ def build_html_email(
 
 def attach_inline_images(msg_root: MIMEMultipart):
     inline_map = {
+        "sun_district": IMAGES_DIR / "email-sun-district.jpg",
         "pc_detalle": IMAGES_DIR / "email-punta-cana-2.jpg",
         "via_basalto": IMAGES_DIR / "email-via-basalto.jpg",
-        "libreria_sign": IMAGES_DIR / "email-libreria-senalizacion.jpg",
     }
     for cid, img_path in inline_map.items():
         if img_path.exists():
