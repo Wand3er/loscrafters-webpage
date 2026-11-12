@@ -53,7 +53,7 @@ TEMPLATES = {
     "residencial_punta_cana": {
         "subject": "Señalización para los proyectos de {empresa}",
         "eyebrow": "LOS CRAFTERS",
-        "headline": "Detalles que hacen brillar la entrega de tus proyectos.",
+        "headline": "Señalización a la altura de tus desarrollos.",
         "intro": (
             "En <strong>Los Crafters</strong> acompañamos a constructoras y desarrolladores a vestir sus edificios "
             "y residenciales con señalización moderna, limpia y hecha para durar."
@@ -72,7 +72,7 @@ TEMPLATES = {
     "constructora": {
         "subject": "Señalización y letreros para proyectos de {empresa}",
         "eyebrow": "LOS CRAFTERS",
-        "headline": "Detalles que hacen brillar la entrega de tus proyectos.",
+        "headline": "Señalización a la altura de tus desarrollos.",
         "intro": (
             "En <strong>Los Crafters</strong> apoyamos a constructoras e ingenierías desde la señalización de obra "
             "hasta los detalles finales de entrega de cada edificio."
