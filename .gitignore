@@ -1,0 +1,11 @@
+.env
+.env.local
+data/*.db
+data/*.sqlite
+__pycache__/
+*.pyc
+.agents/skills/loscrafters-email-marketing/scripts/logs/
+.agents/skills/loscrafters-email-marketing/scripts/scheduled_jobs/
+.agents/skills/loscrafters-email-marketing/scripts/bounces_seen.txt
+.agents/skills/loscrafters-email-marketing/scripts/auto_replies_sent.txt
+.agents/skills/loscrafters-email-marketing/scripts/campana_log.csv

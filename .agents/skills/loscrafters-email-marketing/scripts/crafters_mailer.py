@@ -44,6 +44,24 @@ IMAGES_DIR = ROOT_DIR / "assets" / "images"
 SCRIPTS_DIR = Path(__file__).resolve().parent
 LOG_CSV_PATH = SCRIPTS_DIR / "campana_log.csv"
 AUTO_REPLY_LOG = SCRIPTS_DIR / "auto_replies_sent.txt"
+BOUNCES_SEEN_LOG = SCRIPTS_DIR / "bounces_seen.txt"
+PVC_CAMPAIGN_DIR = Path("/Users/wandermarte/Documents/REPOSITORIOS/loscrafters-video-studio/email-campaigns/pvc-letreros")
+ROTULACION_CAMPAIGN_DIR = Path("/Users/wandermarte/Documents/REPOSITORIOS/loscrafters-video-studio/email-campaigns/rotulacion-vehicular")
+CUSTOM_HTML_ASSETS = {
+    "pvc_letreros": {
+        "img/logo-lc.png": ("pvc_logo", PVC_CAMPAIGN_DIR / "img" / "logo-lc.png"),
+        "img/elenma-solo-hd.jpg": ("pvc_elenma", PVC_CAMPAIGN_DIR / "img" / "elenma-solo-hd.jpg"),
+        "img/boshi-pvc.jpg": ("pvc_boshi", PVC_CAMPAIGN_DIR / "img" / "boshi-pvc.jpg"),
+        "img/afschool-full.jpg": ("pvc_afschool", PVC_CAMPAIGN_DIR / "img" / "afschool-full.jpg"),
+        "img/onestop-pvc.jpg": ("pvc_onestop", PVC_CAMPAIGN_DIR / "img" / "onestop-pvc.jpg"),
+    },
+    "flotilla": {
+        "img/logo-lc.png": ("rot_logo", ROTULACION_CAMPAIGN_DIR / "img" / "logo-lc.png"),
+        "img/medlog-hero.jpg": ("rot_medlog", ROTULACION_CAMPAIGN_DIR / "img" / "medlog-hero.jpg"),
+        "img/retzy-camion.jpg": ("rot_retzy", ROTULACION_CAMPAIGN_DIR / "img" / "retzy-camion.jpg"),
+        "img/kuno-van.jpg": ("rot_kuno", ROTULACION_CAMPAIGN_DIR / "img" / "kuno-van.jpg"),
+    },
+}
 NTFY_TOPICS = ["loscrafters-alertas-8294109362", "loscrafters-vip-alertas-8095686663"]
 
 
@@ -150,7 +168,8 @@ TEMPLATES = {
         "cta_note": (
             "¿Tienen unidades nuevas por rotular o vehículos cuya imagen quieran renovar? "
             "Escríbenos por aquí o por WhatsApp y con gusto les preparamos una propuesta."
-        )
+        ),
+        "custom_html": ROTULACION_CAMPAIGN_DIR / "correo_rotulacion_b2b.html",
     },
     "seguimiento": {
         "subject": "Re: Señalización para los proyectos de {empresa}",
@@ -167,6 +186,16 @@ TEMPLATES = {
             "<strong>Facturación formal:</strong> Comprobante Fiscal (B01 / E-CF) y garantía de instalación."
         ],
         "cta_note": "¿Tienen algún edificio o residencial próximo a entrega donde podamos presentarles propuesta?"
+    },
+    "pvc_letreros": {
+        "subject": "Letreros en PVC para {empresa}",
+        "eyebrow": "LOS CRAFTERS",
+        "headline": "Letreros en PVC para tu negocio o institución",
+        "intro": "",
+        "show_gallery": True,
+        "bullets": [],
+        "cta_note": "",
+        "custom_html": PVC_CAMPAIGN_DIR / "correo_pvc_b2b.html",
     }
 }
 
@@ -181,13 +210,26 @@ def build_html_email(
 ) -> tuple[str, str]:
     tpl = TEMPLATES.get(nicho, TEMPLATES["residencial_punta_cana"])
     subject = tpl["subject"].format(nombre=nombre, empresa=empresa, servicio=servicio)
-    intro_html = tpl["intro"].format(nombre=nombre, empresa=empresa, servicio=servicio)
-    cta_note = tpl["cta_note"].format(nombre=nombre, empresa=empresa, servicio=servicio)
-    bullets_html = "".join(f'<li style="margin-bottom: 8px;">{b}</li>' for b in tpl["bullets"])
 
     empresa_param = urllib.parse.quote_plus(empresa)
     tracked_portfolio_url = f"https://www.loscrafters.net/?utm_source=email_b2b&utm_medium=email&utm_campaign={nicho}&empresa={empresa_param}#portafolio"
     tracked_home_url = f"https://www.loscrafters.net/?utm_source=email_b2b&utm_medium=email&utm_campaign={nicho}&empresa={empresa_param}"
+
+    custom_html_path = tpl.get("custom_html")
+    if custom_html_path and Path(custom_html_path).exists():
+        html = Path(custom_html_path).read_text(encoding="utf-8")
+        html = html.replace("[Nombre]", nombre)
+        html = html.replace("https://www.loscrafters.net/#portafolio", tracked_portfolio_url)
+        html = html.replace('href="https://www.loscrafters.net/"', f'href="{tracked_home_url}"')
+        for rel_src, (cid, img_path) in CUSTOM_HTML_ASSETS.get(nicho, {}).items():
+            target_src = f"cid:{cid}" if use_cid else img_path.as_uri()
+            html = html.replace(f'src="{rel_src}"', f'src="{target_src}"')
+        return subject, html
+
+    intro_html = tpl["intro"].format(nombre=nombre, empresa=empresa, servicio=servicio)
+    cta_note = tpl["cta_note"].format(nombre=nombre, empresa=empresa, servicio=servicio)
+    bullets_html = "".join(f'<li style="margin-bottom: 8px;">{b}</li>' for b in tpl["bullets"])
+
     wa_text = urllib.parse.quote(f"Hola Los Crafters, les escribo de {empresa}. Vi su correo sobre señalización de proyectos y me gustaría cotizar.")
     wa_url = f"https://wa.me/18095686663?text={wa_text}"
 
@@ -361,11 +403,15 @@ def attach_inline_images(msg_root: MIMEMultipart, html: str = ""):
         "flota_camion": IMAGES_DIR / "email-flota-camion.jpg",
         "flota_van": IMAGES_DIR / "email-flota-furgoneta.jpg",
     }
+    for assets in CUSTOM_HTML_ASSETS.values():
+        for cid, img_path in assets.values():
+            inline_map[cid] = img_path
     for cid, img_path in inline_map.items():
         if html and f"cid:{cid}" not in html:
             continue
         if img_path.exists():
-            img_part = MIMEImage(img_path.read_bytes(), _subtype="jpeg")
+            subtype = "png" if img_path.suffix.lower() == ".png" else "jpeg"
+            img_part = MIMEImage(img_path.read_bytes(), _subtype=subtype)
             img_part.add_header("Content-ID", f"<{cid}>")
             img_part.add_header("Content-Disposition", "inline", filename=img_path.name)
             msg_root.attach(img_part)
@@ -456,6 +502,10 @@ def audit_crm_inbox(imap_host, smtp_host, smtp_port, smtp_user, smtp_pass, csv_p
     if AUTO_REPLY_LOG.exists():
         already_replied = set(AUTO_REPLY_LOG.read_text(encoding="utf-8").splitlines())
 
+    seen_bounces = set()
+    if BOUNCES_SEEN_LOG.exists():
+        seen_bounces = set(BOUNCES_SEEN_LOG.read_text(encoding="utf-8").splitlines())
+
     mail = imaplib.IMAP4_SSL(imap_host, ssl_context=get_ssl_context())
     mail.login(smtp_user, smtp_pass)
     mail.select("INBOX")
@@ -484,6 +534,15 @@ def audit_crm_inbox(imap_host, smtp_host, smtp_port, smtp_user, smtp_pass, csv_p
                 clicks_found.append((subj, date))
             elif "mailer-daemon" in sender_lower or "delivery status" in subj.lower() or "undeliverable" in subj.lower():
                 bounces_found.append((sender, subj, date))
+                bounce_key = f"{date}|{subj}"
+                if bounce_key not in seen_bounces:
+                    notify_phone(
+                        "Rebote de correo B2B",
+                        f"Aviso de entrega fallida ({date}): {subj}"
+                    )
+                    seen_bounces.add(bounce_key)
+                    with open(BOUNCES_SEEN_LOG, "a", encoding="utf-8") as bf:
+                        bf.write(bounce_key + "\n")
             else:
                 for p_email, p_emp in prospects.items():
                     if p_email in sender_lower:
@@ -528,6 +587,7 @@ def main():
     parser.add_argument("--inbox", action="store_true", help="Lista los últimos correos recibidos en info@loscrafters.net")
     parser.add_argument("--crm", action="store_true", help="Audita clics, respuestas de prospectos y rebotes en el inbox")
     parser.add_argument("--auto-reply", action="store_true", help="Con --crm, responde automáticamente con acuse cálido a los prospectos que contesten")
+    parser.add_argument("--notify", action="store_true", help="Envía resumen por push ntfy al finalizar --send")
     parser.add_argument("--limit", type=int, default=8, help="Cantidad de correos a mostrar con --inbox")
     parser.add_argument("--to", default="", help="Correo destino para --send-one o --test")
     parser.add_argument("--nombre", default="Equipo de Proyectos", help="Nombre del contacto")
@@ -585,8 +645,12 @@ def main():
     csv_path = Path(args.csv)
     if not csv_path.exists():
         print(f"❌ No se encontró el archivo CSV: {csv_path}")
+        if args.notify:
+            notify_phone("Error en campaña B2B", f"No se encontró el CSV: {csv_path}")
         return
 
+    sent_count = 0
+    failed_items = []
     context = get_ssl_context()
     with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
         server.login(smtp_user, smtp_pass)
@@ -607,10 +671,34 @@ def main():
                 subject, html = build_html_email(nombre, empresa, nicho, servicio, zona, use_cid=True)
                 msg_root = create_mime_message(smtp_user, email_to, subject, html, include_images=row_imgs)
 
-                server.sendmail(smtp_user, [email_to], msg_root.as_string())
-                log_sent_email(empresa, email_to, nicho, subject, "ENVIADO_CAMPANA")
-                print(f"📨 Enviado a {nombre} ({empresa}) <{email_to}> [{nicho}]")
+                try:
+                    server.sendmail(smtp_user, [email_to], msg_root.as_string())
+                    log_sent_email(empresa, email_to, nicho, subject, "ENVIADO_CAMPANA")
+                    sent_count += 1
+                    print(f"📨 Enviado a {nombre} ({empresa}) <{email_to}> [{nicho}]")
+                except smtplib.SMTPServerDisconnected:
+                    try:
+                        server.connect(smtp_host, smtp_port)
+                        server.login(smtp_user, smtp_pass)
+                        server.sendmail(smtp_user, [email_to], msg_root.as_string())
+                        log_sent_email(empresa, email_to, nicho, subject, "ENVIADO_CAMPANA")
+                        sent_count += 1
+                        print(f"📨 Enviado (tras reconexión) a {nombre} ({empresa}) <{email_to}> [{nicho}]")
+                    except Exception as retry_exc:
+                        log_sent_email(empresa, email_to, nicho, subject, f"ERROR: {retry_exc}")
+                        failed_items.append(f"{empresa} <{email_to}>: {retry_exc}")
+                        print(f"❌ Error enviando a {email_to}: {retry_exc}")
+                except Exception as send_exc:
+                    log_sent_email(empresa, email_to, nicho, subject, f"ERROR: {send_exc}")
+                    failed_items.append(f"{empresa} <{email_to}>: {send_exc}")
+                    print(f"❌ Error enviando a {email_to}: {send_exc}")
                 time.sleep(4)
+
+    summary = f"Campaña [{args.nicho}] completada: {sent_count} enviados, {len(failed_items)} errores."
+    print(f"✅ {summary}")
+    if args.notify:
+        details = summary if not failed_items else f"{summary} Fallos: {'; '.join(failed_items[:3])}"
+        notify_phone(f"Campaña B2B {args.nicho}", details)
 
 
 if __name__ == "__main__":

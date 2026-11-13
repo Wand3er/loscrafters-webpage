@@ -50,3 +50,16 @@ Para activarlo 100% gratis usando tu cuenta de Google:
 - **Llamado a la Acción (CTA):** Siempre ofrecer dos vías claras sin fricción:
   1. Responder al correo con el logo en curvas (`.ai` / `.pdf`) y medidas aproximadas (o foto de la pared/vehículo).
   2. Escribir directo al WhatsApp comercial: `https://wa.me/18294109362`
+
+## 4. Programación Puntual Obligatoria (macOS `launchd`)
+- **Prohibido usar temporizadores de chat (`schedule`) para envíos o monitoreos con hora pautada.** Los temporizadores internos del chat pueden retenerse si la cola de sesión queda en pausa.
+- Toda campaña programada para una hora exacta debe registrarse obligatoriamente en el sistema operativo con [`crafters_scheduler.py`](/Users/wandermarte/Documents/REPOSITORIOS/loscrafters-webpage/.agents/skills/loscrafters-email-marketing/scripts/crafters_scheduler.py):
+  ```bash
+  /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 \
+    /Users/wandermarte/Documents/REPOSITORIOS/loscrafters-webpage/.agents/skills/loscrafters-email-marketing/scripts/crafters_scheduler.py \
+    --schedule-campaign --datetime "YYYY-MM-DD HH:MM" --nicho <nicho> --csv <ruta.csv>
+  ```
+- Cada campaña crea un `LaunchAgent` one-shot en `~/Library/LaunchAgents/com.loscrafters.campaign.<id>.plist` con `StartCalendarInterval`, lock anti-doble-envío, espera de red al despertar el Mac, envío con `--notify` (resumen push por `ntfy`) y autolimpieza del `.plist` al terminar.
+- El monitoreo CRM diurno (`08:00–23:30` cada 30 min, silencio total `00:00–07:59`) corre de forma nativa y persistente en `com.loscrafters.crm-monitor` (`--install-crm-monitor`).
+- Usa `--list` para auditar campañas programadas y `--cancel <job_id>` para cancelar un envío pendiente.
+- **Advertencia física de laptop:** Con el Mac encendido o despierto, `launchd` dispara al segundo `:00` exacto. Si la tapa de la MacBook estuvo cerrada en suspensión al momento pautado, macOS ejecutará automáticamente la campaña al instante de abrir/despertar el equipo tras reconectar el Wi-Fi.

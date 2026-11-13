@@ -38,6 +38,7 @@
 
 ## 4. Directivas de Ejecución del Agente
 - **Acción Directa (Cero Fricción):** Cuando el usuario solicite un cambio en la página web, ejecútalo, verifica la sintaxis HTML/JS y realiza `git commit` + `git push origin main` de inmediato sin pedir permiso previo.
+- **Programación Puntual de Campañas (`launchd`):** Nunca uses temporizadores/crons de sesión (`schedule`) para programar envíos de correo o monitoreos CRM con hora fija. Usa siempre `.agents/skills/loscrafters-email-marketing/scripts/crafters_scheduler.py` (`--schedule-campaign` / `--install-crm-monitor`), que registra `LaunchAgents` nativos en macOS (`~/Library/LaunchAgents/`) con lock anti-duplicado, tolerancia a reconexión y notificación push (`--notify`).
 - **Higiene de Git:** Al hacer `git add`, agrega únicamente los archivos correspondientes a la web (`index.html`, `sitemap.xml`, `robots.txt`, `GEMINI.md`, `.agents/`, `assets/`) y nunca subas archivos locales privados no relacionados (como bases de datos o reportes personales).
 - **Skills Especializados Disponibles en `.agents/skills/`:**
   - `loscrafters-email-marketing`: Automatización de campañas de correo, prospección B2B en RD, seguimiento de cotizaciones y conexión de formularios con Google Sheets/Gmail.
