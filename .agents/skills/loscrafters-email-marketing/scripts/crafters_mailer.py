@@ -677,7 +677,7 @@ def send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, to_email, subj
     context = get_ssl_context()
     msg_root = create_mime_message(smtp_user, to_email, subject, html, include_images=include_images)
 
-    with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
+    with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context, timeout=30) as server:
         server.login(smtp_user, smtp_pass)
         server.sendmail(smtp_user, [to_email], msg_root.as_string())
 
@@ -696,7 +696,7 @@ def decode_mime_words(s):
 
 
 def check_inbox(imap_host, smtp_user, smtp_pass, limit=10):
-    mail = imaplib.IMAP4_SSL(imap_host, ssl_context=get_ssl_context())
+    mail = imaplib.IMAP4_SSL(imap_host, ssl_context=get_ssl_context(), timeout=30)
     mail.login(smtp_user, smtp_pass)
     mail.select("INBOX")
     status, messages = mail.search(None, "ALL")
@@ -736,7 +736,7 @@ def audit_crm_inbox(imap_host, smtp_host, smtp_port, smtp_user, smtp_pass, csv_p
     if BOUNCES_SEEN_LOG.exists():
         seen_bounces = set(BOUNCES_SEEN_LOG.read_text(encoding="utf-8").splitlines())
 
-    mail = imaplib.IMAP4_SSL(imap_host, ssl_context=get_ssl_context())
+    mail = imaplib.IMAP4_SSL(imap_host, ssl_context=get_ssl_context(), timeout=30)
     mail.login(smtp_user, smtp_pass)
     mail.select("INBOX")
     status, messages = mail.search(None, "ALL")
@@ -882,7 +882,7 @@ def main():
     sent_count = 0
     failed_items = []
     context = get_ssl_context()
-    with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
+    with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context, timeout=30) as server:
         server.login(smtp_user, smtp_pass)
         with open(csv_path, newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)

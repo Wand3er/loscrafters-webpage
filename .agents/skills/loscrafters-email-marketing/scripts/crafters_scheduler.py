@@ -138,6 +138,30 @@ def schedule_detached_bootout(label: str) -> None:
     )
 
 
+def schedule_detached_rebootstrap(label: str, plist_path: Path) -> None:
+    """Re-registra el plist actualizado (ej. StartInterval) tras terminar el proceso actual."""
+    domain = get_gui_domain()
+    plist_str = str(plist_path).replace("'", "\\'")
+    subprocess.Popen(
+        [
+            get_python_bin(),
+            "-c",
+            (
+                "import subprocess, time; time.sleep(1.5); "
+                f"subprocess.run(['launchctl', 'bootout', '{domain}/{label}'], "
+                "stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL); "
+                "time.sleep(0.5); "
+                f"subprocess.run(['launchctl', 'bootstrap', '{domain}', '{plist_str}'], "
+                "stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)"
+            ),
+        ],
+        start_new_session=True,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
 def cmd_schedule_campaign(args) -> int:
     ensure_dirs()
     try:
@@ -301,27 +325,62 @@ def cmd_run_job(args) -> int:
             schedule_detached_bootout(label)
             return 0
 
-        job["status"] = "running"
-        job["started_at"] = iso_now()
-        save_json_atomic(job_json_path, job)
+        scheduled_dt = datetime.strptime(job["scheduled_for"], "%Y-%m-%d %H:%M")
+        retries = int(job.get("network_retries", 0))
 
-        append_log(
-            log_path,
-            f"[{iso_now()}] === Inicio de job {job_id} (nicho={job['nicho']}, dry_run={job.get('dry_run')}) ===\n",
-        )
-
-        # Esperar red hasta 180s por si el Mac acaba de despertar
-        if not wait_for_tcp("smtp.gmail.com", 465, timeout_s=180):
-            err = "Sin conexión TCP a smtp.gmail.com:465 tras 180s de espera."
-            append_log(log_path, f"[{iso_now()}] ❌ {err}\n")
+        if datetime.now() > scheduled_dt + timedelta(hours=18):
+            msg = "Ventana de recuperación de red expirada (>18h desde la hora programada). Cancelando."
+            append_log(log_path, f"[{iso_now()}] ❌ {msg}\n")
             job["status"] = "failed_network"
             job["finished_at"] = iso_now()
             job["exit_code"] = 1
-            job["error"] = err
+            job["error"] = msg
             save_json_atomic(job_json_path, job)
             plist_path.unlink(missing_ok=True)
             schedule_detached_bootout(label)
             return 1
+
+        job["status"] = "running"
+        job["started_at"] = job.get("started_at") or iso_now()
+        save_json_atomic(job_json_path, job)
+
+        if retries == 0:
+            append_log(
+                log_path,
+                f"[{iso_now()}] === Inicio de job {job_id} (nicho={job['nicho']}, dry_run={job.get('dry_run')}) ===\n",
+            )
+
+        # Primera ejecución espera hasta 120s; reintentos en background sondean 10s
+        wait_timeout = 120 if retries == 0 else 10
+        if not wait_for_tcp("smtp.gmail.com", 465, timeout_s=wait_timeout):
+            retries += 1
+            retry_plist = {
+                "Label": label,
+                "ProgramArguments": [
+                    get_python_bin(),
+                    str(Path(__file__).resolve()),
+                    "--run-job",
+                    job_id,
+                ],
+                "WorkingDirectory": str(SCRIPTS_DIR),
+                "StartInterval": 60,
+                "StandardOutPath": str(LOGS_DIR / f"campaign_{job_id}.launchd.stdout.log"),
+                "StandardErrorPath": str(LOGS_DIR / f"campaign_{job_id}.launchd.stderr.log"),
+                "RunAtLoad": False,
+            }
+            with open(plist_path, "wb") as pf:
+                plistlib.dump(retry_plist, pf)
+
+            err = f"Sin conexión TCP a smtp.gmail.com:465 (intento #{retries}); reintento automático cada 60s activo."
+            if retries == 1 or retries % 10 == 0:
+                append_log(log_path, f"[{iso_now()}] ⏳ {err}\n")
+            job["status"] = "waiting_network"
+            job["network_retries"] = retries
+            job["error"] = err
+            save_json_atomic(job_json_path, job)
+            if retries == 1:
+                schedule_detached_rebootstrap(label, plist_path)
+            return 0
 
         if job.get("dry_run"):
             cmd = [
@@ -345,7 +404,19 @@ def cmd_run_job(args) -> int:
                 "--notify",
             ]
 
-        res = subprocess.run(cmd, capture_output=True, text=True, cwd=str(SCRIPTS_DIR))
+        try:
+            res = subprocess.run(cmd, capture_output=True, text=True, cwd=str(SCRIPTS_DIR), timeout=1800)
+        except subprocess.TimeoutExpired:
+            err = "Tiempo máximo excedido (1800s) ejecutando crafters_mailer."
+            append_log(log_path, f"[{iso_now()}] ❌ {err}\n")
+            job["status"] = "failed_timeout"
+            job["finished_at"] = iso_now()
+            job["exit_code"] = 124
+            job["error"] = err
+            save_json_atomic(job_json_path, job)
+            plist_path.unlink(missing_ok=True)
+            schedule_detached_bootout(label)
+            return 124
         if res.stdout:
             append_log(log_path, res.stdout + ("\n" if not res.stdout.endswith("\n") else ""))
         if res.stderr:
@@ -449,12 +520,17 @@ def cmd_run_crm(_args) -> int:
             append_log(log_path, f"[{iso_now()}] ⚠️ Sin conexión a imap.gmail.com:993; esperando próximo ciclo.\n")
             return 0
 
-        res = subprocess.run(
-            [get_python_bin(), str(MAILER_SCRIPT), "--crm", "--auto-reply"],
-            capture_output=True,
-            text=True,
-            cwd=str(SCRIPTS_DIR),
-        )
+        try:
+            res = subprocess.run(
+                [get_python_bin(), str(MAILER_SCRIPT), "--crm", "--auto-reply"],
+                capture_output=True,
+                text=True,
+                cwd=str(SCRIPTS_DIR),
+                timeout=180,
+            )
+        except subprocess.TimeoutExpired:
+            append_log(log_path, f"[{iso_now()}] ⚠️ Timeout (180s) esperando respuesta IMAP en ciclo CRM.\n")
+            return 124
         append_log(log_path, f"[{iso_now()}] --- CRM Check (exit={res.returncode}) ---\n")
         if res.stdout:
             append_log(log_path, res.stdout + ("\n" if not res.stdout.endswith("\n") else ""))
