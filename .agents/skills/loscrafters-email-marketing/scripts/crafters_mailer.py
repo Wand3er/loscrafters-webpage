@@ -172,9 +172,9 @@ TEMPLATES = {
         "custom_html": ROTULACION_CAMPAIGN_DIR / "correo_rotulacion_b2b.html",
     },
     "seguimiento": {
-        "subject": "Seguimiento cordial — Los Crafters SRL | {empresa}",
-        "eyebrow": "SEGUIMIENTO · LOS CRAFTERS SRL",
-        "headline": "Seguimos a su disposición.",
+        "subject": "Seguimiento breve — Los Crafters SRL | {empresa}",
+        "eyebrow": "LOS CRAFTERS SRL · SANTO DOMINGO",
+        "headline": "Seguimos a la orden.",
         "intro": "",
         "show_gallery": False,
         "bullets": [],
@@ -245,7 +245,7 @@ def build_seguimiento_kanban_html(
 </head>
 <body style="margin:0; padding:0; background-color:#E9EFF6; font-family:'Open Sans', Arial, Helvetica, sans-serif; color:#0F172A; -webkit-font-smoothing:antialiased;">
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#E9EFF6;">
-    Un saludo breve de Los Crafters SRL con nuestros canales de contacto rápido: WhatsApp, correo y página web.
+    Pasamos a saludarles brevemente y dejarles nuestras vías de contacto directo.
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#E9EFF6; padding:24px 10px;">
@@ -260,10 +260,10 @@ def build_seguimiento_kanban_html(
                 <img src="{logo_src}" alt="Los Crafters SRL" width="132" style="display:block; width:132px; height:auto; border:0;" />
               </a>
               <div style="font-family:'Montserrat', Arial, sans-serif; font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#7EC8F7; margin-bottom:6px;">
-                SEGUIMIENTO CORDIAL
+                LOS CRAFTERS SRL · SANTO DOMINGO
               </div>
               <h1 style="margin:0; font-family:'Montserrat', Arial, sans-serif; font-size:24px; line-height:1.22; font-weight:800; color:#FFFFFF; text-align:center;">
-                Seguimos a su disposición
+                Seguimos a la orden
               </h1>
             </td>
           </tr>
@@ -275,10 +275,10 @@ def build_seguimiento_kanban_html(
                 Hola, equipo de <strong>{empresa}</strong>:
               </p>
               <p style="margin:0 0 12px 0; color:#334155;">
-                Les enviamos un saludo cordial para dar seguimiento breve al correo que les compartimos la semana pasada sobre <strong>{servicio_texto}</strong>.
+                La semana pasada les compartimos un correo sobre <strong>{servicio_texto}</strong> y queríamos confirmar que lo hayan recibido.
               </p>
               <p style="margin:0; color:#334155;">
-                Si tienen algún proyecto en agenda o desean solicitar una cotización rápida, pueden contactarnos directo por cualquiera de estas opciones:
+                Si tienen algún trabajo en agenda o desean cotizar algo rápido, aquí tienen nuestras vías de contacto directo:
               </p>
             </td>
           </tr>
@@ -320,7 +320,7 @@ def build_seguimiento_kanban_html(
                                   <a href="{wa_url}" target="_blank" style="color:#0A0F1A; text-decoration:none;">(809) 568-6663</a>
                                 </div>
                                 <div style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; color:#64748B; margin-top:2px;">
-                                  Respuesta ágil para consultas, fotos o medidas
+                                  Consultas rápidas, fotos o medidas
                                 </div>
                               </td>
                               <td class="kanban-cell kanban-cta" valign="middle" align="right" width="150">
@@ -407,13 +407,13 @@ def build_seguimiento_kanban_html(
           <tr>
             <td align="center" style="background-color:#0A0F1A; padding:20px 28px; text-align:center;">
               <p style="margin:0 0 6px 0; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:700; color:#F0F6FF;">
-                Un cordial saludo · Los Crafters SRL
+                Los Crafters SRL
               </p>
               <p style="margin:0 0 8px 0; font-family:'Open Sans', Arial, sans-serif; font-size:12px; color:#8BA4C2;">
                 Santo Domingo, República Dominicana
               </p>
               <p style="margin:0; font-size:11px; color:#64748B;">
-                Si no deseas recibir más correos de seguimiento, responde con la palabra <strong>BAJA</strong>.
+                Si prefieres no recibir más mensajes, responde con la palabra <strong>BAJA</strong>.
               </p>
             </td>
           </tr>
