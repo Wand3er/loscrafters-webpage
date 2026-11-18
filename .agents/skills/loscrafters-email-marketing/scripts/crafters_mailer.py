@@ -172,20 +172,13 @@ TEMPLATES = {
         "custom_html": ROTULACION_CAMPAIGN_DIR / "correo_rotulacion_b2b.html",
     },
     "seguimiento": {
-        "subject": "Re: Señalización para los proyectos de {empresa}",
-        "eyebrow": "LOS CRAFTERS",
-        "headline": "Seguimiento rápido a tus próximos proyectos.",
-        "intro": (
-            "Te escribo brevemente para confirmar que hayas podido ver nuestro correo anterior sobre "
-            "señalización y letreros 3D para los desarrollos de <strong>{empresa}</strong>."
-        ),
-        "show_gallery": True,
-        "bullets": [
-            "<strong>Muestras físicas sin compromiso:</strong> Podemos llevarles muestras de nuestros acabados en relieve 3D a su oficina.",
-            "<strong>Cotización sobre planos:</strong> Cotizamos partidas completas de señalética residencial y letreros de entrada.",
-            "<strong>Facturación formal:</strong> Comprobante Fiscal (B01 / E-CF) y garantía de instalación."
-        ],
-        "cta_note": "¿Tienen algún edificio o residencial próximo a entrega donde podamos presentarles propuesta?"
+        "subject": "Seguimiento cordial — Los Crafters SRL | {empresa}",
+        "eyebrow": "SEGUIMIENTO · LOS CRAFTERS SRL",
+        "headline": "Seguimos a su disposición.",
+        "intro": "",
+        "show_gallery": False,
+        "bullets": [],
+        "cta_note": ""
     },
     "pvc_letreros": {
         "subject": "Letreros en PVC para {empresa}",
@@ -198,6 +191,239 @@ TEMPLATES = {
         "custom_html": PVC_CAMPAIGN_DIR / "correo_pvc_b2b.html",
     }
 }
+
+
+def _resolve_seguimiento_servicio(servicio: str) -> str:
+    s = (servicio or "").lower()
+    if "rotulac" in s or "flotilla" in s or "vehic" in s:
+        return "rotulación vehicular y branding para su flotilla"
+    if "pvc" in s:
+        return "letreros corpóreos en PVC para su negocio o institución"
+    if "señal" in s or "senal" in s or "residencial" in s or "proyecto" in s:
+        return "señalización y letreros 3D para sus proyectos"
+    return "letreros, rotulación y señalización corporativa"
+
+
+def build_seguimiento_kanban_html(
+    empresa: str,
+    subject: str,
+    servicio: str,
+    tracked_home_url: str,
+    use_cid: bool = True,
+) -> str:
+    logo_src = "cid:logo_lc" if use_cid else (IMAGES_DIR / "Logo-LC-12.png").as_uri()
+    servicio_texto = _resolve_seguimiento_servicio(servicio)
+    wa_text = urllib.parse.quote(
+        f"Hola Los Crafters, les escribo de {empresa} en seguimiento al correo que nos enviaron."
+    )
+    wa_url = f"https://wa.me/18095686663?text={wa_text}"
+    mailto_subj = urllib.parse.quote(f"Consulta / Cotización - {empresa}", safe="")
+    mailto_body = urllib.parse.quote(
+        f"Hola equipo de Los Crafters,\n\nLes escribimos de {empresa} respecto al correo de seguimiento.\n"
+    )
+    mailto_url = f"mailto:ventas@loscrafters.net?subject={mailto_subj}&body={mailto_body}"
+
+    return f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{subject}</title>
+  <style>
+    @media only screen and (max-width: 520px) {{
+      .kanban-cell {{
+        display: block !important;
+        width: 100% !important;
+        text-align: left !important;
+      }}
+      .kanban-cta {{
+        padding-top: 12px !important;
+        text-align: left !important;
+      }}
+    }}
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#E9EFF6; font-family:'Open Sans', Arial, Helvetica, sans-serif; color:#0F172A; -webkit-font-smoothing:antialiased;">
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#E9EFF6;">
+    Un saludo breve de Los Crafters SRL con nuestros canales de contacto rápido: WhatsApp, correo y página web.
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#E9EFF6; padding:24px 10px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background-color:#FFFFFF; border-radius:20px; overflow:hidden; border:1px solid #D8E2EE;">
+
+          <!-- HEADER -->
+          <tr>
+            <td align="center" style="background:linear-gradient(135deg, #0A0F1A 0%, #1A3F6F 70%, #3265A6 100%); background-color:#1A3F6F; padding:26px 28px 24px 28px; text-align:center;">
+              <a href="{tracked_home_url}" target="_blank" style="display:inline-block; text-decoration:none; border:0; margin-bottom:14px;">
+                <img src="{logo_src}" alt="Los Crafters SRL" width="132" style="display:block; width:132px; height:auto; border:0;" />
+              </a>
+              <div style="font-family:'Montserrat', Arial, sans-serif; font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#7EC8F7; margin-bottom:6px;">
+                SEGUIMIENTO CORDIAL
+              </div>
+              <h1 style="margin:0; font-family:'Montserrat', Arial, sans-serif; font-size:24px; line-height:1.22; font-weight:800; color:#FFFFFF; text-align:center;">
+                Seguimos a su disposición
+              </h1>
+            </td>
+          </tr>
+
+          <!-- SALUDO CORTO -->
+          <tr>
+            <td style="padding:28px 30px 18px 30px; color:#1E293B; font-size:15px; line-height:1.65;">
+              <p style="margin:0 0 12px 0; font-size:16px; color:#0A0F1A;">
+                Hola, equipo de <strong>{empresa}</strong>:
+              </p>
+              <p style="margin:0 0 12px 0; color:#334155;">
+                Les enviamos un saludo cordial para dar seguimiento breve al correo que les compartimos la semana pasada sobre <strong>{servicio_texto}</strong>.
+              </p>
+              <p style="margin:0; color:#334155;">
+                Si tienen algún proyecto en agenda o desean solicitar una cotización rápida, pueden contactarnos directo por cualquiera de estas opciones:
+              </p>
+            </td>
+          </tr>
+
+          <!-- TABLERO KANBAN DE CONTACTO RÁPIDO -->
+          <tr>
+            <td style="padding:4px 26px 28px 26px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F1F5F9; border:1px solid #DCE5F0; border-radius:16px;">
+                <tr>
+                  <td style="padding:14px 14px 10px 14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="font-family:'Montserrat', Arial, sans-serif; font-size:11px; font-weight:800; letter-spacing:0.10em; text-transform:uppercase; color:#1A3F6F;">
+                          CANALES DE CONTACTO DIRECTO
+                        </td>
+                        <td align="right">
+                          <span style="display:inline-block; background-color:#DCE8F7; color:#1A3F6F; font-family:'Montserrat', Arial, sans-serif; font-size:10px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; padding:4px 10px; border-radius:999px;">
+                            3 OPCIONES
+                          </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- TARJETA 1: WHATSAPP -->
+                <tr>
+                  <td style="padding:0 14px 10px 14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FFFFFF; border:1px solid #DCE5F0; border-left:5px solid #25D366; border-radius:12px;">
+                      <tr>
+                        <td style="padding:14px 16px;">
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                              <td class="kanban-cell" valign="middle">
+                                <span style="display:inline-block; background-color:#DCFCE7; color:#166534; font-family:'Montserrat', Arial, sans-serif; font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; margin-bottom:6px;">
+                                  ● WHATSAPP DIRECTO
+                                </span>
+                                <div style="font-family:'Montserrat', Arial, sans-serif; font-size:17px; font-weight:800; color:#0A0F1A; line-height:1.25;">
+                                  <a href="{wa_url}" target="_blank" style="color:#0A0F1A; text-decoration:none;">(809) 568-6663</a>
+                                </div>
+                                <div style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; color:#64748B; margin-top:2px;">
+                                  Respuesta ágil para consultas, fotos o medidas
+                                </div>
+                              </td>
+                              <td class="kanban-cell kanban-cta" valign="middle" align="right" width="150">
+                                <a href="{wa_url}" target="_blank" style="display:inline-block; min-width:136px; text-align:center; box-sizing:border-box; background-color:#16A34A; color:#FFFFFF; font-family:'Montserrat', Arial, sans-serif; font-size:11px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:10px 14px; border-radius:999px; text-decoration:none; white-space:nowrap;">
+                                  Escribir →
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- TARJETA 2: CORREO -->
+                <tr>
+                  <td style="padding:0 14px 10px 14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FFFFFF; border:1px solid #DCE5F0; border-left:5px solid #3265A6; border-radius:12px;">
+                      <tr>
+                        <td style="padding:14px 16px;">
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                              <td class="kanban-cell" valign="middle">
+                                <span style="display:inline-block; background-color:#DBEAFE; color:#1E40AF; font-family:'Montserrat', Arial, sans-serif; font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; margin-bottom:6px;">
+                                  ● CORREO ELECTRÓNICO
+                                </span>
+                                <div style="font-family:'Montserrat', Arial, sans-serif; font-size:16px; font-weight:800; color:#0A0F1A; line-height:1.25;">
+                                  <a href="{mailto_url}" style="color:#0A0F1A; text-decoration:none;">ventas@loscrafters.net</a>
+                                </div>
+                                <div style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; color:#64748B; margin-top:2px;">
+                                  Envíanos tu logo, medidas o solicitud de cotización
+                                </div>
+                              </td>
+                              <td class="kanban-cell kanban-cta" valign="middle" align="right" width="150">
+                                <a href="{mailto_url}" style="display:inline-block; min-width:136px; text-align:center; box-sizing:border-box; background-color:#3265A6; color:#FFFFFF; font-family:'Montserrat', Arial, sans-serif; font-size:11px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:10px 14px; border-radius:999px; text-decoration:none; white-space:nowrap;">
+                                  Enviar correo →
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- TARJETA 3: PÁGINA WEB -->
+                <tr>
+                  <td style="padding:0 14px 14px 14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FFFFFF; border:1px solid #DCE5F0; border-left:5px solid #5BA3F5; border-radius:12px;">
+                      <tr>
+                        <td style="padding:14px 16px;">
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                              <td class="kanban-cell" valign="middle">
+                                <span style="display:inline-block; background-color:#E2E8F0; color:#0F172A; font-family:'Montserrat', Arial, sans-serif; font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; margin-bottom:6px;">
+                                  ● PORTAFOLIO Y SERVICIOS
+                                </span>
+                                <div style="font-family:'Montserrat', Arial, sans-serif; font-size:16px; font-weight:800; color:#0A0F1A; line-height:1.25;">
+                                  <a href="{tracked_home_url}" target="_blank" style="color:#0A0F1A; text-decoration:none;">www.loscrafters.net</a>
+                                </div>
+                                <div style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; color:#64748B; margin-top:2px;">
+                                  Explora nuestros proyectos recientes y catálogo
+                                </div>
+                              </td>
+                              <td class="kanban-cell kanban-cta" valign="middle" align="right" width="150">
+                                <a href="{tracked_home_url}" target="_blank" style="display:inline-block; min-width:136px; text-align:center; box-sizing:border-box; background-color:#0A0F1A; color:#FFFFFF; font-family:'Montserrat', Arial, sans-serif; font-size:11px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:10px 14px; border-radius:999px; text-decoration:none; white-space:nowrap;">
+                                  Visitar web →
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td align="center" style="background-color:#0A0F1A; padding:20px 28px; text-align:center;">
+              <p style="margin:0 0 6px 0; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:700; color:#F0F6FF;">
+                Un cordial saludo · Los Crafters SRL
+              </p>
+              <p style="margin:0 0 8px 0; font-family:'Open Sans', Arial, sans-serif; font-size:12px; color:#8BA4C2;">
+                Santo Domingo, República Dominicana
+              </p>
+              <p style="margin:0; font-size:11px; color:#64748B;">
+                Si no deseas recibir más correos de seguimiento, responde con la palabra <strong>BAJA</strong>.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>"""
 
 
 def build_html_email(
@@ -214,6 +440,9 @@ def build_html_email(
     empresa_param = urllib.parse.quote_plus(empresa)
     tracked_portfolio_url = f"https://www.loscrafters.net/?utm_source=email_b2b&utm_medium=email&utm_campaign={nicho}&empresa={empresa_param}#portafolio"
     tracked_home_url = f"https://www.loscrafters.net/?utm_source=email_b2b&utm_medium=email&utm_campaign={nicho}&empresa={empresa_param}"
+
+    if nicho == "seguimiento":
+        return subject, build_seguimiento_kanban_html(empresa, subject, servicio, tracked_home_url, use_cid=use_cid)
 
     custom_html_path = tpl.get("custom_html")
     if custom_html_path and Path(custom_html_path).exists():
@@ -397,6 +626,7 @@ def build_auto_reply_html(empresa: str) -> str:
 
 def attach_inline_images(msg_root: MIMEMultipart, html: str = ""):
     inline_map = {
+        "logo_lc": IMAGES_DIR / "Logo-LC-12.png",
         "sun_district": IMAGES_DIR / "email-sun-district.jpg",
         "num_02": IMAGES_DIR / "email-numeracion-02.jpg",
         "onestop_3d": IMAGES_DIR / "email-letrero-3d-onestop.jpg",
@@ -613,12 +843,12 @@ def main():
         return
 
     tpl_info = TEMPLATES.get(args.nicho, TEMPLATES["residencial_punta_cana"])
-    inc_imgs = bool(tpl_info.get("show_gallery", True))
+    base_inc_imgs = bool(tpl_info.get("show_gallery", True))
 
     if args.test:
         target = args.to or smtp_user
         subject, html = build_html_email(args.nombre, args.empresa, args.nicho, args.servicio, args.zona, use_cid=True)
-        send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, target, f"[PRUEBA] {subject}", html, include_images=inc_imgs)
+        send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, target, f"[PRUEBA] {subject}", html, include_images=base_inc_imgs or ("cid:" in html))
         print(f"✅ Correo de prueba enviado exitosamente a {target}!")
         print(f"   Asunto: [PRUEBA] {subject}")
         return
@@ -628,7 +858,7 @@ def main():
             print("❌ Debes indicar --to correo@destino.com")
             return
         subject, html = build_html_email(args.nombre, args.empresa, args.nicho, args.servicio, args.zona, use_cid=True)
-        send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, args.to, subject, html, include_images=inc_imgs)
+        send_single_email(smtp_host, smtp_port, smtp_user, smtp_pass, args.to, subject, html, include_images=base_inc_imgs or ("cid:" in html))
         log_sent_email(args.empresa, args.to, args.nicho, subject, "ENVIADO_INDIVIDUAL")
         print(f"✅ Correo enviado exitosamente a {args.nombre} ({args.empresa}) <{args.to}>!")
         return
@@ -660,15 +890,15 @@ def main():
                 email_to = row.get("correo", "").strip()
                 if not email_to or "@" not in email_to or "ejemplo-" in email_to:
                     continue
-                nombre = row.get("nombre", "Equipo de Proyectos").strip()
-                empresa = row.get("empresa", "su constructora").strip()
-                nicho = row.get("nicho", args.nicho).strip()
-                servicio = row.get("servicio", "Señalización de Proyectos").strip()
-                zona = row.get("zona", "").strip()
+                nombre = (row.get("nombre") or "").strip() or "Equipo de Proyectos"
+                empresa = (row.get("empresa") or "").strip() or "su empresa"
+                nicho = (row.get("nicho") or "").strip() or args.nicho
+                servicio = (row.get("servicio") or "").strip() or "Señalización de Proyectos"
+                zona = (row.get("zona") or "").strip()
 
                 tpl_row = TEMPLATES.get(nicho, TEMPLATES["residencial_punta_cana"])
-                row_imgs = bool(tpl_row.get("show_gallery", True))
                 subject, html = build_html_email(nombre, empresa, nicho, servicio, zona, use_cid=True)
+                row_imgs = bool(tpl_row.get("show_gallery", True)) or ("cid:" in html)
                 msg_root = create_mime_message(smtp_user, email_to, subject, html, include_images=row_imgs)
 
                 try:
