@@ -1154,6 +1154,13 @@ def main():
                 msg_root = create_mime_message(smtp_user, email_to, subject, html, include_images=row_imgs)
 
                 try:
+                    if sent_count > 0 and sent_count % 35 == 0:
+                        try:
+                            server.quit()
+                        except Exception:
+                            pass
+                        server.connect(smtp_host, smtp_port)
+                        server.login(smtp_user, smtp_pass)
                     server.sendmail(smtp_user, [email_to], msg_root.as_string())
                     log_sent_email(empresa, email_to, nicho, subject, "ENVIADO_CAMPANA")
                     sent_count += 1
@@ -1174,7 +1181,7 @@ def main():
                     log_sent_email(empresa, email_to, nicho, subject, f"ERROR: {send_exc}")
                     failed_items.append(f"{empresa} <{email_to}>: {send_exc}")
                     print(f"❌ Error enviando a {email_to}: {send_exc}")
-                time.sleep(4)
+                time.sleep(5)
 
     summary = f"Campaña [{args.nicho}] completada: {sent_count} enviados, {len(failed_items)} errores."
     print(f"✅ {summary}")
