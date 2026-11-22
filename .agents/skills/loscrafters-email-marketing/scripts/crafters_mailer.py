@@ -135,20 +135,13 @@ TEMPLATES = {
         )
     },
     "colegio": {
-        "subject": "Señalización y letras 3D para {empresa}",
-        "eyebrow": "LOS CRAFTERS",
-        "headline": "Espacios que inspiran desde la entrada.",
-        "intro": (
-            "Ayudamos a instituciones educativas a renovar su imagen con letreros corpóreos 3D, "
-            "murales e identificación limpia para cada área del plantel."
-        ),
-        "show_gallery": False,
-        "bullets": [
-            "<strong>Escudos y letras 3D:</strong> Para fachadas, recepciones y auditorios.",
-            "<strong>Murales decorativos:</strong> Vinil de alta durabilidad para aulas y pasillos.",
-            "<strong>Señalización interna:</strong> Identificación de cursos, laboratorios y rutas."
-        ],
-        "cta_note": "Si planean renovar algún área del plantel, escríbenos para coordinar un levantamiento sin costo."
+        "subject": "Letreros, murales y artículos personalizados para {empresa}",
+        "eyebrow": "LOS CRAFTERS SRL · COLEGIOS",
+        "headline": "Letreros y artículos promocionales para tu colegio.",
+        "intro": "",
+        "show_gallery": True,
+        "bullets": [],
+        "cta_note": ""
     },
     "flotilla": {
         "subject": "Rotulación para los vehículos y flotilla de {empresa}",
@@ -426,6 +419,255 @@ def build_seguimiento_kanban_html(
 </html>"""
 
 
+def build_colegio_mixto_html(
+    nombre: str,
+    empresa: str,
+    subject: str,
+    tracked_home_url: str,
+    tracked_portfolio_url: str,
+    use_cid: bool = True,
+) -> str:
+    logo_src = "cid:logo_lc" if use_cid else (IMAGES_DIR / "Logo-LC-12.png").as_uri()
+    img_hero = "cid:col_af_hero" if use_cid else (IMAGES_DIR / "email-colegio-af-hero.jpg").as_uri()
+    img_mural = "cid:col_mural" if use_cid else (IMAGES_DIR / "email-colegio-mural.jpg").as_uri()
+    img_kit = "cid:col_kit_academia" if use_cid else (IMAGES_DIR / "email-colegio-kit-academia.jpg").as_uri()
+    img_termos = "cid:col_termos" if use_cid else (IMAGES_DIR / "email-colegio-termos.jpg").as_uri()
+
+    wa_main = (
+        "https://wa.me/18095686663?text="
+        + urllib.parse.quote(f"Hola Los Crafters, les escribimos de {empresa}. Nos interesa cotizar letreros y artículos promocionales para nuestro colegio.")
+    )
+    wa_rot = (
+        "https://wa.me/18095686663?text="
+        + urllib.parse.quote(f"Hola Los Crafters, de {empresa}. Queremos cotizar letreros 3D, murales o señalización escolar.")
+    )
+    wa_kits = (
+        "https://wa.me/18095686663?text="
+        + urllib.parse.quote(f"Hola Los Crafters, de {empresa}. Queremos cotizar kits de libretas, agendas y termos con nuestro escudo.")
+    )
+    wa_promo = (
+        "https://wa.me/18095686663?text="
+        + urllib.parse.quote(f"Hola Los Crafters, de {empresa}. Queremos cotizar termos grabados y artículos promocionales para el colegio.")
+    )
+    mailto_subj = urllib.parse.quote(f"Solicitud de cotización escolar - {empresa}", safe="")
+    mailto_body = urllib.parse.quote(
+        f"Hola equipo de Los Crafters,\n\nLes escribimos de {empresa} para solicitar cotización de letreros / artículos promocionales.\n"
+    )
+    mailto_url = f"mailto:ventas@loscrafters.net?subject={mailto_subj}&body={mailto_body}"
+
+    return f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{subject}</title>
+  <style>
+    @media only screen and (max-width: 520px) {{
+      .cta-stack {{
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 5px 0 !important;
+      }}
+      .cta-spacer {{
+        display: none !important;
+      }}
+    }}
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#E9EFF6; font-family:'Open Sans', Arial, Helvetica, sans-serif; color:#0F172A; -webkit-font-smoothing:antialiased;">
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#E9EFF6;">
+    Letreros corpóreos 3D, murales escolares y artículos promocionales con el escudo de tu colegio en RD.
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#E9EFF6; padding:24px 10px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background-color:#FFFFFF; border-radius:20px; overflow:hidden; border:1px solid #D8E2EE;">
+
+          <!-- HERO BAND -->
+          <tr>
+            <td align="center" style="background:linear-gradient(180deg, #0A0F1A 0%, #1A3F6F 65%, #3265A6 100%); background-color:#1A3F6F; padding:28px 28px 28px 28px; text-align:center;">
+              <a href="{tracked_home_url}" target="_blank" style="display:block; width:140px; margin:0 auto 20px auto; text-decoration:none; border:0;">
+                <img src="{logo_src}" alt="Los Crafters SRL" width="140" style="display:block; width:140px; height:auto; border:0;" />
+              </a>
+
+              <h1 style="margin:0 0 20px 0; font-family:'Montserrat', Arial, sans-serif; font-size:29px; line-height:1.18; font-weight:900; text-transform:uppercase; letter-spacing:-0.02em; color:#FFFFFF; text-align:center;">
+                LETREROS Y ARTÍCULOS<br /><span style="display:inline-block; font-size:22px; color:#7EC8F7;">PROMOCIONALES PARA COLEGIOS</span>
+              </h1>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center">
+                    <a href="{tracked_portfolio_url}" target="_blank" style="display:block; width:100%; max-width:544px; margin:0 auto; text-decoration:none; border:0;">
+                      <img src="{img_hero}" alt="Letrero corpóreo 3D y escudo institucional - AF School Bilingual" width="544" style="display:block; width:100%; max-width:544px; height:auto; border-radius:14px; border:3px solid rgba(255,255,255,0.22);" />
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- INTRO MIXTA + CTA -->
+          <tr>
+            <td align="center" style="background-color:#FFFFFF; padding:28px 34px 28px 34px; text-align:center;">
+              <p style="margin:0 auto 12px auto; max-width:480px; font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:1.6; color:#334155; text-align:center;">
+                Hola, <strong style="color:#0A0F1A;">{nombre}</strong>:
+              </p>
+              <p style="margin:0 auto 22px auto; max-width:480px; font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:1.6; color:#334155; text-align:center;">
+                En <strong style="color:#0A0F1A;">Los Crafters SRL</strong> fabricamos e instalamos <strong>letreros corpóreos, murales y señalética escolar</strong>, además de <strong>artículos promocionales personalizados</strong> con el escudo de su institución.
+              </p>
+
+              <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" bgcolor="#3265A6" style="border-radius:999px;">
+                    <a href="{wa_main}" target="_blank" style="display:inline-block; padding:13px 28px; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#FFFFFF; text-decoration:none; border-radius:999px;">
+                      Cotizar para nuestro colegio →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- SUBTÍTULO -->
+          <tr>
+            <td align="center" style="padding:0 32px 16px 32px; text-align:center;">
+              <p style="margin:0; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:800; letter-spacing:0.10em; text-transform:uppercase; color:#3265A6; text-align:center;">
+                Explora soluciones reales para tu plantel
+              </p>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 1: LETREROS Y MURALES ESCOLARES -->
+          <tr>
+            <td align="center" style="padding:0 32px 22px 32px; text-align:center;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#1A3F6F; border-radius:20px; overflow:hidden;">
+                <tr>
+                  <td align="center" style="padding:20px 20px 24px 20px; text-align:center;">
+                    <a href="{tracked_portfolio_url}" target="_blank" style="display:block; width:100%; max-width:496px; margin:0 auto 16px auto; text-decoration:none; border:0;">
+                      <img src="{img_mural}" alt="Murales educativos y rotulación de pasillos escolares" width="496" style="display:block; width:100%; max-width:496px; height:auto; border-radius:12px; border:0;" />
+                    </a>
+                    <div style="font-family:'Montserrat', Arial, sans-serif; font-size:19px; font-weight:800; color:#FFFFFF; margin-bottom:6px;">
+                      Letreros 3D, Murales y Señalética
+                    </div>
+                    <p style="margin:0 auto 14px auto; max-width:430px; font-family:'Open Sans', Arial, sans-serif; font-size:13px; line-height:1.5; color:#CBD5E1;">
+                      Escudos corpóreos de fachada, murales de valores para pasillos e identificación de aulas y rutas.
+                    </p>
+                    <a href="{wa_rot}" target="_blank" style="display:inline-block; background-color:#FFFFFF; color:#1A3F6F; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:10px 26px; border-radius:999px; text-decoration:none;">
+                      Cotizar rotulación
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 2: KITS DE AGENDAS Y TERMOS INSTITUCIONALES -->
+          <tr>
+            <td align="center" style="padding:0 32px 22px 32px; text-align:center;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#1A3F6F; border-radius:20px; overflow:hidden;">
+                <tr>
+                  <td align="center" style="padding:20px 20px 24px 20px; text-align:center;">
+                    <a href="{tracked_portfolio_url}" target="_blank" style="display:block; width:100%; max-width:496px; margin:0 auto 16px auto; text-decoration:none; border:0;">
+                      <img src="{img_kit}" alt="Kit personalizado de libreta y termo con escudo institucional" width="496" style="display:block; width:100%; max-width:496px; height:auto; border-radius:12px; border:0;" />
+                    </a>
+                    <div style="font-family:'Montserrat', Arial, sans-serif; font-size:19px; font-weight:800; color:#FFFFFF; margin-bottom:6px;">
+                      Kits de Agendas, Libretas y Termos
+                    </div>
+                    <p style="margin:0 auto 14px auto; max-width:430px; font-family:'Open Sans', Arial, sans-serif; font-size:13px; line-height:1.5; color:#CBD5E1;">
+                      Sets ejecutivos con el escudo del colegio para docentes, directivos, graduaciones y padres.
+                    </p>
+                    <a href="{wa_kits}" target="_blank" style="display:inline-block; background-color:#FFFFFF; color:#1A3F6F; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:10px 26px; border-radius:999px; text-decoration:none;">
+                      Cotizar kits escolares
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 3: TERMOS GRABADOS Y MERCHANDISING -->
+          <tr>
+            <td align="center" style="padding:0 32px 30px 32px; text-align:center;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#1A3F6F; border-radius:20px; overflow:hidden;">
+                <tr>
+                  <td align="center" style="padding:20px 20px 24px 20px; text-align:center;">
+                    <a href="{tracked_portfolio_url}" target="_blank" style="display:block; width:100%; max-width:496px; margin:0 auto 16px auto; text-decoration:none; border:0;">
+                      <img src="{img_termos}" alt="Termos personalizados grabados a láser para actividades y personal" width="496" style="display:block; width:100%; max-width:496px; height:auto; border-radius:12px; border:0;" />
+                    </a>
+                    <div style="font-family:'Montserrat', Arial, sans-serif; font-size:19px; font-weight:800; color:#FFFFFF; margin-bottom:6px;">
+                      Termos Personalizados, Lanyards y Gorras
+                    </div>
+                    <p style="margin:0 auto 14px auto; max-width:430px; font-family:'Open Sans', Arial, sans-serif; font-size:13px; line-height:1.5; color:#CBD5E1;">
+                      Grabado láser con nombre individual, lanyards, tazas, bolígrafos y bordados para eventos o temporada navideña.
+                    </p>
+                    <a href="{wa_promo}" target="_blank" style="display:inline-block; background-color:#FFFFFF; color:#1A3F6F; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:10px 26px; border-radius:999px; text-decoration:none;">
+                      Cotizar promocionales
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CIERRE CON CANALES DIRECTOS -->
+          <tr>
+            <td align="center" style="background-color:#F4F8FD; border-top:1px solid #E2EAF4; padding:26px 26px; text-align:center;">
+              <h2 style="margin:0 0 8px 0; font-family:'Montserrat', Arial, sans-serif; font-size:20px; font-weight:800; color:#0A0F1A; text-align:center;">
+                ¿Cotizamos un proyecto o pedido para su colegio?
+              </h2>
+              <p style="margin:0 auto 18px auto; max-width:440px; font-family:'Open Sans', Arial, sans-serif; font-size:14px; line-height:1.55; color:#475569; text-align:center;">
+                Facturamos con <strong>Comprobante Fiscal (B01 / E-CF)</strong> y coordinamos levantamiento técnico sin costo en Santo Domingo.
+              </p>
+
+              <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 14px auto;">
+                <tr>
+                  <td class="cta-stack" align="center">
+                    <a href="{wa_main}" target="_blank" style="display:inline-block; background-color:#16A34A; padding:12px 22px; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:800; letter-spacing:0.04em; color:#FFFFFF; text-decoration:none; border-radius:999px;">
+                      WhatsApp · (809) 568-6663
+                    </a>
+                  </td>
+                  <td class="cta-spacer" width="10"></td>
+                  <td class="cta-stack" align="center">
+                    <a href="{mailto_url}" style="display:inline-block; background-color:#3265A6; padding:12px 22px; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:800; letter-spacing:0.04em; color:#FFFFFF; text-decoration:none; border-radius:999px;">
+                      ventas@loscrafters.net
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <div>
+                <a href="{tracked_portfolio_url}" target="_blank" style="font-family:'Open Sans', Arial, sans-serif; font-size:13px; font-weight:700; color:#3265A6; text-decoration:underline;">
+                  Explorar portafolio completo en www.loscrafters.net
+                </a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td align="center" style="background-color:#0A0F1A; padding:20px 28px; text-align:center;">
+              <p style="margin:0 0 6px 0; font-family:'Montserrat', Arial, sans-serif; font-size:12px; font-weight:700; color:#F0F6FF;">
+                Los Crafters SRL · Santo Domingo, República Dominicana
+              </p>
+              <p style="margin:0 0 8px 0; font-size:12px;">
+                <a href="{tracked_home_url}" target="_blank" style="color:#7EC8F7; text-decoration:none; font-weight:700;">www.loscrafters.net</a>
+              </p>
+              <p style="margin:0; font-size:11px; color:#64748B;">
+                Si no deseas recibir más información, responde con la palabra <strong>BAJA</strong>.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>"""
+
+
 def build_html_email(
     nombre: str,
     empresa: str,
@@ -443,6 +685,9 @@ def build_html_email(
 
     if nicho == "seguimiento":
         return subject, build_seguimiento_kanban_html(empresa, subject, servicio, tracked_home_url, use_cid=use_cid)
+
+    if nicho == "colegio":
+        return subject, build_colegio_mixto_html(nombre, empresa, subject, tracked_home_url, tracked_portfolio_url, use_cid=use_cid)
 
     custom_html_path = tpl.get("custom_html")
     if custom_html_path and Path(custom_html_path).exists():
@@ -632,6 +877,10 @@ def attach_inline_images(msg_root: MIMEMultipart, html: str = ""):
         "onestop_3d": IMAGES_DIR / "email-letrero-3d-onestop.jpg",
         "flota_camion": IMAGES_DIR / "email-flota-camion.jpg",
         "flota_van": IMAGES_DIR / "email-flota-furgoneta.jpg",
+        "col_af_hero": IMAGES_DIR / "email-colegio-af-hero.jpg",
+        "col_mural": IMAGES_DIR / "email-colegio-mural.jpg",
+        "col_kit_academia": IMAGES_DIR / "email-colegio-kit-academia.jpg",
+        "col_termos": IMAGES_DIR / "email-colegio-termos.jpg",
     }
     for assets in CUSTOM_HTML_ASSETS.values():
         for cid, img_path in assets.values():
